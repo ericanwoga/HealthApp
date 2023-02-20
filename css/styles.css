@@ -42,3 +42,42 @@ li a:hover {
 li a:active, a:visited {
     color:var(--blue300);
 }
+
+.todo-body{
+    margin: 0px 50px 0px 50px;
+    background: rgb(255, 255, 255);
+}
+#entry-list{
+    display: block;
+    background: rgb(255, 255, 255);
+}
+
+.entry-item{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background: rgb(255, 255, 255);
+    padding: 10px;
+    color: var(--blue300);
+}
+
+.entry-item button{
+    color: var(--blue300);
+    border: 0;
+    padding: 10px;
+    font-weight: bold;
+}
+
+.entry-item button:hover {
+    background-color: var(--blue100);
+    cursor: pointer;
+}
+
+.complete{
+    background-color: rgb(196, 222, 145);
+}
+
+.delete{
+    background-color: rgb(231, 146, 148);
+}
