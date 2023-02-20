@@ -47,25 +47,5 @@
                 </div>
             </div>
         </div>
-        <script>
-          function displayText() {
-            const radioButtons = document.getElementsByName("radio");
-            let selectedRadioButton = "";
-            for (let i = 0; i < radioButtons.length; i++) {
-              if (radioButtons[i].checked) {
-                selectedRadioButton = radioButtons[i].value;
-                break;
-              }
-            }
-            const dropdownValue = document.getElementById("dropdown").value;
-            const displayText = `You selected "${selectedRadioButton}" and "${dropdownValue}"`;
-            document.getElementById("display").innerHTML = displayText;
-          }
-        </script>
-        <style>
-            body {
-              background-color: pink;
-            }
-          </style>
     </body>
 </html>

@@ -11,6 +11,29 @@ body {
     margin: 0px;
     padding: 0px;
     font-family: 'Noto Sans', sans-serif;
+    background-color: pink;
+}
+
+.profile {
+    alt: "Avatar";
+    width: 30%;
+    border-radius: 50%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+#profileWarning {
+    display: none;
+    padding: 25px;
+    background-color: red;
+    color: white;
+}
+
+#closeWarning {
+    float: right;
+    margin-left: 25px;
 }
 
 /*Nav bar*/
@@ -26,6 +49,7 @@ ul {
     background-color: var(--blue100);
     font-weight: bold;
 }
+
 /*Nav bar links*/
 li a{
     text-decoration: none;
@@ -65,12 +89,11 @@ li a:active, a:visited {
     right: 10;
 }
 
-
-
 .todo-body{
     margin: 0px 50px 0px 50px;
     background: rgb(255, 255, 255);
 }
+
 #entry-list{
     display: block;
     background: rgb(255, 255, 255);
