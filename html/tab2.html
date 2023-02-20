@@ -4,7 +4,6 @@
         <meta charset="utf-8" />
         <title>Health App</title>
         <link href="../css/styles.css" rel="stylesheet" type="text/css">
-        <script src="../code.js" defer></script>
     </head>
     <body>
         <div class="container">
@@ -20,8 +19,53 @@
                 </ul>
             </nav>
             <div class="body">
-                <!--TAB 2 Page content goes here-->
+                <div id="tabContent">
+                    <h2>Choices</h2>
+                    
+                    <form>
+                        <label for="radio">Hat color to place on Player One's Head:</label>
+                        <br>
+                        <input type="radio" id="Red" name="radio" value="Red">
+                        <label for="Red">Red</label>
+                        <br>
+                        <input type="radio" id="Blue" name="radio" value="Blue">
+                        <label for="Blue">Blue</label>
+                        <br>
+                        <br>
+                        <label for="dropdown">Hat color to place on Player Two's Head:</label>
+                        <br>
+                        <select id="dropdown" name="dropdown">
+                          <option value="Red">Red</option>
+                          <option value="Blue">Blue</option>
+                        </select>
+                        <br>
+                        <br>
+                        <button type="button" onclick="displayText()">Have Computer Players Make Guesses, Exactly One Will Be Correct</button>
+                      </form>
+                      <br>
+                      <div id="display"></div>
+                </div>
             </div>
         </div>
+        <script>
+          function displayText() {
+            const radioButtons = document.getElementsByName("radio");
+            let selectedRadioButton = "";
+            for (let i = 0; i < radioButtons.length; i++) {
+              if (radioButtons[i].checked) {
+                selectedRadioButton = radioButtons[i].value;
+                break;
+              }
+            }
+            const dropdownValue = document.getElementById("dropdown").value;
+            const displayText = `You selected "${selectedRadioButton}" and "${dropdownValue}"`;
+            document.getElementById("display").innerHTML = displayText;
+          }
+        </script>
+        <style>
+            body {
+              background-color: pink;
+            }
+          </style>
     </body>
 </html>
