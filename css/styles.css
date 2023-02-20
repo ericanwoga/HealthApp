@@ -43,6 +43,30 @@ li a:active, a:visited {
     color:var(--blue300);
 }
 
+
+#helloText {
+    border:1px solid;
+    text-align: center;
+    background-color: black;
+    border-color: black;
+    color: yellow;
+    margin: 0;
+}
+#hiText {
+    border:1px solid;
+    text-align: center;
+    background-color: yellow;
+    color: purple;
+    margin: 0;
+}
+#tab6downheretext {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+
+
 .todo-body{
     margin: 0px 50px 0px 50px;
     background: rgb(255, 255, 255);
