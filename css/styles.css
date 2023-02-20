@@ -85,8 +85,8 @@ li a:active, a:visited {
 }
 #tab6downheretext {
     position: absolute;
-    bottom: 0;
-    right: 10;
+    bottom: 0px;
+    right: 10px;
 }
 
 .todo-body{
