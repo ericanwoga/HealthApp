@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import { Button, Grid } from 'semantic-ui-react'
 import { NavLink } from "react-router-dom";
 
-const Navbar = ({pages}) => {
+const Navbar = ({pages, setHeadingPageVisible}) => {
     const [activeItem, setActiveItem] = useState()
 
     return (
-        <Grid centered style={{paddingBottom:'20px'}}>
+        <Grid centered style={{height:'5%'}}>
             <Button.Group fluid>
                 {pages.map((page) => {
                     return (
@@ -16,7 +16,7 @@ const Navbar = ({pages}) => {
                         as={NavLink}
                         to={'/' + page.toLowerCase()}
                         key={page}
-                        onClick={() => setActiveItem(page)}
+                        onClick={() => (setActiveItem(page), setHeadingPageVisible(false))}
                         active={page === activeItem}
                         >{page}</Button>
                     )
