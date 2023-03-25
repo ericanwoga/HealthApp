@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
-import { Button } from 'semantic-ui-react'
-import { Link } from "react-router-dom";
+import { Button, Grid } from 'semantic-ui-react'
+import { NavLink } from "react-router-dom";
 
-const Navbar = (input) => {
+const Navbar = ({pages}) => {
     const [activeItem, setActiveItem] = useState()
 
     return (
-        <div>
+        <Grid centered style={{paddingBottom:'20px'}}>
             <Button.Group fluid>
-                {input.pages.map((page) => {
+                {pages.map((page) => {
                     return (
                         <Button
-                        as={Link}
+                        basic
+                        size='big'
+                        as={NavLink}
                         to={'/' + page.toLowerCase()}
                         key={page}
                         onClick={() => setActiveItem(page)}
@@ -20,7 +22,7 @@ const Navbar = (input) => {
                     )
                 })}
             </Button.Group>
-        </div>
+        </Grid>
     );
 };
   
