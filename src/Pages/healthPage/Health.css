@@ -1,0 +1,18 @@
+:root {
+    --color-midnight: #272643
+    --color-cerulean: #2c698d
+    --color-powder: #bae8e8
+    --color-mint: #cfffd7
+    --color-white: #ffffff
+}
+
+.health-containter {
+    border: 2px;
+    border-color: #ff7f50;
+    border-radius: 5px;
+    
+}
+
+h1{
+   text-align: left;
+}
