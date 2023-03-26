@@ -3,15 +3,15 @@ import * as ReactDOMClient from 'react-dom/client';
 import 'semantic-ui-css/semantic.min.css'
 import { Segment, Container } from 'semantic-ui-react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import IPhoneBar from './components/static/IPhoneBar';
-import Navbar from './components/static/Navbar'
-import Learn from './components/learnPage/Learn'
-import Health from './components/healthPage/Health'
-import Dashboard from './components/dashboardPage/Dashboard'
-import Activity from './components/activityPage/Activity'
-import Body from './components/bodyPage/Body'
-import AppHeading from './components/headingPages/AppHeading'
-import HeadingPage from './components/headingPages/HeadingPage'
+import IPhoneBar from './Pages/static/IPhoneBar';
+import Navbar from './Pages/static/Navbar'
+import Learn from './Pages/learnPage/Learn'
+import Health from './Pages/healthPage/Health'
+import Dashboard from './Pages/dashboardPage/Dashboard'
+import Activity from './Pages/activityPage/Activity'
+import Body from './Pages/bodyPage/Body'
+import AppHeading from './Pages/headingPages/AppHeading'
+import HeadingPage from './Pages/headingPages/HeadingPage'
 
 
 const pages = ["Learn", "Health", "Dashboard", "Activity", "Body"]
