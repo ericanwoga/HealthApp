@@ -28,9 +28,9 @@ function CircleBar({amount}) {
         
             // Colors
             pathColor: `#2c698d`,
-            textColor: '#2c698d',
-            trailColor: '#d3d3d3',
-            backgroundColor: '#bae838',
+            textColor: '#272643',
+            trailColor: '#e8e8e8',
+            backgroundColor: '#272643',
         })}
     />
     

@@ -7,7 +7,7 @@ import './Health.css'
 
 
 const Health = () => {
-  const [sleepAmount, setSleepAmount] = useState(0.30);
+  const [sleepAmount, setSleepAmount] = useState(0.20);
   const [waterAmount, setWaterAmount] = useState(0.40);
 
 
