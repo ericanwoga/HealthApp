@@ -19,6 +19,7 @@ p{
 }
 /*Each health type has a container*/
 .healthtype-container {
+    z-index: 0;
     margin-bottom: 10px;
 }
 
@@ -34,4 +35,39 @@ p{
 .circlebar-container{
     width: 40%;
     padding: 10px;
+    margin-right: 30%;
+}
+
+.text-and-plus-container{
+    display: flex;
+    flex-direction: column;
+    align-content: space-between;
+}
+
+.box-plus-sign {
+    
+}
+
+.popup-container{
+  z-index: 1; /* Sit on top */
+  padding: 10px;
+  position: absolute;
+  top : 0;
+  left: 0;
+  height:1266px;
+  width:585px;
+  overflow:hidden;
+  border-radius: 100px;
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+.popup-box{
+    z-index: 2;
+    position: absolute;
+    top: 400px;
+    background-color: var(--color-white);
+    padding: 10px;
+    border-radius: 30px;
+    width: 500px;
 }
