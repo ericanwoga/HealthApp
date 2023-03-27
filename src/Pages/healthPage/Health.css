@@ -1,18 +1,31 @@
 :root {
-    --color-midnight: #272643
-    --color-cerulean: #2c698d
-    --color-powder: #bae8e8
-    --color-mint: #cfffd7
-    --color-white: #ffffff
-}
-
-.health-containter {
-    border: 2px;
-    border-color: #ff7f50;
-    border-radius: 5px;
-    
+    --color-midnight: #272643;
+    --color-cerulean: #2c698d;
+    --color-powder: #bae8e8;
+    --color-mint: #cfffd7;
+    --color-white: #ffffff;
+    --color-grey: #d3d3d3;
 }
 
 h1{
-   text-align: left;
+    text-align: left;
+    margin-bottom: 2px;
+}
+
+/*Each health type has a container*/
+.healthtype-container {
+    margin-bottom: 10px;
+}
+
+.rounded-box {
+    background: var(--color-powder);
+    border-radius: 30px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    
+}
+
+.circlebar-container{
+    width: 40%;
 }

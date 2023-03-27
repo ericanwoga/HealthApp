@@ -1,18 +1,23 @@
 import React from 'react';
+import {useState } from 'react'
 import { Header } from 'semantic-ui-react'
-import  HealthContainer from './HealthContainer.js'
+import  Sleep from './Sleep.js'
+import  Water from './Water.js'
 import './Health.css'
 
-const healthTypes = ["Sleep", "Water Intake", "Mood"] 
 
 const Health = () => {
+  const [sleepAmount, setSleepAmount] = useState(0.30);
+  const [waterAmount, setWaterAmount] = useState(0.40);
+
+
   return (
     <div>
         <Header>Health</Header>
         
-        {healthTypes.map( type => (
-          <HealthContainer key={type.id} title={type} />
-        ))}
+        <Sleep sleep={sleepAmount}/>
+        <Water water={waterAmount}/>
+        
     </div>
   );
 };
