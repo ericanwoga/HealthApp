@@ -1,11 +1,11 @@
 import React from 'react';
 import 'semantic-ui-css/semantic.min.css'
-import { Grid, Icon, Header } from 'semantic-ui-react'
+import { Container, Grid, Icon, Header } from 'semantic-ui-react'
 
 const IPhoneBar = ({style}) => {
     if (style == "top") {
         return (
-            <Grid centered style={{height:'6%', overflow:'hidden'}}>
+            <Grid centered>
                 <Grid.Column width={4} textAlign='center' verticalAlign='middle'>
                     <Header size='tiny'>{new Date().getHours() % 12 + ":" + String(new Date().getMinutes()).padStart(2, '0')}</Header>
                 </Grid.Column>
@@ -21,8 +21,8 @@ const IPhoneBar = ({style}) => {
         )
     } else if (style == "bottom") {
         return (
-            <Grid centered style={{height:'1%'}}>
-                <div style={{backgroundColor:'grey', borderRadius:'20em', width:'35%', height:'70%'}}/>
+            <Grid centered style={{height:'70%'}}>
+                <div style={{backgroundColor:'grey', borderRadius:'20em', width:'35%'}}/>
             </Grid>
         )
     }
