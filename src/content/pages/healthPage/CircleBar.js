@@ -3,14 +3,13 @@ import { Header } from 'semantic-ui-react'
 import { CircularProgressbar , buildStyles} from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 
-const value = 0.33;
 
-const CircleBar = ({amount}) => {
+function CircleBar({amount}) {
   return (
     
     <CircularProgressbar value={amount} 
         maxValue={1} 
-        text={`${value * 100}%`}
+        text={`${amount * 100}%`}
         styles={buildStyles({
             // Rotation of path and trail, in number of turns (0-1)
             rotation: 0,
