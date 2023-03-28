@@ -23,11 +23,15 @@ const App = () => {
 
     return (
         // Screen size based on that of a recent iPhone (2532px X 1170px)
-        <Segment style={{fontSize: 'x-large', padding:'10px', margin:'auto', marginTop:'10px', height:'1266px', width:'585px', overflow:'hidden', border:'3px solid black', borderRadius:'100px'}}>
-            <IPhoneBar style='top'/>
-            <AppHeading page={headingPage} setPage={setHeadingPage} isVisible={headingPageVisible} setIsVisible={setHeadingPageVisible}/>
+        <Segment style={{fontSize: 'x-large', padding:'10px', margin:'1% auto', height:'1266px', width:'585px', overflow:'hidden', border:'3px solid black', borderRadius:'100px'}}>
+            <Container style={{height:'6%', overflow:'hidden'}}>
+                <IPhoneBar style='top'/>
+            </Container>
+            <Container style={{height:'8%', overflow:'hidden', paddingTop:'3%'}}>
+                <AppHeading page={headingPage} setPage={setHeadingPage} isVisible={headingPageVisible} setIsVisible={setHeadingPageVisible}/>
+            </Container>
             <Router>
-                <Container textAlign='center' fluid style={{height:'82%', overflow:'auto', padding:'10px'}}>
+                <Container textAlign='center' style={{height:'78%', overflow:'auto', padding:'1%'}}>
                     { !headingPageVisible ? (
                         <Routes>
                         <Route path='/learn' element={<Learn/>}/>
@@ -39,9 +43,13 @@ const App = () => {
                         </Routes>
                     ) : <HeadingPage page={headingPage}/> }
                 </Container>
-                <Navbar pages={pages} setHeadingPageVisible={setHeadingPageVisible}/>
+                <Container textAlign='center' style={{height:'9%', padding:'1%'}}>
+                    <Navbar pages={pages} setHeadingPageVisible={setHeadingPageVisible}/>
+                </Container>
             </Router>
-            <IPhoneBar style='bottom'/>
+            <Container textAlign='center' style={{height:'1%'}}>
+                <IPhoneBar style='bottom'/>
+            </Container>
         </Segment>
     )
 }
