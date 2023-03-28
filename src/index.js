@@ -12,6 +12,7 @@ import Activity from './content/pages/activityPage/Activity'
 import Body from './content/pages/bodyPage/Body'
 import AppHeading from './heading/AppHeading'
 import HeadingPage from './heading/HeadingPage'
+import userData from './userData.json'
 
 const pages = ["Learn", "Health", "Dashboard", "Activity", "Body"]
 
@@ -19,6 +20,7 @@ const App = () => {
 
     const [headingPageVisible, setHeadingPageVisible] = useState(false)
     const [headingPage, setHeadingPage] = useState("none")
+    var user = userData.users.johnsmith
 
     return (
         // Screen size based on that of a recent iPhone (2532px X 1170px)
@@ -36,7 +38,7 @@ const App = () => {
                         <Route path='/learn' element={<Learn/>}/>
                         <Route path='/health' element={<Health/>}/>
                         <Route path='/' element={<Dashboard/>}/>
-                        <Route path='/dashboard' element={<Dashboard/>}/>
+                        <Route path='/dashboard' element={<Dashboard user={user}/>}/>
                         <Route path='/activity' element={<Activity/>}/>
                         <Route path='/body' element={<Body/>}/>
                         </Routes>

@@ -5,13 +5,13 @@ import QuickActions from './QuickActions'
 import LifeScore from './LifeScore'
 import RecentActivies from './RecentActivities';
 
-const Dashboard = () => {
+const Dashboard = ({user}) => {
   return (
     <div>
         <Header>Dashboard</Header>
         <StepCount/>
         <QuickActions/>
-        <LifeScore/>
+        <LifeScore score={user.lifeScore}/>
         <RecentActivies/>
     </div>
   );

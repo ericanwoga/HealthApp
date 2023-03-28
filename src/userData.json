@@ -1,0 +1,29 @@
+{
+    "users": {
+        "johnsmith": {
+            "name": "John Smith",
+            "birthday": "05/07/1982",
+            "email": "johnsmith@gmail.com",
+            "lifeScore": "67",
+            "bodyData": {
+                "03/28/2023": {
+                    "height": "74",
+                    "weight": "173"
+                }
+            }
+        },
+
+        "janedoe": {
+            "name": "Jane Doe",
+            "birthday": "11/21/2000",
+            "email": "janedoe@yahoo.com",
+            "lifeScore": "91",
+            "bodyData": {
+                "03/30/2023": {
+                    "height": "62",
+                    "weight": "125"
+                }
+            }
+        }
+    }
+}
