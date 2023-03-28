@@ -88,7 +88,6 @@ const StepCountContent = ({steps}) => {
                 }
                 break;
         }
-        console.log(retVal)
         return retVal
     }
 
