@@ -1,18 +1,41 @@
 import React, { useState } from "react";
-import { Header } from "semantic-ui-react";
+import { Header, Input, Button, Grid } from "semantic-ui-react";
+import PageItem from "../../PageItem";
+
+const BodyContent = () => {
+  const [weight, setWeight] = useState("");
+  const [submittedWeight, setSubmittedWeight] = useState("")
+
+  return ( 
+    <>
+      <Header size='small'>
+        {submittedWeight ? (
+          "You weighed in at " + submittedWeight + " lbs. today!"
+        ) : "Please enter today's weight"}
+      </Header>
+      <Grid>
+        <Grid.Column width={10}>
+          <Input
+          fluid
+          label={{ basic: true, content: 'lbs' }}
+          labelPosition='right'
+          placeholder='Enter weight...'
+          onChange={(e) => {{setWeight(e.target.value)}}}
+          />
+        </Grid.Column>
+        <Grid.Column width={6}>
+          <Button fluid onClick={() => {setSubmittedWeight(weight)}}>Submit</Button>
+        </Grid.Column>
+      </Grid>
+    </>
+  )
+}
 
 const Body = () => {
-  const [weight, setWeight] = useState("");
-
-  const weightChange = (event) => {
-    setWeight(event.target.value);
-  };
-
   return (
     <div>
       <Header>Body</Header>
-      <p>Today's weight is: {weight} lbs</p>
-      <input type="number" value={weight} onChange={weightChange} />
+      <PageItem title="Today's Weight" content={<BodyContent/>}/>
     </div>
   );
 };

@@ -1,18 +1,9 @@
 import React from 'react';
-import { Button, Icon, Grid, Segment, Header } from 'semantic-ui-react'
+import PageItem from '../../PageItem';
 
 const RecentActivies = () => {
     return (
-        <Segment basic>
-            <Header size='large' textAlign='left'>Recent Activies</Header>
-            <Segment>
-                <Grid>
-                    <Grid.Row>
-                        
-                    </Grid.Row>
-                </Grid>
-            </Segment>
-        </Segment>
+        <PageItem title="Recent Activities" moreLabel="View More" content={<></>}/>
     );
 };
   

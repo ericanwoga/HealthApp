@@ -1,18 +1,27 @@
 import React from 'react'
 import  CircleBar from './CircleBar'
+import { Grid, Statistic, Icon } from 'semantic-ui-react'
 import './Health.css'
+import PageItem from '../../PageItem'
 
-function Water({water}) {
-    return(
-        <div className="healthtype-container">
-            <h1>Water Intake</h1>
-            <div className="rounded-box">
-                <div className="circlebar-container">
-                    <CircleBar amount={water}/>
-                </div>
-                <div>blahblah</div>
-            </div>
-        </div>
+function WaterContent({water}) {
+    return (
+        <Grid>
+            <Grid.Column width={8}>
+                <CircleBar amount={water}/>
+            </Grid.Column>
+            <Grid.Column verticalAlign='middle' width={8}>
+                <Statistic>
+                <Statistic.Value>40/100</Statistic.Value>
+                </Statistic>
+            </Grid.Column>
+        </Grid>
+    )
+}
+
+const Water = ({water}) => {
+    return (
+        <PageItem title="Water Intake" content={<WaterContent water={water}/>}/>
     )
 }
 

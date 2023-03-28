@@ -17,26 +17,6 @@ p{
     color: var(--color-midnight);
  
 }
-/*Each health type has a container*/
-.healthtype-container {
-    z-index: 0;
-    margin-bottom: 10px;
-}
-
-.rounded-box {
-    box-shadow: 0 0 20px 1px var(--color-grey);
-    border-radius: 30px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    
-}
-
-.circlebar-container{
-    width: 40%;
-    padding: 10px;
-    margin-right: 30%;
-}
 
 .text-and-plus-container{
     display: flex;
