@@ -2,24 +2,36 @@
     "users": {
         "johnsmith": {
             "name": "John Smith",
-            "birthday": "05/07/1982",
+            "birthday": "1982-05-07",
             "email": "johnsmith@gmail.com",
             "lifeScore": "67",
             "bodyData": {
-                "03/28/2023": {
+                "2023-03-28": {
                     "height": "74",
                     "weight": "173"
+                }
+            },
+            "activityData": {
+                "steps": {
+                    "2023-03-28": "4950",
+                    "2023-03-27": "5300",
+                    "2023-03-26": "3080",
+                    "2023-03-25": "8092",
+                    "2023-03-24": "2040",
+                    "2023-03-23": "3880",
+                    "2023-03-22": "6025",
+                    "2023-03-21": "5020"
                 }
             }
         },
 
         "janedoe": {
             "name": "Jane Doe",
-            "birthday": "11/21/2000",
+            "birthday": "2000-11-21",
             "email": "janedoe@yahoo.com",
             "lifeScore": "91",
             "bodyData": {
-                "03/30/2023": {
+                "2023-03-30": {
                     "height": "62",
                     "weight": "125"
                 }

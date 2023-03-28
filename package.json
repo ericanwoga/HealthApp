@@ -35,6 +35,7 @@
     "babel-preset-react": "^6.24.1",
     "css-loader": "^6.7.3",
     "html-webpack-plugin": "^5.5.0",
+    "moment": "^2.29.4",
     "node-sass": "^8.0.0",
     "react-router-dom": "^6.9.0",
     "recharts": "^2.5.0",

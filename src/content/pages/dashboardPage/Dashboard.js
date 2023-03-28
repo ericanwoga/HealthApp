@@ -9,7 +9,7 @@ const Dashboard = ({user}) => {
   return (
     <div>
         <Header>Dashboard</Header>
-        <StepCount/>
+        <StepCount steps={user.activityData.steps}/>
         <QuickActions/>
         <LifeScore score={user.lifeScore}/>
         <RecentActivies/>
