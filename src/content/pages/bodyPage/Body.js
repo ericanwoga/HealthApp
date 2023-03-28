@@ -10,11 +10,7 @@ const Body = () => {
 
   return (
     <div>
-      <Header>
-        Good Evening,
-        <br />
-        ___!
-      </Header>
+      <Header>Body</Header>
       <p>Today's weight is: {weight} lbs</p>
       <input type="number" value={weight} onChange={weightChange} />
     </div>
