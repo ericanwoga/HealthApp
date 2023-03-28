@@ -13,7 +13,6 @@ import Body from './content/pages/bodyPage/Body'
 import AppHeading from './heading/AppHeading'
 import HeadingPage from './heading/HeadingPage'
 
-
 const pages = ["Learn", "Health", "Dashboard", "Activity", "Body"]
 
 const App = () => {
@@ -23,7 +22,7 @@ const App = () => {
 
     return (
         // Screen size based on that of a recent iPhone (2532px X 1170px)
-        <Segment style={{fontSize: 'x-large', padding:'10px', margin:'1% auto', height:'1266px', width:'585px', overflow:'hidden', border:'3px solid black', borderRadius:'100px'}}>
+        <Segment style={{fontSize: 'x-large', padding:'10px', margin:'auto', height:'1266px', width:'585px', overflow:'hidden', border:'3px solid black', borderRadius:'100px'}}>
             <Container style={{height:'6%', overflow:'hidden'}}>
                 <IPhoneBar style='top'/>
             </Container>
@@ -41,7 +40,7 @@ const App = () => {
                         <Route path='/activity' element={<Activity/>}/>
                         <Route path='/body' element={<Body/>}/>
                         </Routes>
-                    ) : <HeadingPage page={headingPage}/> }
+                    ) : <HeadingPage page={headingPage} setIsVisible={setHeadingPageVisible}/> }
                 </Container>
                 <Container textAlign='center' style={{height:'9%', padding:'1%'}}>
                     <Navbar pages={pages} setHeadingPageVisible={setHeadingPageVisible}/>
