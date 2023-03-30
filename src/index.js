@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import * as ReactDOMClient from 'react-dom/client';
 import 'semantic-ui-css/semantic.min.css'
-import { Segment, Container } from 'semantic-ui-react'
+import { Segment, Container, Icon, Header, Button, Modal } from 'semantic-ui-react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import IPhoneBar from './layout/IPhoneBar';
 import Navbar from './content/Navbar'
@@ -20,11 +20,12 @@ const App = () => {
 
     const [headingPageVisible, setHeadingPageVisible] = useState(false)
     const [headingPage, setHeadingPage] = useState("none")
+    
     var user = userData.users.johnsmith
 
     return (
         // Screen size based on that of a recent iPhone (2532px X 1170px)
-        <Segment style={{fontSize: 'x-large', padding:'10px', margin:'auto', height:'1266px', width:'585px', overflow:'hidden', border:'3px solid black', borderRadius:'100px'}}>
+        <Segment className='phoneContainer' style={{scale:'100%', fontSize:'x-large', padding:'10px', margin:'auto', height:'1266px', width:'585px', overflow:'hidden', border:'3px solid black', borderRadius:'100px'}}>
             <Container style={{height:'6%', overflow:'hidden'}}>
                 <IPhoneBar style='top'/>
             </Container>
@@ -32,7 +33,7 @@ const App = () => {
                 <AppHeading page={headingPage} setPage={setHeadingPage} isVisible={headingPageVisible} setIsVisible={setHeadingPageVisible}/>
             </Container>
             <Router>
-                <Container textAlign='center' style={{height:'78%', overflow:'auto', padding:'1%'}}>
+                <Container textAlign='center' style={{height:'78%', overflow:(true ? 'auto' : 'auto'), padding:'1%'}}>
                     { !headingPageVisible ? (
                         <Routes>
                         <Route path='/learn' element={<Learn/>}/>
@@ -58,4 +59,4 @@ const App = () => {
 const rootElement = document.getElementById("root");
 
 const root = ReactDOMClient.createRoot(rootElement);
-root.render(<App callback={() => console.log("renderered")} />);
+root.render(<App/>);

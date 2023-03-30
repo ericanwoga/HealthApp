@@ -1,18 +1,25 @@
 import React from 'react'
-import  CircleBar from './CircleBar'
-import './Health.css'
+import { Grid, Progress, Statistic } from 'semantic-ui-react'
+import PageItem from '../../PageItem'
 
-function Mood({title}) {
+const MoodContent = ({mood}) => {
     return(
-        <div className="healthtype-container">
-            <h1>{title}</h1>
-            <div className="rounded-box">
-                <div className="circlebar-container">
-                    <CircleBar />
-                </div>
-                <div>blahblah</div>
-            </div>
-        </div>
+        <Grid>
+            <Grid.Column verticalAlign='middle' width={8}>
+                <Progress percent={mood} progress/>
+            </Grid.Column>
+            <Grid.Column verticalAlign='middle' width={8}>
+                <Statistic>
+                    <Statistic.Value>{mood / 10}/10</Statistic.Value>
+                </Statistic>
+            </Grid.Column>
+        </Grid>
+    )
+}
+
+const Mood = ({mood}) => {
+    return (
+        <PageItem title="Mood" content={<MoodContent mood={mood}/>}/>
     )
 }
 
