@@ -19,7 +19,7 @@ const pages = ["Learn", "Health", "Dashboard", "Activity", "Body"]
 const App = () => {
 
     const [headingPageVisible, setHeadingPageVisible] = useState(false)
-    const [headingPage, setHeadingPage] = useState("none")
+    const [headingPage, setHeadingPage] = useState("")
     
     var user = userData.users.johnsmith
 

@@ -13,7 +13,6 @@ const Health = () => {
   return (
     <div>
         <Header>Health</Header>
-        
         <Sleep sleep={sleepAmount} setSleepAmount={setSleepAmount}/>
         <Water water={waterAmount} setWaterAmount={setWaterAmount}/>
         <Mood mood={100}/>
