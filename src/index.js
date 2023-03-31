@@ -13,19 +13,21 @@ import Body from './content/pages/bodyPage/Body'
 import AppHeading from './heading/AppHeading'
 import HeadingPage from './heading/HeadingPage'
 import userData from './userData.json'
+import LoginPage from './content/LoginPage.js'
 
 const pages = ["Learn", "Health", "Dashboard", "Activity", "Body"]
 
 const App = () => {
 
+    const [loggedIn, setLoggedIn] = useState(false)
+    const [user, setUser] = useState(userData.users.johnsmith)
     const [headingPageVisible, setHeadingPageVisible] = useState(false)
     const [headingPage, setHeadingPage] = useState("")
-    
-    var user = userData.users.johnsmith
 
     return (
         // Screen size based on that of a recent iPhone (2532px X 1170px)
         <Segment className='phoneContainer' style={{scale:'100%', fontSize:'x-large', padding:'10px', margin:'auto', height:'1266px', width:'585px', overflow:'hidden', border:'3px solid black', borderRadius:'100px'}}>
+            <LoginPage loggedIn={loggedIn} setLoggedIn={setLoggedIn} setUser={setUser}/>
             <Container style={{height:'6%', overflow:'hidden'}}>
                 <IPhoneBar style='top'/>
             </Container>

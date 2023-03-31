@@ -2,8 +2,8 @@
     "users": {
         "johnsmith": {
             "name": "John Smith",
-            "birthday": "1982-05-07",
             "email": "johnsmith@gmail.com",
+            "password": "demo12345",
             "lifeScore": "67",
             "bodyData": {
                 "2023-03-28": {

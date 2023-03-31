@@ -34,8 +34,11 @@ const SleepContent = ({sleep}) => {
                     <PageModal
                         title={"Sleep Tracker"} 
                         open={showSleepPopup} 
-                        setOpen={setShowSleepPopup} 
+                        setOpen={() => setShowSleepPopup(true)} 
+                        setClosed={() => setShowSleepPopup(false)}
                         content={<ModalContent/>}
+                        submitText={"Submit"}
+                        cancelText={"Cancel"}
                     />
                 </Statistic.Label>
                 </Statistic>
