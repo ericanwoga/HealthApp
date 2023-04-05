@@ -6,15 +6,15 @@ import TrophyPage from './pages/trophyPage/TrophyPage'
 import UserPage from './pages/userPage/UserPage'
 import PageItem from './PageItem';
 
-const HeadingPage = ({page, setIsVisible}) => {
+const HeadingPage = ({setLoggedIn, userData, page, setIsVisible}) => {
     const [content, setContent] = useState(page)
 
     useEffect(() => {
         setContent(
-            page == "Achievements" && <TrophyPage/> || 
-            page == "Help" && <HelpPage/> ||
-            page == "Settings" && <SettingPage/> ||
-            page == "Profile" && <UserPage/>
+            page == "Achievements" && <TrophyPage userData={userData}/> || 
+            page == "Help" && <HelpPage userData={userData}/> ||
+            page == "Settings" && <SettingPage userData={userData}/> ||
+            page == "Profile" && <UserPage setIsVisible={setIsVisible} setLoggedIn={setLoggedIn} userData={userData}/>
         )
     },[page])
 

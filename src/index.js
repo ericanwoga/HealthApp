@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import * as ReactDOMClient from 'react-dom/client';
 import 'semantic-ui-css/semantic.min.css'
-import { Segment, Container, Icon, Header, Button, Modal } from 'semantic-ui-react'
+import { Segment, Container } from 'semantic-ui-react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import IPhoneBar from './layout/IPhoneBar';
 import Navbar from './content/Navbar'
@@ -16,18 +16,20 @@ import userData from './userData.json'
 import LoginPage from './content/LoginPage.js'
 
 const pages = ["Learn", "Health", "Dashboard", "Activity", "Body"]
+const importedUserData = userData
 
 const App = () => {
 
     const [loggedIn, setLoggedIn] = useState(false)
-    const [user, setUser] = useState(userData.users.johnsmith)
+    const [allUsers, setAllUsers] = useState(importedUserData.users)
+    const [userData, setUserData] = useState(allUsers.johnsmith)
     const [headingPageVisible, setHeadingPageVisible] = useState(false)
     const [headingPage, setHeadingPage] = useState("")
 
     return (
         // Screen size based on that of a recent iPhone (2532px X 1170px)
         <Segment className='phoneContainer' style={{scale:'100%', fontSize:'x-large', padding:'10px', margin:'auto', height:'1266px', width:'585px', overflow:'hidden', border:'3px solid black', borderRadius:'100px'}}>
-            <LoginPage loggedIn={loggedIn} setLoggedIn={setLoggedIn} setUser={setUser}/>
+            <LoginPage setUserData={setUserData} allUsers={allUsers} setAllUsers={setAllUsers} loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>
             <Container style={{height:'6%', overflow:'hidden'}}>
                 <IPhoneBar style='top'/>
             </Container>
@@ -40,12 +42,12 @@ const App = () => {
                         <Routes>
                         <Route path='/learn' element={<Learn/>}/>
                         <Route path='/health' element={<Health/>}/>
-                        <Route path='/' element={<Dashboard user={user}/>}/>
-                        <Route path='/dashboard' element={<Dashboard user={user}/>}/>
+                        <Route path='/' element={<Dashboard user={userData}/>}/>
+                        <Route path='/dashboard' element={<Dashboard user={userData}/>}/>
                         <Route path='/activity' element={<Activity/>}/>
                         <Route path='/body' element={<Body/>}/>
                         </Routes>
-                    ) : <HeadingPage page={headingPage} setIsVisible={setHeadingPageVisible}/> }
+                    ) : <HeadingPage setLoggedIn={setLoggedIn} userData={userData} page={headingPage} setIsVisible={setHeadingPageVisible}/> }
                 </Container>
                 <Container textAlign='center' style={{height:'9%', padding:'1%'}}>
                     <Navbar pages={pages} setHeadingPageVisible={setHeadingPageVisible}/>

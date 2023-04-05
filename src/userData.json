@@ -1,10 +1,25 @@
 {
     "users": {
+        "janedoe": {
+            "name": "Jane Doe",
+            "email": "janedoe@gmail.com",
+            "password": "janedoe123",
+            "lifeScore": "84",
+            "healthData": {
+            },
+            "bodyData": {
+            },
+            "activityData": {
+            }
+        },
         "johnsmith": {
             "name": "John Smith",
             "email": "johnsmith@gmail.com",
             "password": "demo12345",
             "lifeScore": "67",
+            "healthData": {
+
+            },
             "bodyData": {
                 "2023-03-28": {
                     "height": "74",

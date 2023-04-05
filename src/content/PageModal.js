@@ -2,7 +2,7 @@ import React from 'react'
 import { Modal, Header, Icon, Button } from 'semantic-ui-react';
 
 
-const PageModal = ({title, open, setOpen, setClosed, content, cancelText, submitText, clickDimmerClose}) => {
+const PageModal = ({title, open, setOpen, setClosed, content, cancelText, submitText, clickDimmerClose, cancelAction, submitAction}) => {
     return (
         <Modal
             onOpen={setOpen}
@@ -21,12 +21,12 @@ const PageModal = ({title, open, setOpen, setClosed, content, cancelText, submit
             </Modal.Content>
             <Modal.Actions>
                 {cancelText &&
-                    <Button color='red' inverted onClick={setClosed}>
+                    <Button color='red' inverted onClick={cancelAction}>
                         <Icon name='remove' /> {cancelText ? cancelText : "Cancel"}
                     </Button>
                 }
                 {submitText &&
-                    <Button color='green' inverted onClick={setClosed}>
+                    <Button color='green' inverted onClick={submitAction}>
                         <Icon name='checkmark' /> {submitText ? submitText : "Submit"}
                     </Button>
                 }

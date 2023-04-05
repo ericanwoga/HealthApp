@@ -1,9 +1,12 @@
 import React from 'react';
-import { Header } from 'semantic-ui-react'
+import { Header, Button } from 'semantic-ui-react'
   
-const UserPage = () => {
+const UserPage = ({setIsVisible, setLoggedIn, userData}) => {
   return (
-    <Header>UserPage</Header>
+    <>
+      <Header>{userData.name}</Header>
+      <Button fluid onClick={() => (setLoggedIn(false), setIsVisible(false))}>Log Out</Button>
+    </>
   );
 };
   

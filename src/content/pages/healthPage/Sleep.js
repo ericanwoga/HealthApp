@@ -36,6 +36,8 @@ const SleepContent = ({sleep}) => {
                         open={showSleepPopup} 
                         setOpen={() => setShowSleepPopup(true)} 
                         setClosed={() => setShowSleepPopup(false)}
+                        submitAction={() => setShowSleepPopup(false)}
+                        cancelAction={() => setShowSleepPopup(false)}
                         content={<ModalContent/>}
                         submitText={"Submit"}
                         cancelText={"Cancel"}

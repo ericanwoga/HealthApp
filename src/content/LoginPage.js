@@ -1,115 +1,58 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import PageModal from "./PageModal"
-import { Form, Button, Divider, Input } from 'semantic-ui-react'
-import userData from '../userData.json'
+import { Button, Header } from 'semantic-ui-react'
 
-const LoginPageContent = ({setLoggedIn, setUser, newUser, setNewUser}) => {
-    const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
+const LoginPageContent = ({allUsers, setUserData, setLoggedIn}) => {
+    const [userKey, setUserKey] = useState("")
 
-    const login = () => {
-        for (let key in userData.users) {
-            if (userData.users[key].email == email && userData.users[key].password == password) {
-                setUser(userData.users[key])
+    useEffect(() => {
+        for (let key in allUsers) {
+            if (key == userKey) {
+                var newUserData = allUsers[key]
+                setUserData(newUserData)
                 setLoggedIn(true)
             }
         }
-    }
-
-    const createAccount = () => {
-        
-    }
+    }, [userKey])
 
     return (
-        newUser ? (
-            <Form>
-                <Form.Field required>
-                    <label>Full Name</label>
-                    <Input 
-                        placeholder='Full Name'
-                        icon='user' 
-                        iconPosition='left'
-                        onChange={(e) => setPassword(e.value)}
-                    />
-                </Form.Field> 
-                <Form.Field required>
-                    <label>E-mail Address</label>
-                    <Input 
-                        placeholder='E-mail Address' 
-                        icon='mail' 
-                        iconPosition='left'
-                        onChange={(e) => setPassword(e.value)}
-                    />
-                </Form.Field>                 
-                <Form.Field required>
-                    <label>Password</label>
-                    <Input 
-                        placeholder='Password' 
-                        icon='lock' 
-                        type='password'
-                        iconPosition='left'
-                        onChange={(e) => setPassword(e.value)}
-                    />
-                </Form.Field> 
-
-                <Button type='submit' fluid size='large' onClick={() => createAccount(name, email, password)}>
-                    Create Account
-                </Button>
-                <Divider/>
-                <Button fluid size='large' onClick={() => setNewUser(false)}>
-                    Back to Login
-                </Button>
-            </Form>
-        ) : (
-            <Form>
-                <Form.Field required>
-                    <label>E-mail Address</label>
-                    <Input 
-                        placeholder='E-mail Address' 
-                        icon='mail' 
-                        iconPosition='left'
-                        onChange={(e) => setEmail(e.target.value)}
-                    />
-                </Form.Field>                 
-                <Form.Field required>
-                    <label>Password</label>
-                    <Input 
-                        placeholder='Password' 
-                        icon='lock' 
-                        iconPosition='left'
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
-                </Form.Field> 
-
-                <Button fluid size='large' onClick={() => login()}>
-                    Login
-                </Button>
-                <Divider/>
-                <Button fluid size='large' onClick={() => setNewUser(true)}>
-                    New User? Create an Account!
-                </Button>
-            </Form>
-        )
+        <>
+            <Header size="small">Click on one of the users below to log in as them!</Header>
+            <Button.Group fluid vertical>
+                {Object.keys(allUsers).map((key) => (
+                    <Button
+                        active={userKey == key}
+                        key={key}
+                        onClick={() => (
+                            setUserKey(key)
+                        )}
+                    >
+                        {allUsers[key].name}
+                    </Button>
+                ))}
+            </Button.Group>
+        </>
     )
 }
 
-const LoginPage = ({loggedIn, setLoggedIn, setUser}) => {
+const LoginPage = ({loggedIn, setLoggedIn, setUserData, allUsers, setAllUsers}) => {
 
     const [newUser, setNewUser] = useState(false)
 
     return (
         <PageModal 
-            title={newUser ? "Create an Account" : "Log in to Health App"}
+            title={"Log in to Health App"}
             open={!loggedIn}
             setOpen={() => setLoggedIn(false)}
             setClosed={() => setLoggedIn(true)}
-            cancelText={"Demo Mode"}
             clickDimmerClose={false}
             content={
                 <LoginPageContent
                     loggedIn={loggedIn} 
                     setLoggedIn={setLoggedIn} 
-                    setUser={setUser}
+                    allUsers={allUsers}
+                    setAllUsers={setAllUsers}
+                    setUserData={setUserData}
                     newUser={newUser}
                     setNewUser={setNewUser}
                 />
