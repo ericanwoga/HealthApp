@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { Button, Grid } from 'semantic-ui-react';
 import { NavLink } from "react-router-dom";
 
-const Navbar = ({pages, setHeadingPageVisible}) => {
+// The bottom navigation bar
+const Navbar = ({pages, setHeadingPage}) => {
     const [activeItem, setActiveItem] = useState()
 
     return (
@@ -17,7 +18,7 @@ const Navbar = ({pages, setHeadingPageVisible}) => {
                             as={NavLink}
                             to={'/' + page.toLowerCase()}
                             key={page}
-                            onClick={() => (setActiveItem(page), setHeadingPageVisible(false))}
+                            onClick={() => (setActiveItem(page), setHeadingPage(false))}
                             active={page === activeItem}
                             >{page}</Button>
                         )

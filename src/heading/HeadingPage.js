@@ -6,6 +6,7 @@ import TrophyPage from './pages/trophyPage/TrophyPage'
 import UserPage from './pages/userPage/UserPage'
 import PageItem from './PageItem';
 
+// Renders the specific Header page if one is selected from the App Heading
 const HeadingPage = ({setLoggedIn, userData, page, setIsVisible}) => {
     const [content, setContent] = useState(page)
 

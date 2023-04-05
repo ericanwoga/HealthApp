@@ -2,25 +2,25 @@ import React from 'react';
 import 'semantic-ui-css/semantic.min.css'
 import { Header, Grid, Icon } from 'semantic-ui-react'
 
-const AppHeading = ({setPage, setIsVisible}) => {
+// Renders the app heading with the 4 buttons and app title.
+const AppHeading = ({page, setPage}) => {
 
     function setHeadingPage (page) {
         setPage(page)
-        setIsVisible(true)
     }
 
     return (
         <Grid centered verticalAlign='middle'>
             <Grid.Column width={4} textAlign='center'>
-                <Icon link circular name='setting' onClick={() => setHeadingPage('Settings')}/>
-                <Icon link circular name='help' onClick={() => setHeadingPage('Help')}/>
+                <Icon link circular inverted={page == "Settings"} name='setting' onClick={() => setHeadingPage('Settings')}/>
+                <Icon link circular inverted={page == "Help"} name='help' onClick={() => setHeadingPage('Help')}/>
             </Grid.Column>
             <Grid.Column width={8} textAlign='center'>
                 <Header size='huge' textAlign='center'>Health App</Header>
             </Grid.Column>
             <Grid.Column width={4} textAlign='center'>
-                <Icon link circular name='trophy' onClick={() => setHeadingPage('Achievements')}/>
-                <Icon link circular name='user' onClick={() => setHeadingPage('Profile')}/>
+                <Icon link circular inverted={page == "Achievements"} name='trophy' onClick={() => setHeadingPage('Achievements')}/>
+                <Icon link circular inverted={page == "Profile"} name='user' onClick={() => setHeadingPage('Profile')}/>
             </Grid.Column>
         </Grid>
     )

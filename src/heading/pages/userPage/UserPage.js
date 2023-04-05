@@ -1,6 +1,7 @@
 import React from 'react';
 import { Header, Button } from 'semantic-ui-react'
   
+// User heading page.
 const UserPage = ({setIsVisible, setLoggedIn, userData}) => {
   return (
     <>

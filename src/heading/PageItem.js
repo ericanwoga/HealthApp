@@ -1,6 +1,7 @@
 import React from 'react';
 import { Header, Icon, Grid, Segment, Button} from 'semantic-ui-react'
 
+// The segment container for the Heading button pages.
 const PageItem = ({title, setIsVisible, content}) => {
     return (
         <Segment textAlign='center' style={{height:'100%', overflow:'auto'}}>

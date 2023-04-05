@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react"
 import PageModal from "./PageModal"
 import { Button, Header } from 'semantic-ui-react'
 
+// A login page that has a list of all users to select from to view different kinds of information displayed.
+// See index.js to set a user without having to select one each time the app re-renders.
 const LoginPageContent = ({allUsers, setUserData, setLoggedIn}) => {
     const [userKey, setUserKey] = useState("")
 
