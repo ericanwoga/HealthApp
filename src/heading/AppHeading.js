@@ -1,5 +1,4 @@
 import React from 'react';
-import 'semantic-ui-css/semantic.min.css'
 import { Header, Grid, Icon } from 'semantic-ui-react'
 
 // Renders the app heading with the 4 buttons and app title.

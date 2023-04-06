@@ -35,6 +35,7 @@ const QuickActionsContent = () => {
         </Grid.Column>
       </Grid.Row>
 
+      {/* 
       <Grid.Row>
         <Grid.Column>
           <Button fluid size='large' icon labelPosition='left'>
@@ -49,6 +50,7 @@ const QuickActionsContent = () => {
           </Button>
         </Grid.Column>
       </Grid.Row>
+      */}
     </Grid>
   );
 };

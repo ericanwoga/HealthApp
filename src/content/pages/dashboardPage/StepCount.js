@@ -6,13 +6,14 @@ import PageItem from '../../PageItem';
 
 const StepCountContent = ({steps}) => {
 
-    var timeFrames = ["1 Week", "1 Month", "3 Month", "6 Month", "1 Year"]
+    // Removed "1 Month"
+    var timeFrames = ["1 Week", "3 Months", "6 Months", "1 Year"]
     const [timeFrame, setTimeFrame] = useState(timeFrames[0])
     var chartButtons = []
 
     timeFrames.forEach( (time) => {
         chartButtons.push(
-            <Button key={time} active={timeFrame == time} onClick={() => setTimeFrame(time)}>
+            <Button size='large' key={time} active={timeFrame == time} onClick={() => setTimeFrame(time)}>
                 {time}
             </Button>
         )
@@ -39,7 +40,7 @@ const StepCountContent = ({steps}) => {
                     })
                 }
                 break;
-            case "3 Month":
+            case "3 Months":
                 for (var i = 12 ; i >= 0; i--) {
                     var weekSteps = 0
                     for (var j = 6 ; j >= 0; j--) {
@@ -53,7 +54,7 @@ const StepCountContent = ({steps}) => {
                     })
                 }
                 break;
-            case "6 Month":
+            case "6 Months":
                 var currDate = moment().subtract(6, 'months')
                 for (var i = 6 ; i >= 0; i--) {
                     var currMonth = currDate.format('MMM')
@@ -96,8 +97,8 @@ const StepCountContent = ({steps}) => {
             <ResponsiveContainer width="100%" height={200}>
                 <BarChart data={getSteps()} margin={0}>
                     <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="name"/>
-                    <YAxis/>
+                    <XAxis fontSize={15} dataKey="name"/>
+                    <YAxis fontSize={15}/>
                     <Bar dataKey="steps" fill="#2C698D" />
                 </BarChart>
             </ResponsiveContainer>

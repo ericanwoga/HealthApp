@@ -56,7 +56,9 @@ Now that all the proper pacakges are installed, you're all set to start developi
 ```
 npm start
 ```
-This command will start the project and open it at ``localhost:8080``. Once this is open, the project is live, so you can make changes in your preferred text editor and after saving the files, the page will re-build in real time.
+This command will start the project and open it at ``localhost:3000``. Once this is open, the project is live, so you can make changes in your preferred text editor and after saving the files, the page will re-build in real time.
+
+When running the app, you will also see an output from the linter, which will check your code for warnings or errors.
 
 ### Building the App
 

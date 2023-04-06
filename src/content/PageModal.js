@@ -25,9 +25,9 @@ const PageModal = ({title, open, setOpen, setClosed, content, cancelText, submit
             closeOnDimmerClick={clickDimmerClose != null ? clickDimmerClose : true}
             open={open}
             style={{width:'80%', borderRadius:'10px'}}
-            mountNode={document.getElementById('root')}
+            mountNode={document.getElementById('rooty')}
         >
-            <Header>
+            <Header size='large'>
                 {title}
             </Header>
             <Modal.Content>

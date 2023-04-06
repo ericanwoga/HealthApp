@@ -15,11 +15,11 @@ const PageItem = ({title, moreLabel, content, moreAction}) => {
         <Segment basic>
             <Grid>
                 <Grid.Column width={10}>
-                    <Header size='large' textAlign='left'>{title}</Header>
+                    <Header size='huge' textAlign='left'>{title}</Header>
                 </Grid.Column>
                 <Grid.Column width={6}>
                     {moreLabel ? ( 
-                        <Button basic floated='right' size='small' onClick={moreAction}>
+                        <Button basic floated='right' size='large' onClick={moreAction}>
                             {moreLabel}
                             <Icon name='right arrow' />
                         </Button>

@@ -1,5 +1,4 @@
 import React from 'react';
-import 'semantic-ui-css/semantic.min.css'
 import { Grid, Icon, Header } from 'semantic-ui-react'
 
 // Defines the top and bottom bars for the iphone layout.

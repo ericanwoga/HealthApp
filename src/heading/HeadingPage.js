@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import 'semantic-ui-css/semantic.min.css'
 import SettingPage from './pages/settingPage/SettingPage'
 import HelpPage from './pages/helpPage/HelpPage'
 import TrophyPage from './pages/trophyPage/TrophyPage'
