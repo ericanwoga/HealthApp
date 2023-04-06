@@ -5,6 +5,8 @@
             "email": "janedoe@gmail.com",
             "password": "janedoe123",
             "lifeScore": "84",
+            "points": "0",
+            "lifePoints": "0",
             "healthData": {
             },
             "bodyData": {
@@ -17,6 +19,8 @@
             "email": "johnsmith@gmail.com",
             "password": "demo12345",
             "lifeScore": "67",
+            "points": "520",
+            "lifePoints": "9375",
             "healthData": {
 
             },

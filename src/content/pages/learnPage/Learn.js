@@ -20,7 +20,7 @@ const HealthArticles = () => {
 const Learn = () => {
   return (
     <div>
-        <Header>Learn</Header>
+        <Header size='large' >Learn</Header>
         <PageItem title="Health Articles" moreLabel="View More" content={<HealthArticles/>}/>
     </div>    
   );

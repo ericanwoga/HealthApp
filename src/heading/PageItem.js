@@ -1,23 +1,34 @@
 import React from 'react';
 import { Header, Icon, Grid, Segment, Button} from 'semantic-ui-react'
 
-// The segment container for the Heading button pages.
-const PageItem = ({title, setIsVisible, content}) => {
+/*
+ * A component file that renders a page item
+ *
+ * Parameters - 
+ *   title (String): The title that is displayed on the top header of the modal
+ *   content (React Element): The react element to be rendered in the body of the modal
+ *   moreLabel (String): The text displayed to the right of the title that 
+ *   moreAction (Func): The action that is completed when the "more" button is clicked
+ */
+const PageItem = ({title, moreLabel, content, moreAction}) => {
     return (
-        <Segment textAlign='center' style={{height:'100%', overflow:'auto'}}>
+        <Segment basic>
             <Grid>
-                <Grid.Column width={4}>
-                    <Button basic floated='left' size='small' onClick={() => setIsVisible(false)}>
-                    <Icon name='left arrow' />
-                    Back
-                    </Button>
+                <Grid.Column width={10}>
+                    <Header size='huge' textAlign='left'>{title}</Header>
                 </Grid.Column>
-                <Grid.Column width={8}>
-                    <Header size='huge'>{title}</Header>
+                <Grid.Column width={6}>
+                    {moreLabel ? ( 
+                        <Button basic floated='right' size='large' onClick={moreAction}>
+                            {moreLabel}
+                            <Icon name='right arrow' />
+                        </Button>
+                    ): <></> }
                 </Grid.Column>
-                <Grid.Column width={4}/>
             </Grid>
-            {content}
+            <Segment>
+                {content}
+            </Segment>
         </Segment>
     );
 };

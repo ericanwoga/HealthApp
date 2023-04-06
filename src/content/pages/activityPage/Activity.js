@@ -4,7 +4,7 @@ import { Header } from 'semantic-ui-react'
 const Activity = () => {
   return (
     <div>
-        <Header>Activity</Header>
+        <Header size='large'>Activity</Header>
     </div>
   );
 };

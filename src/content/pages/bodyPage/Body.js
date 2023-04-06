@@ -34,7 +34,7 @@ const BodyContent = () => {
 const Body = () => {
   return (
     <div>
-      <Header>Body</Header>
+      <Header size='large'>Body</Header>
       <PageItem title="Today's Weight" content={<BodyContent/>}/>
     </div>
   );
