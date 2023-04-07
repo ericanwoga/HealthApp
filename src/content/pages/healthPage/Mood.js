@@ -2,8 +2,8 @@ import React from 'react'
 import { Grid, Progress, Statistic } from 'semantic-ui-react'
 import PageItem from '../../PageItem'
 
-const MoodContent = ({mood}) => {
-    return(
+const MoodContent = ({ mood }) => {
+    return (
         <Grid>
             <Grid.Column verticalAlign='middle' width={8}>
                 <Progress percent={mood} progress/>
@@ -17,10 +17,10 @@ const MoodContent = ({mood}) => {
     )
 }
 
-const Mood = ({mood}) => {
+const Mood = ({ mood }) => {
     return (
         <PageItem title="Mood" content={<MoodContent mood={mood}/>}/>
     )
 }
 
-export default Mood;
+export default Mood

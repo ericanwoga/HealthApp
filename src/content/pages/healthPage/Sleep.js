@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import { Statistic, Grid, Progress, Icon, Header, Input } from 'semantic-ui-react'
 import PageItem from '../../PageItem'
 import PageModal from '../../PageModal'
@@ -9,7 +9,7 @@ const ModalContent = () => {
             <Header>What is your sleep Goal?</Header>
             <Input fluid label={{ basic: true, content: 'hours' }}
                 labelPosition='right'
-                placeholder='Enter sleep goal'/> 
+                placeholder='Enter sleep goal'/>
             <Header>How many hours did you sleep?</Header>
             <Input fluid label={{ basic: true, content: 'hours' }}
                 labelPosition='right'
@@ -18,7 +18,7 @@ const ModalContent = () => {
     )
 }
 
-const SleepContent = ({sleep}) => {
+const SleepContent = ({ sleep }) => {
     const [showSleepPopup, setShowSleepPopup] = useState(false)
 
     return (
@@ -28,31 +28,31 @@ const SleepContent = ({sleep}) => {
             </Grid.Column>
             <Grid.Column verticalAlign='middle' width={8}>
                 <Statistic>
-                <Statistic.Value>{sleep / 10}/10</Statistic.Value>
-                <Statistic.Label>
-                    <Icon onClick={() => setShowSleepPopup(true)} link circular name='plus' className='box-plus-sign'/>
-                    <PageModal
-                        title={"Sleep Tracker"} 
-                        open={showSleepPopup} 
-                        setOpen={() => setShowSleepPopup(true)} 
-                        setClosed={() => setShowSleepPopup(false)}
-                        submitAction={() => setShowSleepPopup(false)}
-                        cancelAction={() => setShowSleepPopup(false)}
-                        content={<ModalContent/>}
-                        submitText={"Submit"}
-                        cancelText={"Cancel"}
-                    />
-                </Statistic.Label>
+                    <Statistic.Value>{sleep / 10}/10</Statistic.Value>
+                    <Statistic.Label>
+                        <Icon onClick={() => setShowSleepPopup(true)} link circular name='plus' className='box-plus-sign'/>
+                        <PageModal
+                            title={'Sleep Tracker'}
+                            open={showSleepPopup}
+                            setOpen={() => setShowSleepPopup(true)}
+                            setClosed={() => setShowSleepPopup(false)}
+                            submitAction={() => setShowSleepPopup(false)}
+                            cancelAction={() => setShowSleepPopup(false)}
+                            content={<ModalContent/>}
+                            submitText={'Submit'}
+                            cancelText={'Cancel'}
+                        />
+                    </Statistic.Label>
                 </Statistic>
             </Grid.Column>
         </Grid>
     )
 }
 
-const Sleep = ({sleep, setSleepAmount}) => {
+const Sleep = ({ sleep, setSleepAmount }) => {
     return (
         <PageItem title="Sleep" content={<SleepContent sleep={sleep}/>}/>
     )
 }
 
-export default Sleep;
+export default Sleep

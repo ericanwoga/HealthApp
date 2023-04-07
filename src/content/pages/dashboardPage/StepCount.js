@@ -1,93 +1,96 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'
 import moment from 'moment'
 import { Button } from 'semantic-ui-react'
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, ResponsiveContainer } from 'recharts';
-import PageItem from '../../PageItem';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, ResponsiveContainer } from 'recharts'
+import PageItem from '../../PageItem'
 
-const StepCountContent = ({steps}) => {
-
+const StepCountContent = ({ steps }) => {
     // Removed "1 Month"
-    var timeFrames = ["1 Week", "3 Months", "6 Months", "1 Year"]
+    const timeFrames = ['1 Week', '3 Months', '6 Months', '1 Year']
     const [timeFrame, setTimeFrame] = useState(timeFrames[0])
-    var chartButtons = []
+    const chartButtons = []
 
-    timeFrames.forEach( (time) => {
+    timeFrames.forEach((time) => {
         chartButtons.push(
-            <Button size='large' key={time} active={timeFrame == time} onClick={() => setTimeFrame(time)}>
+            <Button size='large' key={time} active={timeFrame === time} onClick={() => setTimeFrame(time)}>
                 {time}
             </Button>
         )
     })
-    
-    function getSteps() {
-        var retVal = []
+
+    function getSteps () {
+        const retVal = []
+        let i, j
+        let currDate, currMonth, weekSteps, monthSteps, daysInMonth
         switch (timeFrame) {
-            case "1 Week": 
-                for (var i = 6; i >= 0; i--) {
-                    var currDate = moment().subtract(i, 'days')
-                    retVal.push({ 
-                        "name": currDate.format('dddd').slice(0, 3), 
-                        "steps": steps[currDate.format('YYYY-MM-DD')] || 0
-                    })
+        case '1 Week':
+            for (i = 6; i >= 0; i--) {
+                currDate = moment().subtract(i, 'days')
+                retVal.push({
+                    name: currDate.format('dddd').slice(0, 3),
+                    steps: steps[currDate.format('YYYY-MM-DD')] || 0
+                })
+            }
+            break
+        case '1 Month':
+            for (i = 31; i >= 0; i--) {
+                currDate = moment().subtract(i, 'days')
+                retVal.push({
+                    name: currDate.format('MM-DD'),
+                    steps: steps[currDate.format('YYYY-MM-DD')] || 0
+                })
+            }
+            break
+        case '3 Months':
+            for (i = 12; i >= 0; i--) {
+                weekSteps = 0
+                for (j = 6; j >= 0; j--) {
+                    currDate = moment().subtract(7 * i + j, 'days')
+                    weekSteps += parseInt(steps[currDate.format('YYYY-MM-DD')]) || 0
                 }
-                break;
-            case "1 Month":
-                for (var i = 31; i >= 0; i--) {
-                    var currDate = moment().subtract(i, 'days')
-                    retVal.push({
-                        "name": currDate.format('MM-DD'),
-                        "steps": steps[currDate.format('YYYY-MM-DD')] || 0
-                    })
+                weekSteps /= 7
+                retVal.push({
+                    name: currDate.subtract(7, 'days').format('MM-DD'),
+                    steps: weekSteps || 0
+                })
+            }
+            break
+        case '6 Months':
+            currDate = moment().subtract(6, 'months')
+            for (i = 6; i >= 0; i--) {
+                currMonth = currDate.format('MMM')
+                monthSteps = 0
+                daysInMonth = 0
+                while (currDate.format('MMM') === currMonth) {
+                    monthSteps += parseInt(steps[currDate.format('YYYY-MM-DD')]) || 0
+                    daysInMonth += 1
+                    currDate.add(1, 'days')
                 }
-                break;
-            case "3 Months":
-                for (var i = 12 ; i >= 0; i--) {
-                    var weekSteps = 0
-                    for (var j = 6 ; j >= 0; j--) {
-                        var currDate = moment().subtract(7*i+j, 'days')
-                        weekSteps += parseInt(steps[currDate.format('YYYY-MM-DD')]) || 0
-                    }
-                    weekSteps /= 7
-                    retVal.push({
-                        "name": currDate.subtract(7, 'days').format('MM-DD'),
-                        "steps": weekSteps || 0
-                    })
+                retVal.push({
+                    name: currMonth,
+                    steps: monthSteps / daysInMonth || 0
+                })
+            }
+            break
+        case '1 Year':
+            currDate = moment().subtract(1, 'year')
+            for (i = 12; i >= 0; i--) {
+                currMonth = currDate.format('MMM')
+                monthSteps = 0
+                daysInMonth = 0
+                while (currDate.format('MMM') === currMonth) {
+                    monthSteps += parseInt(steps[currDate.format('YYYY-MM-DD')]) || 0
+                    daysInMonth += 1
+                    currDate.add(1, 'days')
                 }
-                break;
-            case "6 Months":
-                var currDate = moment().subtract(6, 'months')
-                for (var i = 6 ; i >= 0; i--) {
-                    var currMonth = currDate.format('MMM')
-                    var monthSteps = 0
-                    var daysInMonth = 0
-                    while (currDate.format('MMM') == currMonth) {
-                        monthSteps += parseInt(steps[currDate.format('YYYY-MM-DD')]) || 0
-                        daysInMonth += 1
-                        currDate.add(1, 'days')
-                    }
-                    retVal.push({
-                        "name": currMonth,
-                        "steps": monthSteps/daysInMonth || 0
-                    })
-                }
-                break;
-            case "1 Year":
-                var currDate = moment().subtract(1, 'year')
-                for (var i = 12 ; i >= 0; i--) {
-                    var currMonth = currDate.format('MMM')
-                    var monthSteps = 0
-                    var daysInMonth = 0
-                    while (currDate.format('MMM') == currMonth) {
-                        monthSteps += parseInt(steps[currDate.format('YYYY-MM-DD')]) || 0
-                        daysInMonth += 1
-                        currDate.add(1, 'days')
-                    }
-                    retVal.push({
-                        "name": currMonth,
-                        "steps": monthSteps/daysInMonth || 0
-                    })
-                }
-                break;
+                retVal.push({
+                    name: currMonth,
+                    steps: monthSteps / daysInMonth || 0
+                })
+            }
+            break
+        default:
+            break
         }
         return retVal
     }
@@ -104,13 +107,13 @@ const StepCountContent = ({steps}) => {
             </ResponsiveContainer>
             <Button.Group fluid buttons={chartButtons}/>
         </div>
-    );
-};
+    )
+}
 
-const StepCount = ({steps}) => {
+const StepCount = ({ steps }) => {
     return (
         <PageItem title="Step Count" moreLabel="Edit Chart" content={<StepCountContent steps={steps}/>}/>
     )
 }
-  
-export default StepCount;
+
+export default StepCount
