@@ -1,5 +1,6 @@
 import React from 'react'
 import { Header } from 'semantic-ui-react'
+import PropTypes from 'prop-types'
 import StepCount from './StepCount'
 import QuickActions from './QuickActions'
 import LifeScore from './LifeScore'
@@ -15,6 +16,10 @@ const Dashboard = ({ user }) => {
             <RecentActivies/>
         </div>
     )
+}
+
+Dashboard.propTypes = {
+    user: PropTypes.object
 }
 
 export default Dashboard

@@ -1,5 +1,6 @@
 import React from 'react'
 import { Header, Grid, Icon } from 'semantic-ui-react'
+import PropTypes from 'prop-types'
 
 // Renders the app heading with the 4 buttons and app title.
 const AppHeading = ({ page, setPage }) => {
@@ -22,6 +23,11 @@ const AppHeading = ({ page, setPage }) => {
             </Grid.Column>
         </Grid>
     )
+}
+
+AppHeading.propTypes = {
+    page: PropTypes.string,
+    setPage: PropTypes.func
 }
 
 export default AppHeading

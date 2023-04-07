@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import PageModal from './PageModal'
 import { Button, Header } from 'semantic-ui-react'
+import PropTypes from 'prop-types'
 
 // A login page that has a list of all users to select from to view different kinds of information displayed.
 const LoginPageContent = ({ allUsers, setUserData, setLoggedIn }) => {
@@ -18,7 +19,7 @@ const LoginPageContent = ({ allUsers, setUserData, setLoggedIn }) => {
 
     const userButtons = []
 
-    Object.keys(allUsers).map((key) => {
+    Object.keys(allUsers).map((key) => (
         userButtons.push(
             <Button
                 fluid
@@ -31,7 +32,7 @@ const LoginPageContent = ({ allUsers, setUserData, setLoggedIn }) => {
                 content={allUsers[key].name}
             />
         )
-    })
+    ))
 
     return (
         <>
@@ -64,6 +65,20 @@ const LoginPage = ({ loggedIn, setLoggedIn, setUserData, allUsers, setAllUsers }
             }
         />
     )
+}
+
+LoginPageContent.propTypes = {
+    allUsers: PropTypes.object,
+    setLoggedIn: PropTypes.func,
+    setUserData: PropTypes.func
+}
+
+LoginPage.propTypes = {
+    allUsers: PropTypes.object,
+    setLoggedIn: PropTypes.func,
+    setUserData: PropTypes.func,
+    loggedIn: PropTypes.bool,
+    setAllUsers: PropTypes.func
 }
 
 export default LoginPage

@@ -1,9 +1,10 @@
 import React from 'react'
 import { Header } from 'semantic-ui-react'
+import PropTypes from 'prop-types'
 import PageItem from '../../PageItem'
 
 // Achievements heading page
-const TrophyPageContents = ({ userData }) => {
+const TrophyPageContent = ({ userData }) => {
     return (
         <>
             <Header textAlign='left'>Points: {userData.points}</Header>
@@ -15,9 +16,17 @@ const TrophyPageContents = ({ userData }) => {
 const TrophyPage = ({ userData }) => {
     return (
         <>
-            <PageItem title={'Redeem Points'} content={<TrophyPageContents userData={userData}/>}/>
+            <PageItem title={'Redeem Points'} content={<TrophyPageContent userData={userData}/>}/>
         </>
     )
+}
+
+TrophyPageContent.propTypes = {
+    userData: PropTypes.object
+}
+
+TrophyPage.propTypes = {
+    userData: PropTypes.object
 }
 
 export default TrophyPage

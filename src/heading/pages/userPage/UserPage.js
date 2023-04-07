@@ -1,10 +1,11 @@
 import React from 'react'
 import { Header, Button, Divider } from 'semantic-ui-react'
+import PropTypes from 'prop-types'
 import PageItem from '../../PageItem'
 
 // User heading page.
 
-const UserPageContents = ({ setIsVisible, setLoggedIn, userData }) => {
+const UserPageContent = ({ setIsVisible, setLoggedIn, userData }) => {
     return (
         <>
             <Header textAlign='left'>Name: {userData.name}</Header>
@@ -21,9 +22,21 @@ const UserPageContents = ({ setIsVisible, setLoggedIn, userData }) => {
 const UserPage = ({ setIsVisible, setLoggedIn, userData }) => {
     return (
         <>
-            <PageItem title={'Information'} content={<UserPageContents userData={userData} setLoggedIn={setLoggedIn} setIsVisible={setIsVisible}/>}/>
+            <PageItem title={'Information'} content={<UserPageContent userData={userData} setLoggedIn={setLoggedIn} setIsVisible={setIsVisible}/>}/>
         </>
     )
+}
+
+UserPageContent.propTypes = {
+    setIsVisible: PropTypes.func,
+    setLoggedIn: PropTypes.func,
+    userData: PropTypes.object
+}
+
+UserPage.propTypes = {
+    setIsVisible: PropTypes.func,
+    setLoggedIn: PropTypes.func,
+    userData: PropTypes.object
 }
 
 export default UserPage

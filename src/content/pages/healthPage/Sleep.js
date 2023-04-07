@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Statistic, Grid, Progress, Icon, Header, Input } from 'semantic-ui-react'
+import PropTypes from 'prop-types'
 import PageItem from '../../PageItem'
 import PageModal from '../../PageModal'
 
@@ -53,6 +54,15 @@ const Sleep = ({ sleep, setSleepAmount }) => {
     return (
         <PageItem title="Sleep" content={<SleepContent sleep={sleep}/>}/>
     )
+}
+
+SleepContent.propTypes = {
+    sleep: PropTypes.number
+}
+
+Sleep.propTypes = {
+    sleep: PropTypes.number,
+    setSleepAmount: PropTypes.func
 }
 
 export default Sleep

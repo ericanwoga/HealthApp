@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
 import { Header, Accordion, Icon } from 'semantic-ui-react'
+import PropTypes from 'prop-types'
 import PageItem from '../../PageItem'
 
 // Help heading page
-const HelpPageContents = ({ userData }) => {
+const HelpPageContent = ({ userData }) => {
     const [activeIndex, setActiveIndex] = useState(0)
 
     return (
@@ -56,9 +57,17 @@ const HelpPageContents = ({ userData }) => {
 const HelpPage = ({ userData }) => {
     return (
         <>
-            <PageItem title={'FAQ'} content={<HelpPageContents userData={userData}/>}/>
+            <PageItem title={'FAQ'} content={<HelpPageContent userData={userData}/>}/>
         </>
     )
+}
+
+HelpPageContent.propTypes = {
+    userData: PropTypes.object
+}
+
+HelpPage.propTypes = {
+    userData: PropTypes.object
 }
 
 export default HelpPage
