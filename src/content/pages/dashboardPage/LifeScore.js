@@ -1,6 +1,5 @@
 import React from 'react'
 import { Progress, Button } from 'semantic-ui-react'
-import PropTypes from 'prop-types'
 import PageItem from '../../PageItem'
 
 const LifeScoreContent = ({ score }) => {
@@ -16,14 +15,6 @@ const LifeScore = ({ score }) => {
     return (
         <PageItem title="Life Score" moreLabel="" content={<LifeScoreContent score={score}/>}/>
     )
-}
-
-LifeScoreContent.propTypes = {
-    score: PropTypes.object
-}
-
-LifeScore.propTypes = {
-    score: PropTypes.object
 }
 
 export default LifeScore

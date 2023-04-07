@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { Header, Accordion, Icon } from 'semantic-ui-react'
-import PropTypes from 'prop-types'
 import PageItem from '../../PageItem'
 
 // Help heading page
@@ -60,14 +59,6 @@ const HelpPage = ({ userData }) => {
             <PageItem title={'FAQ'} content={<HelpPageContent userData={userData}/>}/>
         </>
     )
-}
-
-HelpPageContent.propTypes = {
-    userData: PropTypes.object
-}
-
-HelpPage.propTypes = {
-    userData: PropTypes.object
 }
 
 export default HelpPage

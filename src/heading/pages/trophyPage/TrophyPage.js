@@ -1,6 +1,5 @@
 import React from 'react'
 import { Header } from 'semantic-ui-react'
-import PropTypes from 'prop-types'
 import PageItem from '../../PageItem'
 
 // Achievements heading page
@@ -19,14 +18,6 @@ const TrophyPage = ({ userData }) => {
             <PageItem title={'Redeem Points'} content={<TrophyPageContent userData={userData}/>}/>
         </>
     )
-}
-
-TrophyPageContent.propTypes = {
-    userData: PropTypes.object
-}
-
-TrophyPage.propTypes = {
-    userData: PropTypes.object
 }
 
 export default TrophyPage

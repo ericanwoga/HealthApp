@@ -1,6 +1,5 @@
 import React from 'react'
 import { Grid, Progress, Statistic } from 'semantic-ui-react'
-import PropTypes from 'prop-types'
 import PageItem from '../../PageItem'
 
 const MoodContent = ({ mood }) => {
@@ -22,14 +21,6 @@ const Mood = ({ mood }) => {
     return (
         <PageItem title="Mood" content={<MoodContent mood={mood}/>}/>
     )
-}
-
-MoodContent.propTypes = {
-    mood: PropTypes.number
-}
-
-Mood.propTypes = {
-    mood: PropTypes.number
 }
 
 export default Mood

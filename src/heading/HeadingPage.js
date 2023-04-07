@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import SettingPage from './pages/settingPage/SettingPage'
-import PropTypes from 'prop-types'
 import HelpPage from './pages/helpPage/HelpPage'
 import TrophyPage from './pages/trophyPage/TrophyPage'
 import UserPage from './pages/userPage/UserPage'
@@ -23,7 +22,7 @@ const HeadingPage = ({ setLoggedIn, userData, page, setIsVisible }) => {
         <Segment textAlign='center' style={{ fontSize: 'x-large', height: '100%', overflow: 'auto' }}>
             <Grid>
                 <Grid.Column width={4}>
-                    <Button basic floated='left' size='small' onClick={() => setIsVisible(false)}>
+                    <Button basic floated='left' onClick={() => setIsVisible(false)}>
                         <Icon name='left arrow' />
                     Back
                     </Button>
@@ -36,13 +35,6 @@ const HeadingPage = ({ setLoggedIn, userData, page, setIsVisible }) => {
             {content}
         </Segment>
     )
-}
-
-HeadingPage.propTypes = {
-    setLoggedIn: PropTypes.func,
-    userData: PropTypes.object,
-    page: PropTypes.string,
-    setIsVisible: PropTypes.func
 }
 
 export default HeadingPage

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Segment, Container } from 'semantic-ui-react'
 import IPhoneBar from './layout/IPhoneBar'
 import Navbar from './content/Navbar'
@@ -9,7 +9,7 @@ import Activity from './content/pages/activityPage/Activity'
 import Body from './content/pages/bodyPage/Body'
 import AppHeading from './heading/AppHeading'
 import HeadingPage from './heading/HeadingPage'
-import userData from './userData.json'
+import userData from './data/userData.json'
 import LoginPage from './content/LoginPage.js'
 
 const pages = ['Learn', 'Health', 'Dashboard', 'Activity', 'Body']
@@ -26,6 +26,10 @@ const App = () => {
     const [headingPage, setHeadingPage] = useState(false)
     // Specifies the main page that is to be displayed
     const [mainPage, setMainPage] = useState(pages[2])
+
+    useEffect(() => {
+        console.log(userData)
+    }, [userData])
 
     return (
         <div id="rooty" style={{ scale: '100%', fontSize: 'xx-large', margin: 'auto', height: '1266px', width: '585px', borderRadius: '100px' }}>
@@ -47,8 +51,8 @@ const App = () => {
                         ? (
                             (mainPage === 'Learn' && <Learn/>) ||
                             (mainPage === 'Health' && <Health/>) ||
-                            (mainPage === 'Dashboard' && <Dashboard user={userData}/>) ||
-                            (mainPage === 'Activity' && <Activity/>) ||
+                            (mainPage === 'Dashboard' && <Dashboard userData={userData} setUserData={setUserData}/>) ||
+                            (mainPage === 'Activity' && <Activity userData={userData}/>) ||
                             (mainPage === 'Body' && <Body/>)
                         )
                         : <HeadingPage setLoggedIn={setLoggedIn} userData={userData} page={headingPage} setIsVisible={setHeadingPage}/> }

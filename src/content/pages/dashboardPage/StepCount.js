@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import moment from 'moment'
 import { Button } from 'semantic-ui-react'
-import PropTypes from 'prop-types'
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, ResponsiveContainer } from 'recharts'
 import PageItem from '../../PageItem'
 
@@ -115,14 +114,6 @@ const StepCount = ({ steps }) => {
     return (
         <PageItem title="Step Count" moreLabel="Edit Chart" content={<StepCountContent steps={steps}/>}/>
     )
-}
-
-StepCountContent.propTypes = {
-    steps: PropTypes.number
-}
-
-StepCount.propTypes = {
-    steps: PropTypes.number
 }
 
 export default StepCount

@@ -28,8 +28,4 @@ const IPhoneBar = ({ position }) => {
     }
 }
 
-IPhoneBar.propTypes = {
-    position: Array
-}
-
 export default IPhoneBar

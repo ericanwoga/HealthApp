@@ -1,6 +1,5 @@
 import React from 'react'
 import { Modal, Header, Icon, Button } from 'semantic-ui-react'
-import PropTypes from 'prop-types'
 
 /*
  * A component file that renders a modal over top all page elements and blurs the background.
@@ -48,19 +47,6 @@ const PageModal = ({ title, open, setOpen, setClosed, content, cancelText, submi
             </Modal.Actions>
         </Modal>
     )
-}
-
-PageModal.propTypes = {
-    title: PropTypes.string,
-    open: PropTypes.func,
-    setOpen: PropTypes.func,
-    setClosed: PropTypes.func,
-    content: PropTypes.element,
-    cancelText: PropTypes.string,
-    submitText: PropTypes.string,
-    clickDimmerClose: PropTypes.bool,
-    cancelAction: PropTypes.func,
-    submitAction: PropTypes.func
 }
 
 export default PageModal

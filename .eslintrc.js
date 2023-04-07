@@ -18,6 +18,6 @@ module.exports = {
     ],
     rules: {
         indent: ['error', 4],
-        'react/prop-types': 2
+        'react/prop-types': 'off'
     }
 }

@@ -1,6 +1,5 @@
 import React from 'react'
 import { Header, Icon, Grid, Segment, Button } from 'semantic-ui-react'
-import PropTypes from 'prop-types'
 
 /*
  * A component file that renders a page item
@@ -34,13 +33,6 @@ const PageItem = ({ title, moreLabel, content, moreAction }) => {
             </Segment>
         </Segment>
     )
-}
-
-PageItem.propTypes = {
-    title: PropTypes.string,
-    moreLabel: PropTypes.string,
-    content: PropTypes.element,
-    moreAction: PropTypes.func
 }
 
 export default PageItem

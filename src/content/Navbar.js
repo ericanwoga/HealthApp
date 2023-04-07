@@ -1,6 +1,5 @@
 import React from 'react'
 import { Button, Grid } from 'semantic-ui-react'
-import PropTypes from 'prop-types'
 
 // The bottom navigation bar
 const Navbar = ({ pages, mainPage, setMainPage, setHeadingPage }) => {
@@ -26,13 +25,6 @@ const Navbar = ({ pages, mainPage, setMainPage, setHeadingPage }) => {
             </Grid.Column>
         </Grid>
     )
-}
-
-Navbar.propTypes = {
-    pages: PropTypes.array,
-    mainPage: PropTypes.string,
-    setMainPage: PropTypes.func,
-    setHeadingPage: PropTypes.func
 }
 
 export default Navbar

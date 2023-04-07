@@ -1,0 +1,27 @@
+[
+    {
+        "key": "Bike Ride",
+        "text": "Bike Ride",
+        "value": "Bike Ride"
+    },
+    {
+        "key": "Outdoor Run",
+        "text": "Outdoor Run",
+        "value": "Outdoor Run"
+    },
+    {
+        "key": "Indoor Run",
+        "text": "Indoor Run",
+        "value": "Indoor Run"
+    },
+    {
+        "key": "Weight Training",
+        "text": "Weight Training",
+        "value": "Weight Training"
+    },
+    {
+        "key": "Swimming",
+        "text": "Swimming",
+        "value": "Swimming"
+    }
+]

@@ -1,6 +1,5 @@
 import React from 'react'
 import { Grid, Statistic, Progress } from 'semantic-ui-react'
-import PropTypes from 'prop-types'
 import PageItem from '../../PageItem'
 
 const WaterContent = ({ water }) => {
@@ -22,14 +21,6 @@ const Water = ({ water }) => {
     return (
         <PageItem title="Water Intake" content={<WaterContent water={water}/>}/>
     )
-}
-
-WaterContent.propTypes = {
-    water: PropTypes.number
-}
-
-Water.propTypes = {
-    water: PropTypes.number
 }
 
 export default Water
