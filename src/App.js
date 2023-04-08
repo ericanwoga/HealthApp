@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { Segment, Container } from 'semantic-ui-react'
 import IPhoneBar from './layout/IPhoneBar'
 import Navbar from './content/Navbar'
@@ -26,10 +26,6 @@ const App = () => {
     const [headingPage, setHeadingPage] = useState(false)
     // Specifies the main page that is to be displayed
     const [mainPage, setMainPage] = useState(pages[2])
-
-    useEffect(() => {
-        console.log(userData)
-    }, [userData])
 
     return (
         <div id="rooty" style={{ scale: '100%', fontSize: 'xx-large', margin: 'auto', height: '1266px', width: '585px', borderRadius: '100px' }}>

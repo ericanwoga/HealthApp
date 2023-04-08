@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Button, Icon, Grid, Header, Input, Dropdown } from 'semantic-ui-react'
+import { Button, Icon, Grid, Header, Input, Dropdown, Radio } from 'semantic-ui-react'
 import activityOptions from '../../../data/activityOptions.json'
 import PageItem from '../../PageItem'
 import PageModal from '../../PageModal'
@@ -74,9 +74,82 @@ const TrackWaterModal = ({ setWater }) => {
     )
 }
 
-const QuickActionsContent = ({ userData, setUserData }) => {
-    const [modal, setModal] = useState(false)
-    const [content, setContent] = useState('')
+const ButtonLayout = ({ actionItems, setModalOpen }) => {
+    const activityButtons = []
+    Object.keys(actionItems).map((key) => (
+        actionItems[key] === true && activityButtons.push(
+            <Button fluid size='large' icon labelPosition='left' onClick={() => {
+                setModalOpen(key)
+            }}>
+                {key}
+                <Icon
+                    name={
+                        (key === 'Track Activity' && 'bicycle') ||
+                            (key === 'Track Meal' && 'food') ||
+                            (key === 'Track Sleep' && 'bed') ||
+                            (key === 'Track Water' && 'tint') ||
+                            (key === 'Learn Something' && 'lightbulb outline') ||
+                            (key === 'Track Mood' && 'smile')
+                    }/>
+            </Button>
+        )
+    ))
+
+    const twoColumnGridItems = []
+    const oneColumnGridItems = []
+
+    while (activityButtons.length > 1) {
+        twoColumnGridItems.unshift(
+            <Grid.Row>
+                <Grid.Column>
+                    {activityButtons.pop()}
+                </Grid.Column>
+                <Grid.Column>
+                    {activityButtons.pop()}
+                </Grid.Column>
+            </Grid.Row>
+        )
+    }
+
+    if (activityButtons.length === 1) {
+        oneColumnGridItems.unshift(
+            <Grid.Row>
+                <Grid.Column>
+                    {activityButtons.pop()}
+                </Grid.Column>
+            </Grid.Row>
+        )
+    }
+
+    return (
+        <>
+            {twoColumnGridItems.length > 0
+                ? <Grid columns={2}>
+                    {twoColumnGridItems.map((gridItem) => (
+                        gridItem
+                    ))}
+                </Grid>
+                : <></> }
+            {oneColumnGridItems.length > 0
+                ? <Grid columns={1}>
+                    {oneColumnGridItems.map((gridItem) => (
+                        gridItem
+                    ))}
+                </Grid>
+                : <></> }
+            {twoColumnGridItems.length === 0 && oneColumnGridItems.length === 0
+                ? <Header textAlign='left'>
+                    {'Select which Quick Actions you would like to see by pressing "Edit Actions" directly above this section!'}
+                </Header>
+                : ''
+            }
+        </>
+    )
+}
+
+const QuickActionsContent = ({ actionItems, userData, setUserData }) => {
+    const [modalOpen, setModalOpen] = useState(false)
+    const [actionModal, setActionModal] = useState('')
     const [name, setName] = useState('')
     const [calories, setCalories] = useState('')
     const [hours, setHours] = useState('')
@@ -123,7 +196,7 @@ const QuickActionsContent = ({ userData, setUserData }) => {
     }
 
     const cancel = () => {
-        setModal(false)
+        setModalOpen(false)
         setName('')
         setCalories('')
         setHours('')
@@ -131,42 +204,42 @@ const QuickActionsContent = ({ userData, setUserData }) => {
     }
 
     useEffect(() => {
-        setContent(
-            (modal === 'Track Activity' &&
+        setActionModal(
+            (modalOpen === 'Track Activity' &&
             <PageModal
                 content={<TrackActivityModal setName={setName} setCalories={setCalories}/>}
-                title={modal}
-                open={modal}
+                title={modalOpen}
+                open={true}
                 setClosed={() => cancel()}
                 submitText={'Submit'}
                 submitAction={() => submitActivity()}
                 cancelText={'Cancel'}
                 cancelAction={() => cancel()}/>) ||
-            (modal === 'Track Meal' &&
+            (modalOpen === 'Track Meal' &&
             <PageModal
                 content={<TrackMealModal setName={setName} setCalories={setCalories}/>}
-                title={modal}
-                open={modal}
+                title={modalOpen}
+                open={true}
                 setClosed={() => cancel()}
                 submitText={'Submit'}
                 submitAction={() => submitMeal()}
                 cancelText={'Cancel'}
                 cancelAction={() => cancel()}/>) ||
-            (modal === 'Track Sleep' &&
+            (modalOpen === 'Track Sleep' &&
             <PageModal
                 content={<TrackSleepModal setHours={setHours}/>}
-                title={modal}
-                open={modal}
+                title={modalOpen}
+                open={true}
                 setClosed={() => cancel()}
                 submitText={'Submit'}
                 submitAction={() => submitSleep()}
                 cancelText={'Cancel'}
                 cancelAction={() => cancel()}/>) ||
-            (modal === 'Track Water' &&
+            (modalOpen === 'Track Water' &&
             <PageModal
                 content={<TrackWaterModal setWater={setWater}/>}
-                title={modal}
-                open={modal}
+                title={modalOpen}
+                open={true}
                 setClosed={() => cancel()}
                 submitText={'Submit'}
                 submitAction={() => submitWater()}
@@ -174,66 +247,60 @@ const QuickActionsContent = ({ userData, setUserData }) => {
                 cancelAction={() => cancel()}/>) ||
             ''
         )
-    }, [modal, name, calories, hours, water])
+    }, [modalOpen, name, calories, hours, water])
 
     return (
         <>
-            {content}
-            <Grid columns={2}>
-                <Grid.Row>
-                    <Grid.Column>
-                        <Button fluid size='large' icon labelPosition='left' onClick={() => setModal('Track Activity')}>
-                        Track Activity
-                            <Icon name='bicycle' />
-                        </Button>
-                    </Grid.Column>
-                    <Grid.Column>
-                        <Button fluid size='large' icon labelPosition='left' onClick={() => setModal('Track Meal')}>
-                        Track Meal
-                            <Icon name='food' />
-                        </Button>
-                    </Grid.Column>
-                </Grid.Row>
-
-                <Grid.Row>
-                    <Grid.Column>
-                        <Button fluid size='large' icon labelPosition='left' onClick={() => setModal('Track Sleep')}>
-                        Track Sleep
-                            <Icon name='bed' />
-                        </Button>
-                    </Grid.Column>
-                    <Grid.Column>
-                        <Button fluid size='large' icon labelPosition='left' onClick={() => setModal('Track Water')}>
-                        Track Water
-                            <Icon name='tint' />
-                        </Button>
-                    </Grid.Column>
-                </Grid.Row>
-
-                {/*
-            <Grid.Row>
-                <Grid.Column>
-                <Button fluid size='large' icon labelPosition='left'>
-                    Learn Something
-                    <Icon name='lightbulb outline' />
-                </Button>
-                </Grid.Column>
-                <Grid.Column>
-                <Button fluid size='large' icon labelPosition='left'>
-                    Track Mood
-                    <Icon name='smile' />
-                </Button>
-                </Grid.Column>
-            </Grid.Row>
-            */}
-            </Grid>
+            {actionModal}
+            <ButtonLayout setModalOpen={setModalOpen} actionItems={actionItems}/>
         </>
     )
 }
 
-const QuickActions = ({ setUserData, userData }) => {
+const GetActionItems = ({ handleClick, actionItems }) => {
+    const activityRadios = []
+    Object.keys(actionItems).map((key) => (
+        activityRadios.push(
+            <Header key={key}>
+                <Radio label={key} toggle checked={actionItems[key]} onClick={() => handleClick(key)}/>
+            </Header>
+        )
+    ))
+
     return (
-        <PageItem title="Quick Actions" moreLabel="Edit Actions" content={<QuickActionsContent userData={userData} setUserData={setUserData}/>}/>
+        <Header>
+            {activityRadios}
+        </Header>
+    )
+}
+
+const QuickActions = ({ setUserData, userData }) => {
+    const [actionModal, setActionModal] = useState(false)
+    const [actionItems, setActionItems] = useState({ 'Track Activity': true, 'Track Meal': true, 'Track Sleep': true, 'Track Water': true })
+    const [reload, setReload] = useState(false)
+
+    const handleClick = (key) => {
+        const updatedActionItems = actionItems
+        updatedActionItems[key] = !actionItems[key]
+        setActionItems(updatedActionItems)
+        setReload(!reload)
+    }
+
+    return (
+        <>
+            <PageModal
+                content={<GetActionItems handleClick={handleClick} actionItems={actionItems}/>}
+                title={'Edit Quick Actions'}
+                open={actionModal}
+                setClosed={() => setActionModal(false)}
+                submitText={'Done'}
+                submitAction={() => setActionModal(false)}/>
+            <PageItem
+                title="Quick Actions"
+                moreLabel="Edit Actions"
+                moreAction={() => setActionModal(true)}
+                content={<QuickActionsContent actionItems={actionItems} userData={userData} setUserData={setUserData}/>}/>
+        </>
     )
 }
 
