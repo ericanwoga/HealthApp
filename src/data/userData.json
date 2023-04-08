@@ -10,7 +10,8 @@
             "healthData": {
                 "water": {},
                 "meals": {},
-                "sleep": {}
+                "sleep": {},
+                "mood": {}
             },
             "bodyData": {
             },
@@ -34,6 +35,9 @@
 
                 },
                 "sleep": {
+
+                },
+                "mood": {
 
                 }
             },

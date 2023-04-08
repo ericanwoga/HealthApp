@@ -74,22 +74,35 @@ const TrackWaterModal = ({ setWater }) => {
     )
 }
 
+const TrackMoodModal = ({ setMood }) => {
+    return (
+        <>
+            <Header>How are you feeling today?</Header>
+            <Input
+                fluid
+                labelPosition='right'
+                placeholder='Describe how you feel!'
+                onChange={(e, result) => setMood(result.value)}/>
+        </>
+    )
+}
+
 const ButtonLayout = ({ actionItems, setModalOpen }) => {
     const activityButtons = []
     Object.keys(actionItems).map((key) => (
         actionItems[key] === true && activityButtons.push(
-            <Button fluid size='large' icon labelPosition='left' onClick={() => {
+            <Button key={key} fluid size='large' icon labelPosition='left' onClick={() => {
                 setModalOpen(key)
             }}>
                 {key}
                 <Icon
                     name={
                         (key === 'Track Activity' && 'bicycle') ||
-                            (key === 'Track Meal' && 'food') ||
-                            (key === 'Track Sleep' && 'bed') ||
-                            (key === 'Track Water' && 'tint') ||
-                            (key === 'Learn Something' && 'lightbulb outline') ||
-                            (key === 'Track Mood' && 'smile')
+                        (key === 'Track Meal' && 'food') ||
+                        (key === 'Track Sleep' && 'bed') ||
+                        (key === 'Track Water' && 'tint') ||
+                        (key === 'Learn Something' && 'lightbulb outline') ||
+                        (key === 'Track Mood' && 'smile')
                     }/>
             </Button>
         )
@@ -100,7 +113,7 @@ const ButtonLayout = ({ actionItems, setModalOpen }) => {
 
     while (activityButtons.length > 1) {
         twoColumnGridItems.unshift(
-            <Grid.Row>
+            <Grid.Row key={activityButtons.length}>
                 <Grid.Column>
                     {activityButtons.pop()}
                 </Grid.Column>
@@ -113,7 +126,7 @@ const ButtonLayout = ({ actionItems, setModalOpen }) => {
 
     if (activityButtons.length === 1) {
         oneColumnGridItems.unshift(
-            <Grid.Row>
+            <Grid.Row key={activityButtons.length}>
                 <Grid.Column>
                     {activityButtons.pop()}
                 </Grid.Column>
@@ -154,12 +167,14 @@ const QuickActionsContent = ({ actionItems, userData, setUserData }) => {
     const [calories, setCalories] = useState('')
     const [hours, setHours] = useState('')
     const [water, setWater] = useState('')
+    const [mood, setMood] = useState('')
+
+    const updatedUserData = userData
+    const now = moment()
 
     const submitActivity = () => {
         if (name !== '' && calories !== '') {
-            const updatedUserData = userData
-            const now = moment()
-            updatedUserData.activityData.activity[now] = { name, calories }
+            updatedUserData.activityData.activity[now.toDate()] = { name, calories }
             setUserData(updatedUserData)
             cancel()
         }
@@ -167,9 +182,7 @@ const QuickActionsContent = ({ actionItems, userData, setUserData }) => {
 
     const submitMeal = () => {
         if (name !== '' && calories !== '') {
-            const updatedUserData = userData
-            const now = moment()
-            updatedUserData.healthData.meals[now] = { name, calories }
+            updatedUserData.healthData.meals[now.toDate()] = { name, calories }
             setUserData(updatedUserData)
             cancel()
         }
@@ -177,9 +190,7 @@ const QuickActionsContent = ({ actionItems, userData, setUserData }) => {
 
     const submitSleep = () => {
         if (hours !== '') {
-            const updatedUserData = userData
-            const now = moment().toDate()
-            updatedUserData.healthData.sleep[now] = { hours }
+            updatedUserData.healthData.sleep[now.toDate()] = { hours }
             setUserData(updatedUserData)
             cancel()
         }
@@ -187,9 +198,15 @@ const QuickActionsContent = ({ actionItems, userData, setUserData }) => {
 
     const submitWater = () => {
         if (water !== '') {
-            const updatedUserData = userData
-            const now = moment().toDate()
-            updatedUserData.healthData.water[now] = { water }
+            updatedUserData.healthData.water[now.toDate()] = { water }
+            setUserData(updatedUserData)
+            cancel()
+        }
+    }
+
+    const submitMood = () => {
+        if (mood !== '') {
+            updatedUserData.healthData.mood[now.toDate()] = { mood }
             setUserData(updatedUserData)
             cancel()
         }
@@ -201,6 +218,7 @@ const QuickActionsContent = ({ actionItems, userData, setUserData }) => {
         setCalories('')
         setHours('')
         setWater('')
+        setMood('')
     }
 
     useEffect(() => {
@@ -245,9 +263,19 @@ const QuickActionsContent = ({ actionItems, userData, setUserData }) => {
                 submitAction={() => submitWater()}
                 cancelText={'Cancel'}
                 cancelAction={() => cancel()}/>) ||
+            (modalOpen === 'Track Mood' &&
+            <PageModal
+                content={<TrackMoodModal setMood={setMood}/>}
+                title={modalOpen}
+                open={true}
+                setClosed={() => cancel()}
+                submitText={'Submit'}
+                submitAction={() => submitMood()}
+                cancelText={'Cancel'}
+                cancelAction={() => cancel()}/>) ||
             ''
         )
-    }, [modalOpen, name, calories, hours, water])
+    }, [modalOpen, name, calories, hours, water, mood])
 
     return (
         <>
@@ -276,7 +304,7 @@ const GetActionItems = ({ handleClick, actionItems }) => {
 
 const QuickActions = ({ setUserData, userData }) => {
     const [actionModal, setActionModal] = useState(false)
-    const [actionItems, setActionItems] = useState({ 'Track Activity': true, 'Track Meal': true, 'Track Sleep': true, 'Track Water': true })
+    const [actionItems, setActionItems] = useState({ 'Track Activity': true, 'Track Meal': true, 'Track Sleep': true, 'Track Water': true, 'Track Mood': false })
     const [reload, setReload] = useState(false)
 
     const handleClick = (key) => {
