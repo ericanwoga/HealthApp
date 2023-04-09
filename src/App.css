@@ -36,3 +36,19 @@
     transform: rotate(360deg);
   }
 }
+  
+.hg-theme-default {
+    height: 100%
+}
+
+.hg-row {
+    height: 25%
+}
+
+.hg-theme-default .hg-standardBtn {
+    height: 100%
+}
+
+.hg-theme-default .hg-functionBtn {
+    height: 100%
+}

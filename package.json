@@ -48,6 +48,7 @@
     "eslint-plugin-react": "^7.32.2",
     "moment": "^2.29.4",
     "react-router-dom": "^6.10.0",
+    "react-simple-keyboard": "^3.5.53",
     "recharts": "^2.5.0",
     "semantic-ui-css": "^2.5.0",
     "semantic-ui-react": "^2.1.4"

@@ -2,7 +2,7 @@ import React from 'react'
 import { Button, Grid } from 'semantic-ui-react'
 
 // The bottom navigation bar
-const Navbar = ({ pages, mainPage, setMainPage, setHeadingPage }) => {
+const Navbar = ({ setKeyboardVisible, pages, mainPage, setMainPage, setHeadingPage }) => {
     return (
         <Grid centered textAlign='center' verticalAlign='middle' style={{ paddingTop: '5%' }}>
             <Grid.Column textAlign='center' verticalAlign='middle'>
@@ -16,6 +16,7 @@ const Navbar = ({ pages, mainPage, setMainPage, setHeadingPage }) => {
                                 onClick={() => {
                                     setMainPage(page)
                                     setHeadingPage(false)
+                                    setKeyboardVisible('off')
                                 }}
                                 active={page === mainPage}
                             >{page}</Button>

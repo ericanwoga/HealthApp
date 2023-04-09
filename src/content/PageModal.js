@@ -24,13 +24,13 @@ const PageModal = ({ title, open, setOpen, setClosed, content, cancelText, submi
             closeOnEscape={clickDimmerClose != null ? clickDimmerClose : true}
             closeOnDimmerClick={clickDimmerClose != null ? clickDimmerClose : true}
             open={open}
-            style={{ width: '80%', borderRadius: '10px' }}
+            style={{ width: '80%', borderRadius: '10px', marginBottom: '250px' }}
             mountNode={document.getElementById('rooty')}
         >
             <Header size='large'>
                 {title}
             </Header>
-            <Modal.Content>
+            <Modal.Content scrolling style={{ maxHeight: '650px' }}>
                 {content}
             </Modal.Content>
             <Modal.Actions>

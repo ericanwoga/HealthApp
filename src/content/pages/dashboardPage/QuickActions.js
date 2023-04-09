@@ -5,7 +5,7 @@ import PageItem from '../../PageItem'
 import PageModal from '../../PageModal'
 import moment from 'moment'
 
-const TrackActivityModal = ({ setName, setCalories }) => {
+const TrackActivityModal = ({ setKeyboardVisible, setName, setCalories }) => {
     return (
         <>
             <Header>What kind of activity would you like to track?</Header>
@@ -21,12 +21,13 @@ const TrackActivityModal = ({ setName, setCalories }) => {
                 label={{ basic: true, content: 'calories' }}
                 labelPosition='right'
                 placeholder='Calories'
+                onClick={() => setKeyboardVisible('onModal')}
                 onChange={(e, result) => setCalories(result.value)}/>
         </>
     )
 }
 
-const TrackMealModal = ({ setName, setCalories }) => {
+const TrackMealModal = ({ setKeyboardVisible, setName, setCalories }) => {
     return (
         <>
             <Header>What is the name of the meal?</Header>
@@ -34,6 +35,7 @@ const TrackMealModal = ({ setName, setCalories }) => {
                 fluid
                 labelPosition='right'
                 placeholder='Meal name'
+                onClick={() => setKeyboardVisible('onModal')}
                 onChange={(e, result) => setName(result.value)}/>
             <Header>How many calories were in the meal?</Header>
             <Input
@@ -41,12 +43,13 @@ const TrackMealModal = ({ setName, setCalories }) => {
                 label={{ basic: true, content: 'calories' }}
                 labelPosition='right'
                 placeholder='Calories'
+                onClick={() => setKeyboardVisible('onModal')}
                 onChange={(e, result) => setCalories(result.value)}/>
         </>
     )
 }
 
-const TrackSleepModal = ({ setHours }) => {
+const TrackSleepModal = ({ setKeyboardVisible, setHours }) => {
     return (
         <>
             <Header>How many hours did you sleep?</Header>
@@ -55,12 +58,13 @@ const TrackSleepModal = ({ setHours }) => {
                 label={{ basic: true, content: 'hours' }}
                 labelPosition='right'
                 placeholder='Enter hours slept'
+                onClick={() => setKeyboardVisible('onModal')}
                 onChange={(e, result) => setHours(result.value)}/>
         </>
     )
 }
 
-const TrackWaterModal = ({ setWater }) => {
+const TrackWaterModal = ({ setKeyboardVisible, setWater }) => {
     return (
         <>
             <Header>How much water would you like to track?</Header>
@@ -69,12 +73,13 @@ const TrackWaterModal = ({ setWater }) => {
                 label={{ basic: true, content: 'fluid oz' }}
                 labelPosition='right'
                 placeholder='Enter water intake'
+                onClick={() => setKeyboardVisible('onModal')}
                 onChange={(e, result) => setWater(result.value)}/>
         </>
     )
 }
 
-const TrackMoodModal = ({ setMood }) => {
+const TrackMoodModal = ({ setKeyboardVisible, setMood }) => {
     return (
         <>
             <Header>How are you feeling today?</Header>
@@ -82,6 +87,7 @@ const TrackMoodModal = ({ setMood }) => {
                 fluid
                 labelPosition='right'
                 placeholder='Describe how you feel!'
+                onClick={() => setKeyboardVisible('onModal')}
                 onChange={(e, result) => setMood(result.value)}/>
         </>
     )
@@ -160,7 +166,7 @@ const ButtonLayout = ({ actionItems, setModalOpen }) => {
     )
 }
 
-const QuickActionsContent = ({ actionItems, userData, setUserData }) => {
+const QuickActionsContent = ({ setKeyboardVisible, actionItems, userData, setUserData }) => {
     const [modalOpen, setModalOpen] = useState(false)
     const [actionModal, setActionModal] = useState('')
     const [name, setName] = useState('')
@@ -214,6 +220,7 @@ const QuickActionsContent = ({ actionItems, userData, setUserData }) => {
 
     const cancel = () => {
         setModalOpen(false)
+        setKeyboardVisible('off')
         setName('')
         setCalories('')
         setHours('')
@@ -225,7 +232,7 @@ const QuickActionsContent = ({ actionItems, userData, setUserData }) => {
         setActionModal(
             (modalOpen === 'Track Activity' &&
             <PageModal
-                content={<TrackActivityModal setName={setName} setCalories={setCalories}/>}
+                content={<TrackActivityModal setKeyboardVisible={setKeyboardVisible} setName={setName} setCalories={setCalories}/>}
                 title={modalOpen}
                 open={true}
                 setClosed={() => cancel()}
@@ -235,7 +242,7 @@ const QuickActionsContent = ({ actionItems, userData, setUserData }) => {
                 cancelAction={() => cancel()}/>) ||
             (modalOpen === 'Track Meal' &&
             <PageModal
-                content={<TrackMealModal setName={setName} setCalories={setCalories}/>}
+                content={<TrackMealModal setKeyboardVisible={setKeyboardVisible} setName={setName} setCalories={setCalories}/>}
                 title={modalOpen}
                 open={true}
                 setClosed={() => cancel()}
@@ -245,7 +252,7 @@ const QuickActionsContent = ({ actionItems, userData, setUserData }) => {
                 cancelAction={() => cancel()}/>) ||
             (modalOpen === 'Track Sleep' &&
             <PageModal
-                content={<TrackSleepModal setHours={setHours}/>}
+                content={<TrackSleepModal setKeyboardVisible={setKeyboardVisible} setHours={setHours}/>}
                 title={modalOpen}
                 open={true}
                 setClosed={() => cancel()}
@@ -255,7 +262,7 @@ const QuickActionsContent = ({ actionItems, userData, setUserData }) => {
                 cancelAction={() => cancel()}/>) ||
             (modalOpen === 'Track Water' &&
             <PageModal
-                content={<TrackWaterModal setWater={setWater}/>}
+                content={<TrackWaterModal setKeyboardVisible={setKeyboardVisible} setWater={setWater}/>}
                 title={modalOpen}
                 open={true}
                 setClosed={() => cancel()}
@@ -265,7 +272,7 @@ const QuickActionsContent = ({ actionItems, userData, setUserData }) => {
                 cancelAction={() => cancel()}/>) ||
             (modalOpen === 'Track Mood' &&
             <PageModal
-                content={<TrackMoodModal setMood={setMood}/>}
+                content={<TrackMoodModal setKeyboardVisible={setKeyboardVisible} setMood={setMood}/>}
                 title={modalOpen}
                 open={true}
                 setClosed={() => cancel()}
@@ -302,7 +309,7 @@ const GetActionItems = ({ handleClick, actionItems }) => {
     )
 }
 
-const QuickActions = ({ setUserData, userData }) => {
+const QuickActions = ({ setKeyboardVisible, setUserData, userData }) => {
     const [actionModal, setActionModal] = useState(false)
     const [actionItems, setActionItems] = useState({ 'Track Activity': true, 'Track Meal': true, 'Track Sleep': true, 'Track Water': true, 'Track Mood': false })
     const [reload, setReload] = useState(false)
@@ -327,7 +334,7 @@ const QuickActions = ({ setUserData, userData }) => {
                 title="Quick Actions"
                 moreLabel="Edit Actions"
                 moreAction={() => setActionModal(true)}
-                content={<QuickActionsContent actionItems={actionItems} userData={userData} setUserData={setUserData}/>}/>
+                content={<QuickActionsContent setKeyboardVisible={setKeyboardVisible} actionItems={actionItems} userData={userData} setUserData={setUserData}/>}/>
         </>
     )
 }
