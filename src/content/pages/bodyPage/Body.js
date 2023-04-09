@@ -1,31 +1,29 @@
 import React, { useState } from 'react'
 import { Header, Input, Button, Grid } from 'semantic-ui-react'
 import PageItem from '../../PageItem'
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, ResponsiveContainer } from 'recharts'
 
-const BodyContent = () => {
+const BodyContent = ({ data, setData }) => {
     const [weight, setWeight] = useState('')
-    const [submittedWeight, setSubmittedWeight] = useState('')
-    let data = []
 
-    const WeightChange = (e) => {
+    const handleWeightChange = (e) => {
         setWeight(e.target.value)
     }
 
-    const SubmitWeight = () => {
+    const handleSubmitWeight = () => {
         const parsedWeight = parseInt(weight)
-        setSubmittedWeight(parsedWeight)
-        data.push({ submittedWeight: parsedWeight })
+        setData([...data, { weight: parsedWeight }])
     }
 
-    const ClearData = () => {
-        data = []
+    const handleClearData = () => {
+        setData([])
     }
 
     return (
         <>
             <Header size="small">
-                {submittedWeight
-                    ? `You weighed in at ${submittedWeight} lbs. today!`
+                {data.length
+                    ? `You weighed in at ${data[data.length - 1].weight} lbs. today!`
                     : "Please enter today's weight"}
             </Header>
             <Grid>
@@ -35,14 +33,14 @@ const BodyContent = () => {
                         label={{ basic: true, content: 'lbs' }}
                         labelPosition="right"
                         placeholder="Enter weight..."
-                        onChange={WeightChange}
+                        onChange={handleWeightChange}
                     />
                 </Grid.Column>
                 <Grid.Column width={6}>
-                    <Button fluid onClick={SubmitWeight}>
+                    <Button fluid onClick={handleSubmitWeight}>
             Submit
                     </Button>
-                    <Button fluid onClick={ClearData}>
+                    <Button fluid onClick={handleClearData}>
             Clear
                     </Button>
                 </Grid.Column>
@@ -50,14 +48,28 @@ const BodyContent = () => {
         </>
     )
 }
+const GraphContent = ({ data }) => {
+    return (
+        <ResponsiveContainer width="100%" height={300}>
+            <BarChart data={data}>
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="date" />
+                <YAxis />
+                <Bar dataKey="weight" fill="#2C698D" />
+            </BarChart>
+        </ResponsiveContainer>
+    )
+}
 
 const Body = () => {
+    const [data, setData] = useState([])
+
     return (
         <div>
             <Header>Body</Header>
-            <PageItem title="Today's Weight" content={<BodyContent />} />
+            <PageItem title="Today's Weight" content={<BodyContent data={data} setData={setData} />} />
+            <PageItem title="Weights" content={<GraphContent data={data} />} />
         </div>
-
     )
 }
 
