@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Statistic, Grid, Progress, Icon, Header, Input } from 'semantic-ui-react'
 import PageItem from '../../PageItem'
 import PageModal from '../../PageModal'
+import './Health.css'
 
 const ModalContent = () => {
     return (
@@ -18,17 +19,18 @@ const ModalContent = () => {
     )
 }
 
-const SleepContent = ({ sleep }) => {
+const SleepContent = ({ sleep, sleepGoal }) => {
     const [showSleepPopup, setShowSleepPopup] = useState(false)
 
     return (
         <Grid>
             <Grid.Column verticalAlign='middle' width={8}>
-                <Progress percent={sleep} progress/>
+                <Progress percent={((sleep / sleepGoal) * 100).toFixed(2)} progress size='big' />
             </Grid.Column>
             <Grid.Column verticalAlign='middle' width={8}>
                 <Statistic>
-                    <Statistic.Value>{sleep / 10}/10</Statistic.Value>
+                    <Statistic.Value>{sleep}/{sleepGoal}</Statistic.Value>
+                    <Statistic.Label>Hours</Statistic.Label>
                     <Statistic.Label>
                         <Icon onClick={() => setShowSleepPopup(true)} link circular name='plus' className='box-plus-sign'/>
                         <PageModal
@@ -49,9 +51,9 @@ const SleepContent = ({ sleep }) => {
     )
 }
 
-const Sleep = ({ sleep, setSleepAmount }) => {
+const Sleep = ({ sleep, setSleepAmount, sleepGoal, setSleepGoal }) => {
     return (
-        <PageItem title="Sleep" content={<SleepContent sleep={sleep}/>}/>
+        <PageItem title="Sleep" content={<SleepContent sleep={sleep} setSleepAmount={setSleepAmount} sleepGoal={sleepGoal} setSleepGoal={setSleepGoal} />}/>
     )
 }
 
