@@ -6,7 +6,7 @@ const MoodContent = ({ mood }) => {
     return (
         <Grid>
             <Grid.Column verticalAlign='middle' width={8}>
-                <Progress percent={mood} progress/>
+                <Progress percent={mood} progress size='big'/>
             </Grid.Column>
             <Grid.Column verticalAlign='middle' width={8}>
                 <Statistic>

@@ -5,3 +5,6 @@
 /*-- Colors --*/
 
 @cerulean : #2C698D;
+@powder : #BAE8E8';
+@mint : #CFFFD7;
+@midnight : #272643;
