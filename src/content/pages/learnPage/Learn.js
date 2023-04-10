@@ -8,26 +8,29 @@ const ArticleButton = ({ onClick }) => {
     return (<Button fluid onClick={onClick}>Open Article</Button>)
 }
 
-const Article = ({ name }) => {
+const Article = ({ name, articleContent }) => {
     return (
         <>
             {name}
+            <br></br>
+            <br></br>
+            {articleContent}
         </>
     )
 }
 
-const HealthArticles = ({ setActiveModal, improveSleep, howMuchAlc }) => {
+const HealthArticles = ({ setActiveModal, improveSleep, howMuchWater }) => {
     return (
         <div>
             <PageCard
                 title="How to improve your sleep"
-                imageSrc="https://www.patientfirst.com/Portals/0/LiveBlog/549/Patient-First-Better-Sleep.jpg?ver=8roOpZrVcGmaPoSjUotFzQ%3d%3d"
+                imageSrc="./sleep.jpeg"
                 description={<ArticleButton onClick={() => setActiveModal(improveSleep)}/>}
             />
             <PageCard
-                title="How much alcohol should you drink?"
-                imageSrc="https://domf5oio6qrcr.cloudfront.net/medialibrary/7909/b8a1309a-ba53-48c7-bca3-9c36aab2338a.jpg"
-                description={<ArticleButton onClick={() => setActiveModal(howMuchAlc)}/>}
+                title="How much water should you drink?"
+                imageSrc="./water.jpeg"
+                description={<ArticleButton onClick={() => setActiveModal(howMuchWater)}/>}
             />
         </div>
     )
@@ -37,12 +40,28 @@ const Recipes = ({ setActiveModal, buffChickSan, brocChedSoup }) => {
         <div>
             <PageCard
                 title="Buffalo Chicken Sandwich"
-                imageSrc="https://embed.widencdn.net/img/mccormick/6hvkqaid2w/840x840px/Frank%E2%80%99s%20Grilled%20Buffalo%20Chicken%20Sandwich-7705.jpg?crop=true&q=80&u=o2hyef"
+                imageSrc="./buffaloChicken.jpeg"
                 description={<ArticleButton onClick={() => setActiveModal(buffChickSan)}/>}
             />
             <PageCard
                 title="Brocolli Cheddar Soup Dumplings"
-                imageSrc="https://www.halfbakedharvest.com/wp-content/uploads/2020/09/One-Pot-Broccoli-Cheddar-and-Dumplings-1.jpg"
+                imageSrc="./dumplings.jpeg"
+                description={<ArticleButton onClick={() => setActiveModal(brocChedSoup)}/>}
+            />
+        </div>
+    )
+}
+const Workouts = ({ setActiveModal, buffChickSan, brocChedSoup }) => {
+    return (
+        <div>
+            <PageCard
+                title="Boxing training"
+                imageSrc="/boxing.jpeg"
+                description={<ArticleButton onClick={() => setActiveModal(buffChickSan)}/>}
+            />
+            <PageCard
+                title="20 minute Hitt Workout"
+                imageSrc="./Hiit.webp"
                 description={<ArticleButton onClick={() => setActiveModal(brocChedSoup)}/>}
             />
         </div>
@@ -54,24 +73,25 @@ const Learn = () => {
     const [modalContent, setModalContent] = useState('')
 
     const improveSleep = 'How to improve your sleep'
-    const howMuchAlc = 'How much alcohol should you drink'
+    const howMuchWater = 'How much Water should you drink'
     const buffChickSan = 'Buffalo Chicken Sandwich'
     const brocChedSoup = 'Broccoli Cheddar Soup Dumplings'
+    const sleepArticle = 'gfjnkg'
 
     useEffect(() => {
         setModalContent(
             (activeModal === improveSleep &&
             <PageModal
-                content={<Article name={improveSleep}/>}
+                content={<Article name={improveSleep} articleContent = {sleepArticle}/>}
                 title={activeModal}
                 open={true}
                 setClosed={() => setActiveModal('')}
                 submitText={'Done'}
                 submitAction={() => setActiveModal('')}/>) ||
-            (activeModal === howMuchAlc &&
+            (activeModal === howMuchWater &&
             <PageModal
-                content={<Article name={howMuchAlc}/>}
-                title={howMuchAlc}
+                content={<Article name={howMuchWater}/>}
+                title={howMuchWater}
                 open={true}
                 setClosed={() => setActiveModal('')}
                 submitText={'Done'}
@@ -99,8 +119,9 @@ const Learn = () => {
     return (
         <div>
             {modalContent}
-            <PageItem title="Health Articles" moreLabel="View More" content={<HealthArticles improveSleep={improveSleep} howMuchAlc={howMuchAlc} setActiveModal={setActiveModal}/>}/>
+            <PageItem title="Health Articles" moreLabel="View More" content={<HealthArticles improveSleep={improveSleep} howMuchWater={howMuchWater} setActiveModal={setActiveModal}/>}/>
             <PageItem title="Recipes" moreLabel="View More" content={<Recipes brocChedSoup={brocChedSoup} buffChickSan={buffChickSan} setActiveModal={setActiveModal}/>}/>
+            <PageItem title="Workouts" moreLabel="View More" content={<Workouts brocChedSoup={brocChedSoup} buffChickSan={buffChickSan} setActiveModal={setActiveModal}/>}/>
         </div>
     )
 }
