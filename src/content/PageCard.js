@@ -1,13 +1,15 @@
 import React from 'react'
 import { Card, Image } from 'semantic-ui-react'
 
-const PageCard = ({ title, imageSrc, description }) => {
+const PageCard = ({ title, imageSrc, button }) => {
     return (
-        <Card>
+        <Card style={{ height: '100%' }}>
             <Image src={imageSrc} />
             <Card.Content>
                 <Card.Header>{title}</Card.Header>
-                <Card.Description>{description}</Card.Description>
+            </Card.Content>
+            <Card.Content extra>
+                {button}
             </Card.Content>
         </Card>
     )
