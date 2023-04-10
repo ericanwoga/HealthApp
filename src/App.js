@@ -65,7 +65,7 @@ const App = () => {
                         { !headingPage
                             ? (
                                 (mainPage === 'Learn' && <Learn/>) ||
-                                (mainPage === 'Health' && <Health/>) ||
+                                (mainPage === 'Health' && <Health userData={userData} setUserData={setUserData}/>) ||
                                 (mainPage === 'Dashboard' && <Dashboard setKeyboardVisible={setKeyboardVisible} userData={userData} setUserData={setUserData}/>) ||
                                 (mainPage === 'Activity' && <Activity userData={userData}/>) ||
                                 (mainPage === 'Body' && <Body/>)

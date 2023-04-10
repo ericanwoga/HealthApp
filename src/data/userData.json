@@ -29,13 +29,38 @@
             "lifePoints": "9375",
             "healthData": {
                 "water": {
-
+                    "2023-03-28": {
+                        "waterAmount": "48",
+                        "waterGoal": "64",
+                        "waterUnit": "ounces"
+                    },
+                    "2023-03-29": {
+                        "waterAmount": "54",
+                        "waterGoal": "64",
+                        "waterUnit": "ounces"
+                    },
+                    "2023-03-30": {
+                        "waterAmount": "60",
+                        "waterGoal": "64",
+                        "waterUnit": "ounces"
+                    }
                 },
                 "meals": {
 
                 },
                 "sleep": {
-
+                    "2023-03-28": {
+                        "sleepAmount": "7",
+                        "sleepGoal": "9"
+                    },
+                    "2023-03-29": {
+                        "sleepAmount": "8",
+                        "sleepGoal": "9"
+                    },
+                    "2023-03-30": {
+                        "sleepAmount": "7.5",
+                        "sleepGoal": "9"
+                    }
                 },
                 "mood": {
 

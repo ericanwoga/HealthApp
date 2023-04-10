@@ -21,7 +21,7 @@ const MoodContent = ({ mood }) => {
                     <Header>How are you feeling today?</Header>
                 </Grid.Row>
                 <br />
-                <Button.Group textAlign='center' width={8} size="large">
+                <Button.Group textalign='center' width={8} size="large">
                     <Button onClick={changeUnit} value="happy">Happy</Button>
                     <Button onClick={changeUnit} value="okay">Okay</Button>
                     <Button onClick={changeUnit} value="sad">Sad</Button>
