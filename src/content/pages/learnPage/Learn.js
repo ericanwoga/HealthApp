@@ -1,21 +1,25 @@
 import React, { useState, useEffect } from 'react'
-import { Button } from 'semantic-ui-react'
+import { Button, Header } from 'semantic-ui-react'
 import PageItem from '../../PageItem'
 import PageCard from '../../PageCard'
 import PageModal from '../../PageModal'
+import articleText from './articleText.json'
+import waterImage from './images/water.jpeg'
+import sleepImage from './images/sleep.jpeg'
+import buffChickImage from './images/buffaloChicken.jpeg'
+import dumplingImage from './images/dumplings.jpeg'
+import boxingImage from './images/boxing.jpeg'
+import hiitImage from './images/Hiit.webp'
 
 const ArticleButton = ({ onClick }) => {
     return (<Button fluid onClick={onClick}>Open Article</Button>)
 }
 
-const Article = ({ name, articleContent }) => {
+const Article = ({ name, content }) => {
     return (
-        <>
-            {name}
-            <br></br>
-            <br></br>
-            {articleContent}
-        </>
+        <Header>
+            {content}
+        </Header>
     )
 }
 
@@ -23,13 +27,13 @@ const HealthArticles = ({ setActiveModal, improveSleep, howMuchWater }) => {
     return (
         <div>
             <PageCard
-                title="How to improve your sleep"
-                imageSrc="./sleep.jpeg"
+                title={improveSleep}
+                imageSrc={sleepImage}
                 description={<ArticleButton onClick={() => setActiveModal(improveSleep)}/>}
             />
             <PageCard
-                title="How much water should you drink?"
-                imageSrc="./water.jpeg"
+                title={howMuchWater}
+                imageSrc={waterImage}
                 description={<ArticleButton onClick={() => setActiveModal(howMuchWater)}/>}
             />
         </div>
@@ -39,30 +43,30 @@ const Recipes = ({ setActiveModal, buffChickSan, brocChedSoup }) => {
     return (
         <div>
             <PageCard
-                title="Buffalo Chicken Sandwich"
-                imageSrc="./buffaloChicken.jpeg"
+                title={buffChickSan}
+                imageSrc={buffChickImage}
                 description={<ArticleButton onClick={() => setActiveModal(buffChickSan)}/>}
             />
             <PageCard
-                title="Brocolli Cheddar Soup Dumplings"
-                imageSrc="./dumplings.jpeg"
+                title={brocChedSoup}
+                imageSrc={dumplingImage}
                 description={<ArticleButton onClick={() => setActiveModal(brocChedSoup)}/>}
             />
         </div>
     )
 }
-const Workouts = ({ setActiveModal, buffChickSan, brocChedSoup }) => {
+const Workouts = ({ setActiveModal, boxingTraining, hiitWorkout }) => {
     return (
         <div>
             <PageCard
-                title="Boxing training"
-                imageSrc="/boxing.jpeg"
-                description={<ArticleButton onClick={() => setActiveModal(buffChickSan)}/>}
+                title={boxingTraining}
+                imageSrc={boxingImage}
+                description={<ArticleButton onClick={() => setActiveModal(boxingTraining)}/>}
             />
             <PageCard
-                title="20 minute Hitt Workout"
-                imageSrc="./Hiit.webp"
-                description={<ArticleButton onClick={() => setActiveModal(brocChedSoup)}/>}
+                title={hiitWorkout}
+                imageSrc={hiitImage}
+                description={<ArticleButton onClick={() => setActiveModal(hiitWorkout)}/>}
             />
         </div>
     )
@@ -76,38 +80,15 @@ const Learn = () => {
     const howMuchWater = 'How much Water should you drink'
     const buffChickSan = 'Buffalo Chicken Sandwich'
     const brocChedSoup = 'Broccoli Cheddar Soup Dumplings'
-    const sleepArticle = 'gfjnkg'
+    const boxingTraining = 'Boxing Training Workout'
+    const hiitWorkout = '20 Minute HIIT Workout'
 
     useEffect(() => {
         setModalContent(
-            (activeModal === improveSleep &&
+            (activeModal !== '' &&
             <PageModal
-                content={<Article name={improveSleep} articleContent = {sleepArticle}/>}
+                content={<Article name={activeModal} content={articleText[activeModal]}/>}
                 title={activeModal}
-                open={true}
-                setClosed={() => setActiveModal('')}
-                submitText={'Done'}
-                submitAction={() => setActiveModal('')}/>) ||
-            (activeModal === howMuchWater &&
-            <PageModal
-                content={<Article name={howMuchWater}/>}
-                title={howMuchWater}
-                open={true}
-                setClosed={() => setActiveModal('')}
-                submitText={'Done'}
-                submitAction={() => setActiveModal('')}/>) ||
-            (activeModal === buffChickSan &&
-            <PageModal
-                content={<Article name={buffChickSan}/>}
-                title={buffChickSan}
-                open={true}
-                setClosed={() => setActiveModal('')}
-                submitText={'Done'}
-                submitAction={() => setActiveModal('')}/>) ||
-            (activeModal === brocChedSoup &&
-            <PageModal
-                content={<Article name={brocChedSoup}/>}
-                title={brocChedSoup}
                 open={true}
                 setClosed={() => setActiveModal('')}
                 submitText={'Done'}
@@ -118,10 +99,11 @@ const Learn = () => {
 
     return (
         <div>
+            <Header size='large'>Learn</Header>
             {modalContent}
             <PageItem title="Health Articles" moreLabel="View More" content={<HealthArticles improveSleep={improveSleep} howMuchWater={howMuchWater} setActiveModal={setActiveModal}/>}/>
             <PageItem title="Recipes" moreLabel="View More" content={<Recipes brocChedSoup={brocChedSoup} buffChickSan={buffChickSan} setActiveModal={setActiveModal}/>}/>
-            <PageItem title="Workouts" moreLabel="View More" content={<Workouts brocChedSoup={brocChedSoup} buffChickSan={buffChickSan} setActiveModal={setActiveModal}/>}/>
+            <PageItem title="Workouts" moreLabel="View More" content={<Workouts boxingTraining={boxingTraining} hiitWorkout={hiitWorkout} setActiveModal={setActiveModal}/>}/>
         </div>
     )
 }

@@ -23,5 +23,10 @@
         "key": "Swimming",
         "text": "Swimming",
         "value": "Swimming"
+    },
+    {
+        "key": "Other",
+        "text": "Other",
+        "value": "Other"
     }
 ]
