@@ -3,7 +3,6 @@ import { Header } from 'semantic-ui-react'
 import StepCount from './StepCount'
 import QuickActions from './QuickActions'
 import LifeScore from './LifeScore'
-import RecentActivies from './RecentActivities'
 
 const Dashboard = ({ setKeyboardVisible, userData, setUserData }) => {
     return (
@@ -12,7 +11,6 @@ const Dashboard = ({ setKeyboardVisible, userData, setUserData }) => {
             <StepCount steps={userData.activityData.steps ? userData.activityData.steps : {}}/>
             <QuickActions setKeyboardVisible={setKeyboardVisible} userData={userData} setUserData={setUserData}/>
             <LifeScore score={userData.lifeScore}/>
-            <RecentActivies/>
         </div>
     )
 }
