@@ -61,7 +61,7 @@ const SleepContent = ({ sleep, setSleepAmount, sleepGoal, setSleepGoal }) => {
     return (
         <Grid>
             <Grid.Column verticalAlign='middle' textAlign='middle' width={8}>
-                <Progress percent={((sleep / sleepGoal) * 100).toFixed(1)} progress size='big' />
+                <Progress percent={((sleep / sleepGoal) * 100).toFixed(1)} progress size='large' />
             </Grid.Column>
             <Grid.Column verticalAlign='middle' width={6}>
                 <Statistic horizontal label size='large'>
