@@ -10,6 +10,9 @@ import buffChickImage from './images/buffaloChicken.jpeg'
 import dumplingImage from './images/dumplings.jpeg'
 import boxingImage from './images/boxing.jpeg'
 import hiitImage from './images/Hiit.webp'
+import meditationImage from './images/meditation.jpg'
+import chickpeaImage from './images/chickpea.jpeg'
+import yogaImage from './images/yoga.jpeg'
 
 const ArticleButton = ({ onClick }) => {
     return (<Button fluid onClick={onClick}>Open Article</Button>)
@@ -23,7 +26,7 @@ const Article = ({ name, content }) => {
     )
 }
 
-const HealthArticles = ({ setActiveModal, improveSleep, howMuchWater }) => {
+const HealthArticles = ({ setActiveModal, improveSleep, howMuchWater, meditationBenefits }) => {
     return (
         <div>
             <PageCard
@@ -36,10 +39,15 @@ const HealthArticles = ({ setActiveModal, improveSleep, howMuchWater }) => {
                 imageSrc={waterImage}
                 description={<ArticleButton onClick={() => setActiveModal(howMuchWater)}/>}
             />
+            <PageCard
+                title={meditationBenefits}
+                imageSrc={meditationImage}
+                description={<ArticleButton onClick={() => setActiveModal(meditationBenefits)}/>}
+            />
         </div>
     )
 }
-const Recipes = ({ setActiveModal, buffChickSan, brocChedSoup }) => {
+const Recipes = ({ setActiveModal, buffChickSan, brocChedSoup, chickpeaStir }) => {
     return (
         <div>
             <PageCard
@@ -52,10 +60,15 @@ const Recipes = ({ setActiveModal, buffChickSan, brocChedSoup }) => {
                 imageSrc={dumplingImage}
                 description={<ArticleButton onClick={() => setActiveModal(brocChedSoup)}/>}
             />
+            <PageCard
+                title={chickpeaStir}
+                imageSrc={chickpeaImage}
+                description={<ArticleButton onClick={() => setActiveModal(chickpeaStir)}/>}
+            />
         </div>
     )
 }
-const Workouts = ({ setActiveModal, boxingTraining, hiitWorkout }) => {
+const Workouts = ({ setActiveModal, boxingTraining, hiitWorkout, yoga }) => {
     return (
         <div>
             <PageCard
@@ -67,6 +80,11 @@ const Workouts = ({ setActiveModal, boxingTraining, hiitWorkout }) => {
                 title={hiitWorkout}
                 imageSrc={hiitImage}
                 description={<ArticleButton onClick={() => setActiveModal(hiitWorkout)}/>}
+            />
+            <PageCard
+                title={yoga}
+                imageSrc={yogaImage}
+                description={<ArticleButton onClick={() => setActiveModal(yoga)}/>}
             />
         </div>
     )
@@ -82,6 +100,9 @@ const Learn = () => {
     const brocChedSoup = 'Broccoli Cheddar Soup Dumplings'
     const boxingTraining = 'Boxing Training Workout'
     const hiitWorkout = '20 Minute HIIT Workout'
+    const meditationBenefits = 'The Benefits of Meditation for Stress Reduction'
+    const chickpeaStir = 'Chickpea and Vegetable Stir-Fry'
+    const yoga = 'Yoga for Beginners'
 
     useEffect(() => {
         setModalContent(
@@ -101,9 +122,9 @@ const Learn = () => {
         <div>
             <Header size='large'>Learn</Header>
             {modalContent}
-            <PageItem title="Health Articles" moreLabel="View More" content={<HealthArticles improveSleep={improveSleep} howMuchWater={howMuchWater} setActiveModal={setActiveModal}/>}/>
-            <PageItem title="Recipes" moreLabel="View More" content={<Recipes brocChedSoup={brocChedSoup} buffChickSan={buffChickSan} setActiveModal={setActiveModal}/>}/>
-            <PageItem title="Workouts" moreLabel="View More" content={<Workouts boxingTraining={boxingTraining} hiitWorkout={hiitWorkout} setActiveModal={setActiveModal}/>}/>
+            <PageItem title="Health Articles" moreLabel="View More" content={<HealthArticles improveSleep={improveSleep} howMuchWater={howMuchWater} meditationBenefits = {meditationBenefits} setActiveModal={setActiveModal}/>}/>
+            <PageItem title="Recipes" moreLabel="View More" content={<Recipes brocChedSoup={brocChedSoup} buffChickSan={buffChickSan} chickpeaStir = {chickpeaStir} setActiveModal={setActiveModal}/>}/>
+            <PageItem title="Workouts" moreLabel="View More" content={<Workouts boxingTraining={boxingTraining} hiitWorkout={hiitWorkout} yoga = {yoga} setActiveModal={setActiveModal}/>}/>
         </div>
     )
 }
