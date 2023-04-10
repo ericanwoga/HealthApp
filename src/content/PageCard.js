@@ -4,7 +4,7 @@ import { Card, Image } from 'semantic-ui-react'
 const PageCard = ({ title, imageSrc, description }) => {
     return (
         <Card>
-            <Image src={imageSrc} wrapped ui={false} />
+            <Image src={imageSrc} />
             <Card.Content>
                 <Card.Header>{title}</Card.Header>
                 <Card.Description>{description}</Card.Description>

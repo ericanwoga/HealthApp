@@ -28,7 +28,7 @@ const PageItem = ({ title, moreLabel, content, moreAction }) => {
                         : <></> }
                 </Grid.Column>
             </Grid>
-            <Segment>
+            <Segment style={{ overflow: 'auto' }}>
                 {content}
             </Segment>
         </Segment>

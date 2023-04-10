@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Button, Header } from 'semantic-ui-react'
+import { Button, Grid, Header } from 'semantic-ui-react'
 import PageItem from '../../PageItem'
 import PageCard from '../../PageCard'
 import PageModal from '../../PageModal'
@@ -18,7 +18,7 @@ const ArticleButton = ({ onClick }) => {
     return (<Button fluid onClick={onClick}>Open Article</Button>)
 }
 
-const Article = ({ name, content }) => {
+const Article = ({ content }) => {
     return (
         <Header>
             {content}
@@ -28,65 +28,84 @@ const Article = ({ name, content }) => {
 
 const HealthArticles = ({ setActiveModal, improveSleep, howMuchWater, meditationBenefits }) => {
     return (
-        <div>
-            <PageCard
-                title={improveSleep}
-                imageSrc={sleepImage}
-                description={<ArticleButton onClick={() => setActiveModal(improveSleep)}/>}
-            />
-            <PageCard
-                title={howMuchWater}
-                imageSrc={waterImage}
-                description={<ArticleButton onClick={() => setActiveModal(howMuchWater)}/>}
-            />
-            <PageCard
-                title={meditationBenefits}
-                imageSrc={meditationImage}
-                description={<ArticleButton onClick={() => setActiveModal(meditationBenefits)}/>}
-            />
-        </div>
+
+        <Grid style={{ width: '150%', height: '100%' }} columns={3}>
+            <Grid.Column>
+                <PageCard
+                    title={improveSleep}
+                    imageSrc={sleepImage}
+                    description={<ArticleButton onClick={() => setActiveModal(improveSleep)}/>}
+                />
+            </Grid.Column>
+            <Grid.Column>
+                <PageCard
+                    title={howMuchWater}
+                    imageSrc={waterImage}
+                    description={<ArticleButton onClick={() => setActiveModal(howMuchWater)}/>}
+                />
+            </Grid.Column>
+            <Grid.Column>
+                <PageCard
+                    title={meditationBenefits}
+                    imageSrc={meditationImage}
+                    description={<ArticleButton onClick={() => setActiveModal(meditationBenefits)}/>}
+                />
+            </Grid.Column>
+        </Grid>
     )
 }
 const Recipes = ({ setActiveModal, buffChickSan, brocChedSoup, chickpeaStir }) => {
     return (
-        <div>
-            <PageCard
-                title={buffChickSan}
-                imageSrc={buffChickImage}
-                description={<ArticleButton onClick={() => setActiveModal(buffChickSan)}/>}
-            />
-            <PageCard
-                title={brocChedSoup}
-                imageSrc={dumplingImage}
-                description={<ArticleButton onClick={() => setActiveModal(brocChedSoup)}/>}
-            />
-            <PageCard
-                title={chickpeaStir}
-                imageSrc={chickpeaImage}
-                description={<ArticleButton onClick={() => setActiveModal(chickpeaStir)}/>}
-            />
-        </div>
+        <Grid style={{ width: '150%', height: '100%' }} columns={3}>
+            <Grid.Column>
+                <PageCard
+                    title={buffChickSan}
+                    imageSrc={buffChickImage}
+                    description={<ArticleButton onClick={() => setActiveModal(buffChickSan)}/>}
+                />
+            </Grid.Column>
+            <Grid.Column>
+                <PageCard
+                    title={brocChedSoup}
+                    imageSrc={dumplingImage}
+                    description={<ArticleButton onClick={() => setActiveModal(brocChedSoup)}/>}
+                />
+            </Grid.Column>
+            <Grid.Column>
+                <PageCard
+                    title={chickpeaStir}
+                    imageSrc={chickpeaImage}
+                    description={<ArticleButton onClick={() => setActiveModal(chickpeaStir)}/>}
+                />
+            </Grid.Column>
+        </Grid>
     )
 }
 const Workouts = ({ setActiveModal, boxingTraining, hiitWorkout, yoga }) => {
     return (
-        <div>
-            <PageCard
-                title={boxingTraining}
-                imageSrc={boxingImage}
-                description={<ArticleButton onClick={() => setActiveModal(boxingTraining)}/>}
-            />
-            <PageCard
-                title={hiitWorkout}
-                imageSrc={hiitImage}
-                description={<ArticleButton onClick={() => setActiveModal(hiitWorkout)}/>}
-            />
-            <PageCard
-                title={yoga}
-                imageSrc={yogaImage}
-                description={<ArticleButton onClick={() => setActiveModal(yoga)}/>}
-            />
-        </div>
+        <Grid style={{ width: '150%', height: '100%' }} columns={3}>
+            <Grid.Column>
+                <PageCard
+                    title={boxingTraining}
+                    imageSrc={boxingImage}
+                    description={<ArticleButton onClick={() => setActiveModal(boxingTraining)}/>}
+                />
+            </Grid.Column>
+            <Grid.Column>
+                <PageCard
+                    title={hiitWorkout}
+                    imageSrc={hiitImage}
+                    description={<ArticleButton onClick={() => setActiveModal(hiitWorkout)}/>}
+                />
+            </Grid.Column>
+            <Grid.Column>
+                <PageCard
+                    title={yoga}
+                    imageSrc={yogaImage}
+                    description={<ArticleButton onClick={() => setActiveModal(yoga)}/>}
+                />
+            </Grid.Column>
+        </Grid>
     )
 }
 
