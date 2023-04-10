@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
-import { Header, Input, Button, Grid, Dropdown } from 'semantic-ui-react'
+import { Header, Input, Button, Grid } from 'semantic-ui-react'
 import PageItem from '../../PageItem'
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, ResponsiveContainer } from 'recharts'
+import BodyMeasurements from './BodyMeasurements'
 
 const BodyContent = ({ data, setData }) => {
     const [weight, setWeight] = useState('')
@@ -45,7 +46,7 @@ const BodyContent = ({ data, setData }) => {
                 </Grid.Column>
                 <Grid.Column width={8}>
                     <Button fluid onClick={handleClearData}>
-            Clear
+            Undo Last Weight
                     </Button>
                 </Grid.Column>
             </Grid>
@@ -64,28 +65,32 @@ const GraphContent = ({ data }) => {
         </ResponsiveContainer>
     )
 }
-const options = [
-    { key: 1, text: 'Choice 1', value: 1 },
-    { key: 2, text: 'Choice 2', value: 2 },
-    { key: 3, text: 'Choice 3', value: 3 }
-]
-const DropdownExampleSelection = () => (
-    <Dropdown
-        placeholder='Choose your goal!'
-        fluid
-        selection
-        options={options}
-    />
-)
+// const options = [
+//     { key: 1, text: 'Lose 2 Pounds A Week', value: 1 },
+//     { key: 2, text: 'Lose 1 Pounds A Week', value: 2 },
+//     { key: 3, text: 'Maintain Weight', value: 3 },
+//     { key: 4, text: 'Gain 1 Pound A Week', value: 4 },
+//     { key: 5, text: 'Gain 2 Pounds A Week', value: 5 }
+// ]
+// const DropdownExampleSelection = () => (
+//     <Dropdown
+//         fluid
+//         selection
+//         options={options}
+//         defaultValue = {3}
+//     />
+// )
+
 const Body = () => {
     const [data, setData] = useState([])
-
     return (
         <div>
             <Header>Body</Header>
             <PageItem title="Today's Weight" content={<BodyContent data={data} setData={setData} />} />
             <PageItem title="Weights" content={<GraphContent data={data} />} />
-            <PageItem title="Calories" content={<DropdownExampleSelection />} />
+            {/* <PageItem title="Choose your Goal!" content={<DropdownExampleSelection />} /> */}
+            <PageItem title="Body Measurements" content={<BodyMeasurements />} />
+
         </div>
     )
 }
