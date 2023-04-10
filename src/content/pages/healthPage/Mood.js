@@ -1,17 +1,33 @@
-import React from 'react'
-import { Grid, Progress, Statistic } from 'semantic-ui-react'
+import React, { useState } from 'react'
+import { Grid, Button, Header } from 'semantic-ui-react'
 import PageItem from '../../PageItem'
+import './Health.css'
 
 const MoodContent = ({ mood }) => {
+    const [currentMood, setMood] = useState('')
+
+    const changeUnit = (e) => {
+        const val = e.target.value
+        if (currentMood === val) {
+            setMood(val)
+        }
+        setMood(val)
+    }
+
     return (
         <Grid>
-            <Grid.Column verticalAlign='middle' width={8}>
-                <Progress percent={mood} progress size='big'/>
-            </Grid.Column>
-            <Grid.Column verticalAlign='middle' width={8}>
-                <Statistic>
-                    <Statistic.Value>{mood / 10}/10</Statistic.Value>
-                </Statistic>
+            <Grid.Column textAlign='left'>
+                <Grid.Row>
+                    <Header>How are you feeling today?</Header>
+                </Grid.Row>
+                <br />
+                <Button.Group textAlign='center' width={8}>
+                    <Button onClick={changeUnit} value="happy">Happy</Button>
+                    <Button onClick={changeUnit} value="okay">Okay</Button>
+                    <Button onClick={changeUnit} value="sad">Sad</Button>
+                    <Button onClick={changeUnit} value="anxious">Anxious</Button>
+                    <Button onClick={changeUnit} value="angry">Angry</Button>
+                </Button.Group>
             </Grid.Column>
         </Grid>
     )
