@@ -85,10 +85,23 @@ const TrackMoodModal = ({ setKeyboardVisible, setMood }) => {
             <Header>How are you feeling today?</Header>
             <Input
                 fluid
-                labelPosition='right'
                 placeholder='Describe how you feel!'
                 onClick={() => setKeyboardVisible('onModal')}
                 onChange={(e, result) => setMood(result.value)}/>
+        </>
+    )
+}
+
+const TrackStepsModal = ({ userData, setKeyboardVisible, setSteps }) => {
+    return (
+        <>
+            <Header>Current steps today: {userData.activityData.steps[moment().format('YYYY-MM-DD')]}</Header>
+            <Header>How many more steps would you like to track for today?</Header>
+            <Input
+                fluid
+                placeholder='Steps to add to your total today'
+                onClick={() => setKeyboardVisible('onModal')}
+                onChange={(e, result) => setSteps(result.value)}/>
         </>
     )
 }
@@ -108,7 +121,8 @@ const ButtonLayout = ({ actionItems, setModalOpen }) => {
                         (key === 'Track Sleep' && 'bed') ||
                         (key === 'Track Water' && 'tint') ||
                         (key === 'Learn Something' && 'lightbulb outline') ||
-                        (key === 'Track Mood' && 'smile')
+                        (key === 'Track Mood' && 'smile') ||
+                        (key === 'Track Steps' && 'plus')
                     }/>
             </Button>
         )
@@ -174,6 +188,7 @@ const QuickActionsContent = ({ setKeyboardVisible, actionItems, userData, setUse
     const [hours, setHours] = useState('')
     const [water, setWater] = useState('')
     const [mood, setMood] = useState('')
+    const [steps, setSteps] = useState('')
 
     const updatedUserData = userData
     const now = moment()
@@ -218,6 +233,18 @@ const QuickActionsContent = ({ setKeyboardVisible, actionItems, userData, setUse
         }
     }
 
+    const submitSteps = () => {
+        if (steps !== '') {
+            let currentSteps = parseInt(updatedUserData.activityData.steps[now.format('YYYY-MM-DD')])
+            currentSteps > 0
+                ? currentSteps += parseInt(steps)
+                : currentSteps = parseInt(steps)
+            updatedUserData.activityData.steps[now.format('YYYY-MM-DD')] = currentSteps.toString()
+            setUserData(updatedUserData)
+            cancel()
+        }
+    }
+
     const cancel = () => {
         setModalOpen(false)
         setKeyboardVisible('off')
@@ -226,6 +253,7 @@ const QuickActionsContent = ({ setKeyboardVisible, actionItems, userData, setUse
         setHours('')
         setWater('')
         setMood('')
+        setSteps('')
     }
 
     useEffect(() => {
@@ -280,9 +308,19 @@ const QuickActionsContent = ({ setKeyboardVisible, actionItems, userData, setUse
                 submitAction={() => submitMood()}
                 cancelText={'Cancel'}
                 cancelAction={() => cancel()}/>) ||
+            (modalOpen === 'Track Steps' &&
+            <PageModal
+                content={<TrackStepsModal userData={userData} setKeyboardVisible={setKeyboardVisible} setSteps={setSteps}/>}
+                title={modalOpen}
+                open={true}
+                setClosed={() => cancel()}
+                submitText={'Submit'}
+                submitAction={() => submitSteps()}
+                cancelText={'Cancel'}
+                cancelAction={() => cancel()}/>) ||
             ''
         )
-    }, [modalOpen, name, calories, hours, water, mood])
+    }, [modalOpen, name, calories, hours, water, mood, steps])
 
     return (
         <>
@@ -311,7 +349,7 @@ const GetActionItems = ({ handleClick, actionItems }) => {
 
 const QuickActions = ({ setKeyboardVisible, setUserData, userData }) => {
     const [actionModal, setActionModal] = useState(false)
-    const [actionItems, setActionItems] = useState({ 'Track Activity': true, 'Track Meal': true, 'Track Sleep': true, 'Track Water': true, 'Track Mood': false })
+    const [actionItems, setActionItems] = useState({ 'Track Activity': true, 'Track Meal': true, 'Track Sleep': true, 'Track Water': true, 'Track Mood': true, 'Track Steps': true })
     const [reload, setReload] = useState(false)
 
     const handleClick = (key) => {
