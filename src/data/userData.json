@@ -47,47 +47,19 @@
                 },
                 "meals": {
                     "2023-03-28": {
-                        "breakfast": {
-                            "Avacado Toast" : "220",
-                            "Almond Milk" : "80",
-                            "Greek Yogurt" : "90"
-                        },
-                        "lunch": {
-                            "Baked Chicken" : "300",
-                            "White Rice" : "120"
-                        },
-                        "dinner": {
-                            "Broiled Salmon" : "360",
-                            "Spinach" : "20"
-                        }
+                        "breakfast": [{"Avacado Toast" : "220"},{"Almond Milk" : "80"}, {"Greek Yogurt" : "90"} ],
+                        "lunch": [{"Baked Chicken" : "300"}, {"White Rice" : "120"} ],
+                        "dinner": [{"Broiled Salmon" : "360"},{"  Spinach" : "80"} ]
                     },
                     "2023-03-29": {
-                        "breakfast": {
-                            "Blueberry Pancakes" : "350",
-                            "Almond Milk" : "80"
-                        },
-                        "lunch": {
-                            "Tuna Sandwich" : "320",
-                            "Saltine Crackers" : "150"
-                        },
-                        "dinner": {
-                            "Shrimp Tacos" : "300",
-                            "Asparagus" : "20"
-                        }
+                        "breakfast": [{"Blueberry Pancakes" : "350"},{"Almond Milk" : "80"}],
+                        "lunch": [{"Tuna Sandwich" : "320"},{"Saltine Crackers" : "150"}],
+                        "dinner": [{"Shrimp Tacos" : "300"}, {"Asparagus" : "20"}]
                     },
                     "2023-03-30": {
-                        "breakfast": {
-                            "Eggs" : "160",
-                            "Wheat Toast" : "180"
-                        },
-                        "lunch": {
-                            "Strawberries" : "50",
-                            "Alfredo Pasta" : "300"
-                        },
-                        "dinner": {
-                            "Steak" : "400",
-                            "Brocoli" : "30"
-                        }
+                        "breakfast": [{"Eggs" : "160"},{"Wheat Toast" : "180"}],
+                        "lunch": [{"Strawberries" : "50"},{"Alfredo Pasta" : "300"}],
+                        "dinner": [{"Steak" : "400"},{"Brocoli" : "30"}]
                     }
                 },
                 "sleep": {

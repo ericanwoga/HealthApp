@@ -70,7 +70,7 @@ const ModalContent = ({ unit, setUnit, water, setWaterAmount, waterGoal, setWate
 }
 
 const WaterContent = ({ water, setWaterAmount, waterGoal, setWaterGoal }) => {
-    const [showSleepPopup, setShowSleepPopup] = useState(false)
+    const [showWaterPopup, setShowWaterPopup] = useState(false)
     const [unit, setUnit] = useState('ounces')
 
     return (
@@ -85,14 +85,14 @@ const WaterContent = ({ water, setWaterAmount, waterGoal, setWaterGoal }) => {
                 </Statistic>
             </Grid.Column>
             <Grid.Column verticalAlign='middle' width={1}>
-                <Icon onClick={() => setShowSleepPopup(true)} link circular name='plus' className='box-plus-sign' />
+                <Icon onClick={() => setShowWaterPopup(true)} link circular name='plus' className='box-plus-sign' />
                 <PageModal
-                    title={'Sleep Tracker'}
-                    open={showSleepPopup}
-                    setOpen={() => setShowSleepPopup(true)}
-                    setClosed={() => setShowSleepPopup(false)}
-                    submitAction={() => setShowSleepPopup(false)}
-                    cancelAction={() => setShowSleepPopup(false)}
+                    title={'Water Tracker'}
+                    open={showWaterPopup}
+                    setOpen={() => setShowWaterPopup(true)}
+                    setClosed={() => setShowWaterPopup(false)}
+                    submitAction={() => setShowWaterPopup(false)}
+                    cancelAction={() => setShowWaterPopup(false)}
                     content={<ModalContent unit={unit} setUnit={setUnit} water={water} setWaterAmount={setWaterAmount} waterGoal={waterGoal} setWaterGoal={setWaterGoal}/>}
                     submitText={'Submit'}
                     cancelText={'Cancel'}
