@@ -83,7 +83,7 @@ const App = () => {
             </div>
             {keyboardVisible !== 'off' && (
                 <>
-                    <Container textAlign='center' id="rootyOverlay" style={{ position: 'absolute', left: '0', right: '0', top: '30em', scale: '100%', fontSize: 'xx-large', height: '17.5%', width: '550px', borderRadius: '100px' }}>
+                    <Container textAlign='center' id="rootyOverlay" style={{ position: 'absolute', left: '0', right: '0', top: '30em', scale: '100%', fontSize: 'xx-large', width: '550px', borderRadius: '100px' }}>
                         <Keyboard
                             onKeyPress={(e) => handleKeyboardPress(e)}
                             layoutName={keyboardLayout}
