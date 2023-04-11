@@ -267,6 +267,39 @@ const Article = ({ name, content }) => {
                 </br>
                 *** Remember to listen to your body, modify the exercises if needed, and stay hydrated throughout the workout. HIIT workouts can be intense, so be sure to warm up properly and cool down afterwards to take care of your body. Enjoy your quick and effective 20-minute HIIT workout! ***
             </List>)}
+            {name === yoga && (<List>
+                What is yoga
+                <br>
+                </br>
+                Yoga is a spiritual practice that aims to integrate mind, body, and spirit for enlightenment or oneness with the universe.
+                <br>
+                </br>
+                Is Yoga Right for You?
+                <br>
+                </br>
+                Yoga is inclusive and accessible to everyone, regardless of age, weight, occupation, location, or religion. However, if you have a medical condition or recent injury, it may be challenging to do certain types of yoga poses or techniques, and it is important to consult with a physician or qualified healthcare professional before starting yoga. It iss normal to feel some intensity in your muscles during poses, but you should never feel pain, especially in the joints. Pain is a signal to stop and take it easy.
+                <br>
+                </br>
+                What is the best yoga for beginners ?
+                <br>
+                </br>
+                The best yoga for beginners depends on your fitness level and flexibility. If you are out of shape or extremely inflexible, starting with a gentle practice is recommended until you build up strength and flexibility. If you are relatively fit and flexible, you can start with a regular Hatha yoga class and then explore vinyasa or flow classes once you are familiar with basic postures. It is advised to avoid Ashtanga, Bikram, or hot yoga until you have built up physical strength and endurance. It is important to approach yoga slowly and carefully, and the best way to know if it iss right for you is to give it a try!
+                <br>
+                </br>
+                How to practice Yoga
+                <br>
+                </br>
+                To practice yoga, you typically need a sticky yoga mat and comfortable, stretchy clothing. Yoga props such as straps, blocks, blankets, and bolsters can be helpful, but you can also use household items as substitutes. It is not necessary to purchase props initially as many yoga studios provide them. For your first yoga practice, start with a short and simple session and gradually increase the difficulty level. Learn and follow the essential components of a yoga practice, including breathing, meditation, intention, yoga poses (asanas), and relaxation. As you become more comfortable, you can incorporate more challenging poses into your practice.
+                <br>
+                </br>
+                How Often Should you Do Yoga
+                <br>
+                </br>
+                The Benefits of Practicing Yoga
+                <br>
+                </br>
+                The benefits of practicing yoga are numerous and diverse. Yoga can help build virtues and values such as discipline, honesty, devotion, self-inquiry, mindfulness, and non-attachment. It empowers individuals to make conscious choices towards a healthier and more fulfilling life. Some of the specific benefits of yoga include keeping the mind healthy and strong, reducing stress and promoting relaxation, improving sleep, boosting the immune system, alleviating common aches like back pain, increasing happiness and well-being while reducing depression, aiding in weight loss and body shape changes, improving and maintaining the health of muscles, joints, and organs, preventing conditions like diabetes, heart disease, and auto-immune disorders, as well as enhancing flexibility, strength, stamina, mobility, range of motion, and balance.
+            </List>)}
         </Header>
     )
 }
