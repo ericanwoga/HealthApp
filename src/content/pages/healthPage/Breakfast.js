@@ -38,7 +38,7 @@ const ModalContent = ({ bfList, setBfList }) => {
             <Input fluid
                 onChange={changeFoodName}
                 error={foodNameError}
-                placeholder='Enter sleep goal'/>
+                placeholder='Enter food name'/>
             <Header>How many calories are in this meal?</Header>
             <Input fluid label={{ basic: true, content: 'calories' }}
                 labelPosition='right'

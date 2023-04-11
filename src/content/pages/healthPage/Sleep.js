@@ -66,6 +66,7 @@ const SleepContent = ({ sleep, setSleepAmount, sleepGoal, setSleepGoal }) => {
             <Grid.Column verticalAlign='middle' width={6}>
                 <Statistic label size='large'>
                     <Statistic.Value>{sleep}/{sleepGoal}</Statistic.Value>
+                    <Statistic.Label>hours</Statistic.Label>
                 </Statistic>
             </Grid.Column>
             <Grid.Column verticalAlign='middle' width={1}>
