@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Header, Button } from 'semantic-ui-react'
+import { Header, Button, Divider } from 'semantic-ui-react'
 import PageItem from '../../PageItem'
 
 // Achievements heading page
@@ -12,7 +12,7 @@ const GeneralContent = ({ userData }) => {
 }
 
 const PreferenceContent = ({ userData, setUserData }) => {
-    const [unit, setUnit] = useState(userData.preferences.waterUnit)
+    const [unit, setUnit] = useState(userData.preferences.unit)
 
     const changeUnit = (e) => {
         const val = e.target.value
@@ -30,11 +30,13 @@ const PreferenceContent = ({ userData, setUserData }) => {
 
     return (
         <>
-            <Header textAlign='left'>Preferred measurement system:</Header>
+            <Header textAlign='left'>Measurement system and units:</Header>
             <Button.Group fluid>
                 <Button onClick={changeUnit} active={unit === 'standard'} value="standard">Standard</Button>
                 <Button onClick={changeUnit} active={unit === 'metric'} value="metric">Metric</Button>
             </Button.Group>
+            <Divider/>
+            *Note: By selecting an option, the only things that change are data labels. Value changes are not supported at this time.
         </>
     )
 }
@@ -43,7 +45,7 @@ const SettingPage = ({ userData, setUserData }) => {
     return (
         <>
             <PageItem title={'General'} content={<GeneralContent userData={userData}/>}/>
-            <PageItem title={'General'} content={<PreferenceContent setUserData={setUserData} userData={userData}/>}/>
+            <PageItem title={'Preferences'} content={<PreferenceContent setUserData={setUserData} userData={userData}/>}/>
         </>
     )
 }

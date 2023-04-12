@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Header, Input, Button, Grid, Divider } from 'semantic-ui-react'
 import moment from 'moment'
 
-const BodyMeasurements = ({ userData, setUserData }) => {
+const BodyMeasurements = ({ unit, userData, setUserData }) => {
     const [neck, setNeck] = useState('')
     const [waist, setWaist] = useState('')
     const [biceps, setBiceps] = useState('')
@@ -56,7 +56,7 @@ const BodyMeasurements = ({ userData, setUserData }) => {
                         <Header>Neck</Header>
                         <Input
                             fluid
-                            label={{ basic: true, content: 'in.' }}
+                            label={{ basic: true, content: unit === 'metric' ? 'cm.' : 'in.' }}
                             labelPosition="right"
                             placeholder="Neck"
                             onChange={NeckChange}
@@ -67,7 +67,7 @@ const BodyMeasurements = ({ userData, setUserData }) => {
                         <Header>Waist</Header>
                         <Input
                             fluid
-                            label={{ basic: true, content: 'in.' }}
+                            label={{ basic: true, content: unit === 'metric' ? 'cm.' : 'in.' }}
                             labelPosition="right"
                             placeholder="Waist"
                             onChange={WaistChange}
@@ -78,7 +78,7 @@ const BodyMeasurements = ({ userData, setUserData }) => {
                         <Header>Biceps</Header>
                         <Input
                             fluid
-                            label={{ basic: true, content: 'in.' }}
+                            label={{ basic: true, content: unit === 'metric' ? 'cm.' : 'in.' }}
                             labelPosition="right"
                             placeholder="Biceps"
                             onChange={BicepsChange}
@@ -91,7 +91,7 @@ const BodyMeasurements = ({ userData, setUserData }) => {
                         <Header>Thighs</Header>
                         <Input
                             fluid
-                            label={{ basic: true, content: 'in.' }}
+                            label={{ basic: true, content: unit === 'metric' ? 'cm.' : 'in.' }}
                             labelPosition="right"
                             placeholder="Thighs"
                             onChange={ThighsChange}
@@ -102,7 +102,7 @@ const BodyMeasurements = ({ userData, setUserData }) => {
                         <Header>Calves</Header>
                         <Input
                             fluid
-                            label={{ basic: true, content: 'in.' }}
+                            label={{ basic: true, content: unit === 'metric' ? 'cm.' : 'in.' }}
                             labelPosition="right"
                             placeholder="Calves"
                             onChange={CalvesChange}
@@ -113,7 +113,7 @@ const BodyMeasurements = ({ userData, setUserData }) => {
                         <Header>Chest</Header>
                         <Input
                             fluid
-                            label={{ basic: true, content: 'in.' }}
+                            label={{ basic: true, content: unit === 'metric' ? 'cm.' : 'in.' }}
                             labelPosition="right"
                             placeholder="Chest"
                             onChange={ChestChange}
