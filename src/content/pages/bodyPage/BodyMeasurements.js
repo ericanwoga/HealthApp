@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Header, Input, Button, Grid, Divider } from 'semantic-ui-react'
 import moment from 'moment'
 
-const BodyMeasurements = ({ unit, userData, setUserData }) => {
+const BodyMeasurements = ({ setKeyboardVisible, unit, userData, setUserData }) => {
     const [neck, setNeck] = useState('')
     const [waist, setWaist] = useState('')
     const [biceps, setBiceps] = useState('')
@@ -46,6 +46,7 @@ const BodyMeasurements = ({ unit, userData, setUserData }) => {
         setThighs('')
         setCalves('')
         setChest('')
+        setKeyboardVisible('off')
     }
 
     return (
@@ -60,6 +61,7 @@ const BodyMeasurements = ({ unit, userData, setUserData }) => {
                             labelPosition="right"
                             placeholder="Neck"
                             onChange={NeckChange}
+                            onClick={() => setKeyboardVisible('onNoModal')}
                             value={neck}
                         />
                     </Grid.Column>
@@ -71,6 +73,7 @@ const BodyMeasurements = ({ unit, userData, setUserData }) => {
                             labelPosition="right"
                             placeholder="Waist"
                             onChange={WaistChange}
+                            onClick={() => setKeyboardVisible('onNoModal')}
                             value={waist}
                         />
                     </Grid.Column>
@@ -82,6 +85,7 @@ const BodyMeasurements = ({ unit, userData, setUserData }) => {
                             labelPosition="right"
                             placeholder="Biceps"
                             onChange={BicepsChange}
+                            onClick={() => setKeyboardVisible('onNoModal')}
                             value={biceps}
                         />
                     </Grid.Column>
@@ -95,6 +99,7 @@ const BodyMeasurements = ({ unit, userData, setUserData }) => {
                             labelPosition="right"
                             placeholder="Thighs"
                             onChange={ThighsChange}
+                            onClick={() => setKeyboardVisible('onNoModal')}
                             value={thighs}
                         />
                     </Grid.Column>
@@ -106,6 +111,7 @@ const BodyMeasurements = ({ unit, userData, setUserData }) => {
                             labelPosition="right"
                             placeholder="Calves"
                             onChange={CalvesChange}
+                            onClick={() => setKeyboardVisible('onNoModal')}
                             value={calves}
                         />
                     </Grid.Column>
@@ -117,7 +123,8 @@ const BodyMeasurements = ({ unit, userData, setUserData }) => {
                             labelPosition="right"
                             placeholder="Chest"
                             onChange={ChestChange}
-                            value={calves}
+                            onClick={() => setKeyboardVisible('onNoModal')}
+                            value={chest}
                         />
                     </Grid.Column>
                 </Grid.Row>

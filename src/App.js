@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Segment, Container } from 'semantic-ui-react'
+import { Segment, Container, Button } from 'semantic-ui-react'
 import IPhoneBar from './layout/IPhoneBar'
 import Navbar from './content/Navbar'
 import Learn from './content/pages/learnPage/Learn'
@@ -40,9 +40,10 @@ const App = () => {
         e === '{abc}' && setKeyboardLayout('default')
         e === '{shift}' && (keyboardLayout === 'default' ? setKeyboardLayout('shift') : setKeyboardLayout('default'))
         e === '{numbers}' && setKeyboardLayout('numbers')
+        e === '{hide}' && setKeyboardVisible('off')
     }
 
-    const bodyHeight = keyboardVisible === 'onModal' ? '62%' : '78%'
+    const bodyHeight = keyboardVisible === 'onNoModal' ? '62%' : '78%'
     const keyboardPadding = keyboardVisible === 'onModal' ? '35%' : ''
 
     return (
@@ -65,10 +66,10 @@ const App = () => {
                         { !headingPage
                             ? (
                                 (mainPage === 'Learn' && <Learn/>) ||
-                                (mainPage === 'Health' && <Health userData={userData} setUserData={setUserData}/>) ||
+                                (mainPage === 'Health' && <Health setKeyboardVisible={setKeyboardVisible} userData={userData} setUserData={setUserData}/>) ||
                                 (mainPage === 'Dashboard' && <Dashboard setKeyboardVisible={setKeyboardVisible} userData={userData} setUserData={setUserData}/>) ||
                                 (mainPage === 'Activity' && <Activity setUserData={setUserData} setKeyboardVisible={setKeyboardVisible} userData={userData}/>) ||
-                                (mainPage === 'Body' && <Body userData={userData} setUserData={setUserData} />)
+                                (mainPage === 'Body' && <Body setKeyboardVisible={setKeyboardVisible} userData={userData} setUserData={setUserData} />)
                             )
                             : <HeadingPage setUserData={setUserData} setLoggedIn={setLoggedIn} userData={userData} page={headingPage} setIsVisible={setHeadingPage}/>
                         }
@@ -119,6 +120,7 @@ const App = () => {
                                 '{metaright}': 'cmd ⌘',
                                 '{abc}': 'abc'
                             }}/>
+                        <Button size='large' onClick={() => setKeyboardVisible('off')} style={{ width: '300px' }}>Hide Keyboard</Button>
                     </Container>
                     <Container textAlign='center' style={{ position: 'absolute', left: '0', right: '0', top: '35em' }}>
                         <IPhoneBar position="bottom"/>

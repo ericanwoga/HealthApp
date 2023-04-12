@@ -4,7 +4,7 @@ import PageItem from '../../PageItem'
 import PageModal from '../../PageModal'
 import './Health.css'
 
-const ModalContent = ({ unit, water, setWaterAmount, waterGoal, setWaterGoal }) => {
+const ModalContent = ({ setKeyboardVisible, unit, water, setWaterAmount, waterGoal, setWaterGoal }) => {
     const [waterGoalError, setWaterGoalError] = useState(false)
     const [waterAmountError, setWaterAmountError] = useState(false)
 
@@ -39,23 +39,35 @@ const ModalContent = ({ unit, water, setWaterAmount, waterGoal, setWaterGoal }) 
                 labelPosition='right'
                 value={waterGoal}
                 onChange={changeWaterGoal}
+                onClick={() => setKeyboardVisible('onModal')}
                 error={waterGoalError}
                 placeholder='Enter water intake goal'/>
-            {waterGoalError ? <Label basic color='red' pointing prompt >Must be a number greater than 0</Label> : null}
+            {waterGoalError ? <Label basic color='red' pointing prompt >Must be a number greater than or equal to 0</Label> : null}
             <Header>How much water did you drink today?</Header>
             <Input fluid label={{ basic: true, content: unit === 'standard' ? ' ounces' : 'liters' }}
                 labelPosition='right'
                 value={water}
                 onChange={changeWaterAmount}
+                onClick={() => setKeyboardVisible('onModal')}
                 error={waterAmountError}
                 placeholder='Enter water intake'/>
-            {waterAmountError ? <Label basic color='red' pointing prompt >Must be a number greater than 0</Label> : null}
+            {waterAmountError ? <Label basic color='red' pointing prompt >Must be a number greater than or equal to 0</Label> : null}
         </>
     )
 }
 
-const WaterContent = ({ unit, water, setWaterAmount, waterGoal, setWaterGoal }) => {
+const WaterContent = ({ setKeyboardVisible, unit, water, setWaterAmount, waterGoal, setWaterGoal }) => {
     const [showWaterPopup, setShowWaterPopup] = useState(false)
+
+    function submit () {
+        setShowWaterPopup(false)
+        setKeyboardVisible('off')
+    }
+
+    function cancel () {
+        setShowWaterPopup(false)
+        setKeyboardVisible('off')
+    }
 
     return (
         <Grid>
@@ -74,10 +86,10 @@ const WaterContent = ({ unit, water, setWaterAmount, waterGoal, setWaterGoal }) 
                     title={'Water Tracker'}
                     open={showWaterPopup}
                     setOpen={() => setShowWaterPopup(true)}
-                    setClosed={() => setShowWaterPopup(false)}
-                    submitAction={() => setShowWaterPopup(false)}
-                    cancelAction={() => setShowWaterPopup(false)}
-                    content={<ModalContent unit={unit} water={water} setWaterAmount={setWaterAmount} waterGoal={waterGoal} setWaterGoal={setWaterGoal}/>}
+                    setClosed={() => cancel()}
+                    submitAction={() => submit()}
+                    cancelAction={() => cancel()}
+                    content={<ModalContent setKeyboardVisible={setKeyboardVisible} unit={unit} water={water} setWaterAmount={setWaterAmount} waterGoal={waterGoal} setWaterGoal={setWaterGoal}/>}
                     submitText={'Submit'}
                     cancelText={'Cancel'}
                 />
@@ -86,9 +98,9 @@ const WaterContent = ({ unit, water, setWaterAmount, waterGoal, setWaterGoal }) 
     )
 }
 
-const Water = ({ unit, water, setWaterAmount, waterGoal, setWaterGoal }) => {
+const Water = ({ setKeyboardVisible, unit, water, setWaterAmount, waterGoal, setWaterGoal }) => {
     return (
-        <PageItem title="Water Intake" content={<WaterContent unit={unit} water={water} setWaterAmount={setWaterAmount} waterGoal={waterGoal} setWaterGoal={setWaterGoal}/>}/>
+        <PageItem title="Water Intake" content={<WaterContent setKeyboardVisible={setKeyboardVisible} unit={unit} water={water} setWaterAmount={setWaterAmount} waterGoal={waterGoal} setWaterGoal={setWaterGoal}/>}/>
     )
 }
 

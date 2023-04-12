@@ -4,7 +4,7 @@ import PageItem from '../../PageItem'
 import PageModal from '../../PageModal'
 import './Health.css'
 
-const ModalContent = ({ bfList, setBfList }) => {
+const ModalContent = ({ setKeyboardVisible }) => {
     const [foodNameError, setfoodNameError] = useState(false)
     const [calorieError, setCalorieError] = useState(false)
 
@@ -37,12 +37,14 @@ const ModalContent = ({ bfList, setBfList }) => {
             <Header>What is the name of this meal?</Header>
             <Input fluid
                 onChange={changeFoodName}
+                onClick={() => setKeyboardVisible('onModal')}
                 error={foodNameError}
                 placeholder='Enter food name'/>
             <Header>How many calories are in this meal?</Header>
             <Input fluid label={{ basic: true, content: 'calories' }}
                 labelPosition='right'
                 onChange={changeCalorieAmount}
+                onClick={() => setKeyboardVisible('onModal')}
                 error={calorieError}
                 placeholder='Enter calorie amount'/>
             {calorieError ? <Label basic color='red' pointing prompt >Must be a number 0 or greater</Label> : null}
@@ -50,7 +52,7 @@ const ModalContent = ({ bfList, setBfList }) => {
     )
 }
 
-const BreakfastContent = ({ bfList, setBfList }) => {
+const BreakfastContent = ({ setKeyboardVisible, bfList, setBfList }) => {
     const [showSleepPopup, setShowSleepPopup] = useState(false)
     const list = []
 
@@ -65,6 +67,16 @@ const BreakfastContent = ({ bfList, setBfList }) => {
         setBfList(temp) // new breakfast list doesn't include deleted item
     }
     */
+
+    function submit () {
+        setShowSleepPopup(false)
+        setKeyboardVisible('off')
+    }
+
+    function cancel () {
+        setShowSleepPopup(false)
+        setKeyboardVisible('off')
+    }
 
     bfList.forEach((item, index) => {
         list.push(
@@ -81,10 +93,10 @@ const BreakfastContent = ({ bfList, setBfList }) => {
                         title={'Add Breakfast Item'}
                         open={showSleepPopup}
                         setOpen={() => setShowSleepPopup(true)}
-                        setClosed={() => setShowSleepPopup(false)}
-                        submitAction={() => setShowSleepPopup(false)}
-                        cancelAction={() => setShowSleepPopup(false)}
-                        content={<ModalContent bfList={bfList} setBfList={setBfList}/>}
+                        setClosed={() => cancel()}
+                        submitAction={() => submit()}
+                        cancelAction={() => cancel()}
+                        content={<ModalContent setKeyboardVisible={setKeyboardVisible} bfList={bfList} setBfList={setBfList}/>}
                         submitText={'Submit'}
                         cancelText={'Cancel'}
                     />
@@ -101,9 +113,9 @@ const BreakfastContent = ({ bfList, setBfList }) => {
     )
 }
 
-const Breakfast = ({ bfList, setBfList }) => {
+const Breakfast = ({ setKeyboardVisible, bfList, setBfList }) => {
     return (
-        <PageItem title="Breakfast" content={<BreakfastContent bfList={bfList} setBfList={setBfList}/>}/>
+        <PageItem title="Breakfast" content={<BreakfastContent setKeyboardVisible={setKeyboardVisible} bfList={bfList} setBfList={setBfList}/>}/>
     )
 }
 

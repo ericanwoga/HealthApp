@@ -5,12 +5,13 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, ResponsiveContainer } from 
 import BodyMeasurements from './BodyMeasurements'
 import moment from 'moment'
 
-const BodyContent = ({ unit, setReload, reload, weightData, setWeightData }) => {
+const BodyContent = ({ setKeyboardVisible, unit, setReload, reload, weightData, setWeightData }) => {
     const [weight, setWeight] = useState('')
     const weightDataCopy = weightData
 
     const handleSubmitWeight = () => {
         const parsedWeight = parseInt(weight)
+        setKeyboardVisible('off')
         weightDataCopy[moment().format('YYYY-MM-DD')] = parsedWeight
         setWeightData(weightDataCopy)
         setWeight('')
@@ -19,6 +20,7 @@ const BodyContent = ({ unit, setReload, reload, weightData, setWeightData }) => 
 
     const handleClearData = () => {
         delete weightDataCopy[moment().format('YYYY-MM-DD')]
+        setKeyboardVisible('off')
         setWeightData(weightDataCopy)
         setReload(!reload)
     }
@@ -38,6 +40,7 @@ const BodyContent = ({ unit, setReload, reload, weightData, setWeightData }) => 
                         labelPosition="right"
                         placeholder="Enter weight..."
                         onChange={(e, result) => setWeight(result.value)}
+                        onClick={() => setKeyboardVisible('onNoModal')}
                         value={weight}
                     />
                 </Grid.Column>
@@ -164,7 +167,7 @@ const GraphContent = ({ weightData }) => {
 //     />
 // )
 
-const Body = ({ userData, setUserData }) => {
+const Body = ({ setKeyboardVisible, userData, setUserData }) => {
     const [weightData, setWeightData] = useState(userData.bodyData.weight)
     const [reload, setReload] = useState(false)
     const unit = userData.preferences.unit
@@ -177,10 +180,10 @@ const Body = ({ userData, setUserData }) => {
     return (
         <div>
             <Header>Body</Header>
-            <PageItem title="Today's Weight" content={<BodyContent unit={unit} setReload={setReload} reload={reload} weightData={weightData} setWeightData={setWeightData} />} />
+            <PageItem title="Today's Weight" content={<BodyContent setKeyboardVisible={setKeyboardVisible} unit={unit} setReload={setReload} reload={reload} weightData={weightData} setWeightData={setWeightData} />} />
             <PageItem title="Weights" content={<GraphContent setReload={setReload} reload={reload} weightData={weightData} />} />
             {/* <PageItem title="Choose your Goal!" content={<DropdownExampleSelection />} /> */}
-            <PageItem title="Body Measurements" content={<BodyMeasurements unit={unit} userData={userData} setUserData={setUserData}/>} />
+            <PageItem title="Body Measurements" content={<BodyMeasurements setKeyboardVisible={setKeyboardVisible} unit={unit} userData={userData} setUserData={setUserData}/>} />
 
         </div>
     )

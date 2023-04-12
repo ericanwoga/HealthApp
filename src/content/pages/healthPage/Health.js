@@ -5,7 +5,7 @@ import Water from './Water'
 import Mood from './Mood'
 import Breakfast from './Breakfast'
 
-const Health = ({ userData, setUserData }) => {
+const Health = ({ setKeyboardVisible, userData, setUserData }) => {
     const [sleepAmount, setSleepAmount] = useState(parseInt((userData.healthData.sleep['2023-03-28'].sleepAmount))) // hours slept
     const [sleepGoal, setSleepGoal] = useState(parseInt((userData.healthData.sleep['2023-03-28'].sleepGoal))) // sleep goal
     const [waterAmount, setWaterAmount] = useState(parseInt((userData.healthData.water['2023-03-28'].waterAmount))) // water intake
@@ -45,10 +45,10 @@ const Health = ({ userData, setUserData }) => {
     return (
         <div>
             <Header size='large'>Health</Header>
-            <Sleep sleep={sleepAmount} setSleepAmount={setSleepAmount} sleepGoal={sleepGoal} setSleepGoal={setSleepGoal}/>
-            <Water water={waterAmount} unit={unit} setWaterAmount={setWaterAmount} waterGoal={waterGoal} setWaterGoal={setWaterGoal}/>
+            <Sleep setKeyboardVisible={setKeyboardVisible} sleep={sleepAmount} setSleepAmount={setSleepAmount} sleepGoal={sleepGoal} setSleepGoal={setSleepGoal}/>
+            <Water setKeyboardVisible={setKeyboardVisible} water={waterAmount} unit={unit} setWaterAmount={setWaterAmount} waterGoal={waterGoal} setWaterGoal={setWaterGoal}/>
             <Mood mood={100}/>
-            <Breakfast bfList={bfList} setBfList={setBfList}/>
+            <Breakfast setKeyboardVisible={setKeyboardVisible} bfList={bfList} setBfList={setBfList}/>
         </div>
     )
 }

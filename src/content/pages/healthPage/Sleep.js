@@ -4,7 +4,7 @@ import PageItem from '../../PageItem'
 import PageModal from '../../PageModal'
 import './Health.css'
 
-const ModalContent = ({ sleep, setSleepAmount, sleepGoal, setSleepGoal }) => {
+const ModalContent = ({ setKeyboardVisible, sleep, setSleepAmount, sleepGoal, setSleepGoal }) => {
     const [sleepGoalError, setSleepGoalError] = useState(false)
     const [sleepAmountError, setSleepAmountError] = useState(false)
 
@@ -40,6 +40,7 @@ const ModalContent = ({ sleep, setSleepAmount, sleepGoal, setSleepGoal }) => {
                 labelPosition='right'
                 value={sleepGoal}
                 onChange={changeSleepGoal}
+                onClick={() => setKeyboardVisible('onModal')}
                 error={sleepGoalError}
                 placeholder='Enter sleep goal'/>
             {sleepGoalError ? <Label basic color='red' pointing prompt >Must be a number between 0 and 24 </Label> : null}
@@ -48,6 +49,7 @@ const ModalContent = ({ sleep, setSleepAmount, sleepGoal, setSleepGoal }) => {
                 labelPosition='right'
                 value={sleep}
                 onChange={changeSleepAmount}
+                onClick={() => setKeyboardVisible('onModal')}
                 error={sleepAmountError}
                 placeholder='Enter hours slept'/>
             {sleepAmountError ? <Label basic color='red' pointing prompt >Must be a number between 0 and 24 </Label> : null}
@@ -55,8 +57,18 @@ const ModalContent = ({ sleep, setSleepAmount, sleepGoal, setSleepGoal }) => {
     )
 }
 
-const SleepContent = ({ sleep, setSleepAmount, sleepGoal, setSleepGoal }) => {
+const SleepContent = ({ setKeyboardVisible, sleep, setSleepAmount, sleepGoal, setSleepGoal }) => {
     const [showSleepPopup, setShowSleepPopup] = useState(false)
+
+    function submit () {
+        setShowSleepPopup(false)
+        setKeyboardVisible('off')
+    }
+
+    function cancel () {
+        setShowSleepPopup(false)
+        setKeyboardVisible('off')
+    }
 
     return (
         <Grid>
@@ -75,10 +87,10 @@ const SleepContent = ({ sleep, setSleepAmount, sleepGoal, setSleepGoal }) => {
                     title={'Sleep Tracker'}
                     open={showSleepPopup}
                     setOpen={() => setShowSleepPopup(true)}
-                    setClosed={() => setShowSleepPopup(false)}
-                    submitAction={() => setShowSleepPopup(false)}
-                    cancelAction={() => setShowSleepPopup(false)}
-                    content={<ModalContent sleep={sleep} sleepGoal={sleepGoal} setSleepAmount={setSleepAmount} setSleepGoal={setSleepGoal}/>}
+                    setClosed={() => cancel()}
+                    submitAction={() => submit()}
+                    cancelAction={() => cancel()}
+                    content={<ModalContent setKeyboardVisible={setKeyboardVisible} sleep={sleep} sleepGoal={sleepGoal} setSleepAmount={setSleepAmount} setSleepGoal={setSleepGoal}/>}
                     submitText={'Submit'}
                     cancelText={'Cancel'}
                 />
@@ -87,9 +99,9 @@ const SleepContent = ({ sleep, setSleepAmount, sleepGoal, setSleepGoal }) => {
     )
 }
 
-const Sleep = ({ sleep, setSleepAmount, sleepGoal, setSleepGoal }) => {
+const Sleep = ({ setKeyboardVisible, sleep, setSleepAmount, sleepGoal, setSleepGoal }) => {
     return (
-        <PageItem title="Sleep" content={<SleepContent sleep={sleep} setSleepAmount={setSleepAmount} sleepGoal={sleepGoal} setSleepGoal={setSleepGoal} />}/>
+        <PageItem title="Sleep" content={<SleepContent setKeyboardVisible={setKeyboardVisible} sleep={sleep} setSleepAmount={setSleepAmount} sleepGoal={sleepGoal} setSleepGoal={setSleepGoal} />}/>
     )
 }
 
