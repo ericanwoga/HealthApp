@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { Button, Grid, Header, List } from 'semantic-ui-react'
+import { Button, Grid, Header, List, Card, Image } from 'semantic-ui-react'
 import PageItem from '../../PageItem'
-import PageCard from '../../PageCard'
 import PageModal from '../../PageModal'
 import articleText from './articleText.json'
 import waterImage from './images/water.jpeg'
@@ -13,6 +12,7 @@ import hiitImage from './images/Hiit.jpeg'
 import meditationImage from './images/meditation.jpeg'
 import chickpeaImage from './images/chickpea.jpeg'
 import yogaImage from './images/yoga.jpeg'
+import PaginatedItems from '../../PaginatedItems'
 
 const improveSleep = 'How to improve your sleep'
 const howMuchWater = 'How much Water should you drink'
@@ -20,9 +20,41 @@ const buffChickSan = 'Buffalo Chicken Sandwich'
 const brocChedSoup = 'Broccoli Cheddar Soup Dumplings'
 const boxingTraining = 'Boxing Training Workout'
 const hiitWorkout = '20 Minute HIIT Workout'
-const meditationBenefits = 'The Benefits of Meditation for Stress Reduction'
+const meditationBenefits = 'Meditation for Stress Reduction'
 const chickpeaStir = 'Chickpea and Vegetable Stir-Fry'
 const yoga = 'Yoga for Beginners'
+
+const recipeArticles = [buffChickSan, brocChedSoup, chickpeaStir]
+const workoutArticles = [hiitWorkout, boxingTraining, yoga]
+const healthArticles = [improveSleep, howMuchWater, meditationBenefits]
+
+const ArticleScrollCard = ({ title, imageSrc, button }) => {
+    return (
+        <Card style={{ height: '100%' }}>
+            <Image src={imageSrc} />
+            <Card.Content>
+                <Card.Header>{title}</Card.Header>
+            </Card.Content>
+            <Card.Content extra>
+                {button}
+            </Card.Content>
+        </Card>
+    )
+}
+
+const ArticleListCard = ({ title, imageSrc, button }) => {
+    return (
+        <Card fluid>
+            <Image src={imageSrc} />
+            <Card.Content>
+                <Card.Header>{title}</Card.Header>
+            </Card.Content>
+            <Card.Content extra>
+                {button}
+            </Card.Content>
+        </Card>
+    )
+}
 
 const ArticleButton = ({ onClick }) => {
     return (<Button fluid onClick={onClick}>Open Article</Button>)
@@ -304,83 +336,42 @@ const Article = ({ name, content }) => {
     )
 }
 
-const HealthArticles = ({ setActiveModal }) => {
+function getImage (article) {
     return (
+        (article === improveSleep && sleepImage) ||
+        (article === howMuchWater && waterImage) ||
+        (article === buffChickSan && buffChickImage) ||
+        (article === brocChedSoup && dumplingImage) ||
+        (article === boxingTraining && boxingImage) ||
+        (article === hiitWorkout && hiitImage) ||
+        (article === meditationBenefits && meditationImage) ||
+        (article === chickpeaStir && chickpeaImage) ||
+        (article === yoga && yogaImage)
+    )
+}
 
-        <Grid style={{ width: '150%', height: '100%' }} columns={3}>
-            <Grid.Column>
-                <PageCard
-                    title={improveSleep}
-                    imageSrc={sleepImage}
-                    button={<ArticleButton onClick={() => setActiveModal(improveSleep)}/>}
-                />
-            </Grid.Column>
-            <Grid.Column>
-                <PageCard
-                    title={howMuchWater}
-                    imageSrc={waterImage}
-                    button={<ArticleButton onClick={() => setActiveModal(howMuchWater)}/>}
-                />
-            </Grid.Column>
-            <Grid.Column>
-                <PageCard
-                    title={meditationBenefits}
-                    imageSrc={meditationImage}
-                    button={<ArticleButton onClick={() => setActiveModal(meditationBenefits)}/>}
-                />
-            </Grid.Column>
-        </Grid>
-    )
-}
-const Recipes = ({ setActiveModal }) => {
+const MainArticleView = ({ setActiveModal, articles }) => {
     return (
         <Grid style={{ width: '150%', height: '100%' }} columns={3}>
             <Grid.Column>
-                <PageCard
-                    title={buffChickSan}
-                    imageSrc={buffChickImage}
-                    button={<ArticleButton onClick={() => setActiveModal(buffChickSan)}/>}
+                <ArticleScrollCard
+                    title={articles[0]}
+                    imageSrc={getImage(articles[0])}
+                    button={<ArticleButton onClick={() => setActiveModal(articles[0])}/>}
                 />
             </Grid.Column>
             <Grid.Column>
-                <PageCard
-                    title={brocChedSoup}
-                    imageSrc={dumplingImage}
-                    button={<ArticleButton onClick={() => setActiveModal(brocChedSoup)}/>}
+                <ArticleScrollCard
+                    title={articles[1]}
+                    imageSrc={getImage(articles[1])}
+                    button={<ArticleButton onClick={() => setActiveModal(articles[1])}/>}
                 />
             </Grid.Column>
             <Grid.Column>
-                <PageCard
-                    title={chickpeaStir}
-                    imageSrc={chickpeaImage}
-                    button={<ArticleButton onClick={() => setActiveModal(chickpeaStir)}/>}
-                />
-            </Grid.Column>
-        </Grid>
-    )
-}
-const Workouts = ({ setActiveModal }) => {
-    return (
-        <Grid style={{ width: '150%', height: '100%' }} columns={3}>
-            <Grid.Column>
-                <PageCard
-                    title={boxingTraining}
-                    imageSrc={boxingImage}
-                    button={<ArticleButton onClick={() => setActiveModal(boxingTraining)}/>}
-                />
-            </Grid.Column>
-            <Grid.Column>
-                <PageCard
-                    title={hiitWorkout}
-                    imageSrc={hiitImage}
-                    button={<ArticleButton onClick={() => setActiveModal(hiitWorkout)}/>}
-                />
-            </Grid.Column>
-            <Grid.Column>
-                <PageCard
-                    title={yoga}
-                    imageSrc={yogaImage}
-                    button={<ArticleButton onClick={() => setActiveModal(yoga)}/>}
+                <ArticleScrollCard
+                    title={articles[2]}
+                    imageSrc={getImage(articles[2])}
+                    button={<ArticleButton onClick={() => setActiveModal(articles[2])}/>}
                 />
             </Grid.Column>
         </Grid>
@@ -390,6 +381,8 @@ const Workouts = ({ setActiveModal }) => {
 const Learn = () => {
     const [activeModal, setActiveModal] = useState('')
     const [modalContent, setModalContent] = useState('')
+    const [allArticles, setAllArticles] = useState('')
+    const [allModalTitle, setAllModalTitle] = useState('')
 
     useEffect(() => {
         setModalContent(
@@ -405,13 +398,52 @@ const Learn = () => {
         )
     }, [activeModal])
 
+    function allArticleView (articles) {
+        const articleList = []
+        articles.map((article) => (
+            articleList.push(
+                <ArticleListCard
+                    title={article}
+                    imageSrc={getImage(article)}
+                    button={<ArticleButton onClick={() => setActiveModal(article)}/>}
+                />
+            )
+        ))
+        return articleList
+    }
+
+    function openAllArticleModal (articles, modalTitle) {
+        setAllArticles(allArticleView(articles))
+        setAllModalTitle(modalTitle)
+    }
+
     return (
         <div>
             <Header size='large'>Learn</Header>
+            <PageModal
+                title={'All ' + allModalTitle}
+                open={allArticles !== ''}
+                cancelText={'Done'}
+                cancelAction={() => setAllArticles('')}
+                setClosed={() => setAllArticles('')}
+                content={<PaginatedItems itemList={allArticles} itemsPerPage={2}/>}
+            />
             {modalContent}
-            <PageItem title="Health Articles" moreLabel="View More" content={<HealthArticles setActiveModal={setActiveModal}/>}/>
-            <PageItem title="Recipes" moreLabel="View More" content={<Recipes setActiveModal={setActiveModal}/>}/>
-            <PageItem title="Workouts" moreLabel="View More" content={<Workouts setActiveModal={setActiveModal}/>}/>
+            <PageItem
+                title="Health Articles"
+                moreLabel="View All"
+                moreAction={() => openAllArticleModal(healthArticles, 'Health Articles')}
+                content={<MainArticleView articles={healthArticles} setActiveModal={setActiveModal}/>}/>
+            <PageItem
+                title="Recipes"
+                moreLabel="View All"
+                moreAction={() => openAllArticleModal(recipeArticles, 'Recipes')}
+                content={<MainArticleView articles={recipeArticles} setActiveModal={setActiveModal}/>}/>
+            <PageItem
+                title="Workouts"
+                moreLabel="View All"
+                moreAction={() => openAllArticleModal(workoutArticles, 'Workouts')}
+                content={<MainArticleView articles={workoutArticles} setActiveModal={setActiveModal}/>}/>
         </div>
     )
 }

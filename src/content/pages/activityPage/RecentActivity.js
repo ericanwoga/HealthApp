@@ -1,35 +1,10 @@
 import React, { useState } from 'react'
-import PageItem from '../../PageItem'
-import { Header, Card, Pagination } from 'semantic-ui-react'
+import { Header, Card, Button, Dropdown, Input } from 'semantic-ui-react'
 import moment from 'moment'
-
-const Paginate = ({ itemList, limit, itemsPerPage }) => {
-    const [activePage, setActivePage] = useState(1)
-    itemsPerPage = itemsPerPage > 0 ? itemsPerPage : 10
-
-    return (
-        <>
-            {limit
-                ? itemList.slice((activePage - 1) * itemsPerPage, limit)
-                : (<>
-                    {itemList.slice((activePage - 1) * itemsPerPage, activePage * itemsPerPage)}
-                    {(itemList.length >= itemsPerPage)
-                        ? <Pagination
-                            onPageChange={(e, { activePage }) => setActivePage(activePage)}
-                            boundaryRange={0}
-                            defaultActivePage={1}
-                            ellipsisItem={null}
-                            firstItem={null}
-                            lastItem={null}
-                            siblingRange={1}
-                            totalPages={Math.ceil(itemList.length / itemsPerPage)}
-                        />
-                        : ''} </>
-                )
-            }
-        </>
-    )
-}
+import PageItem from '../../PageItem'
+import PageModal from '../../PageModal'
+import PaginatedItems from '../../PaginatedItems'
+import activityOptions from '../../../data/activityOptions.json'
 
 const WorkoutCard = ({ date, workout }) => {
     return (
@@ -43,27 +18,114 @@ const WorkoutCard = ({ date, workout }) => {
     )
 }
 
-const WorkoutList = ({ workouts }) => {
-    const workoutsArray = []
-    Object.keys(workouts).map((key) => (
-        workoutsArray.push(
-            <WorkoutCard key={key} date={key} workout={workouts[key]}></WorkoutCard>
-        )
-    ))
-
+const WorkoutList = ({ workouts, setTrackActivityModal }) => {
     return (
         <>
-            {workoutsArray.length > 0
-                ? <Paginate itemList={workoutsArray} limit={3}/>
+            <Button fluid size='large' onClick={() => {
+                setTrackActivityModal(true)
+            }}>
+                Track Activity
+            </Button>
+            {workouts.length > 0
+                ? <PaginatedItems itemList={workouts} limit={3}/>
                 : <Header>{'Track your first workout and you\'ll see it here!'}</Header>
             }
         </>
     )
 }
 
-const RecentActivity = ({ userData }) => {
+const TrackActivityModal = ({ setKeyboardVisible, setName, setCalories }) => {
     return (
-        <PageItem title="Recent Activity" moreLabel="View More" content={<WorkoutList workouts={userData.activityData.activity} limit={3}/>}/>
+        <>
+            <Header>What kind of activity would you like to track?</Header>
+            <Dropdown
+                placeholder='Select Activity'
+                fluid
+                selection
+                options={activityOptions}
+                onChange={(e, result) => setName(result.value)}/>
+            <Header>How many calories did you burn?</Header>
+            <Input
+                fluid
+                label={{ basic: true, content: 'calories' }}
+                labelPosition='right'
+                placeholder='Calories'
+                onClick={() => setKeyboardVisible('onModal')}
+                onChange={(e, result) => setCalories(result.value)}/>
+        </>
+    )
+}
+
+const RecentActivityContent = ({ workouts }) => {
+    return (
+        <>
+            <PaginatedItems itemList={workouts} itemsPerPage={4}/>
+        </>
+
+    )
+}
+
+const RecentActivity = ({ setKeyboardVisible, userData, setUserData }) => {
+    const [activityModal, setActivityModal] = useState(false)
+    const [trackActivityModal, setTrackActivityModal] = useState(false)
+    const [calories, setCalories] = useState(false)
+    const [name, setName] = useState(false)
+
+    const updatedUserData = userData
+    const now = moment()
+
+    const workouts = userData.activityData.activity
+    const workoutsArray = []
+    Object.keys(workouts).map((key) => (
+        workoutsArray.push(
+            <WorkoutCard key={key} date={key} workout={workouts[key]}></WorkoutCard>
+        )
+    ))
+    const unsortedWorkouts = workoutsArray
+    const sortedWorkouts = unsortedWorkouts.reverse()
+
+    const submitActivity = () => {
+        if (name !== '' && calories !== '') {
+            updatedUserData.activityData.activity[now.toDate()] = { name, calories }
+            setUserData(updatedUserData)
+            cancel()
+        }
+    }
+
+    const cancel = () => {
+        setActivityModal(false)
+        setTrackActivityModal(false)
+        setKeyboardVisible('off')
+    }
+
+    return (
+        <>
+            <PageModal
+                content={<TrackActivityModal setKeyboardVisible={setKeyboardVisible} setName={setName} setCalories={setCalories}/>}
+                title={'Track Activity'}
+                open={trackActivityModal}
+                setClosed={() => cancel()}
+                submitText={'Submit'}
+                submitAction={() => submitActivity()}
+                cancelText={'Cancel'}
+                cancelAction={() => cancel()}/>
+            <PageModal
+                title={'All Activity'}
+                open={activityModal}
+                setOpen={() => setActivityModal(true)}
+                setClosed={() => setActivityModal(false)}
+                cancelText={'Done'}
+                cancelAction={() => setActivityModal(false)}
+                content={<RecentActivityContent workouts={sortedWorkouts}/>}/>
+            <PageItem
+                title="Recent Activity"
+                moreAction={() => setActivityModal(true)}
+                moreLabel="View All"
+                content={
+                    <WorkoutList setTrackActivityModal={setTrackActivityModal} workouts={sortedWorkouts} limit={3}/>
+                }
+            />
+        </>
     )
 }
 

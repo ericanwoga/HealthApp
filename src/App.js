@@ -67,7 +67,7 @@ const App = () => {
                                 (mainPage === 'Learn' && <Learn/>) ||
                                 (mainPage === 'Health' && <Health userData={userData} setUserData={setUserData}/>) ||
                                 (mainPage === 'Dashboard' && <Dashboard setKeyboardVisible={setKeyboardVisible} userData={userData} setUserData={setUserData}/>) ||
-                                (mainPage === 'Activity' && <Activity userData={userData}/>) ||
+                                (mainPage === 'Activity' && <Activity setUserData={setUserData} setKeyboardVisible={setKeyboardVisible} userData={userData}/>) ||
                                 (mainPage === 'Body' && <Body/>)
                             )
                             : <HeadingPage setLoggedIn={setLoggedIn} userData={userData} page={headingPage} setIsVisible={setHeadingPage}/>
@@ -81,7 +81,7 @@ const App = () => {
                     </Container>
                 </Segment>
             </div>
-            {keyboardVisible !== 'off' && (
+            {(keyboardVisible === 'onModal' || keyboardVisible === 'onNoModal') && (
                 <>
                     <Container textAlign='center' id="rootyOverlay" style={{ position: 'absolute', left: '0', right: '0', top: '30em', scale: '100%', fontSize: 'xx-large', width: '550px', borderRadius: '100px' }}>
                         <Keyboard
