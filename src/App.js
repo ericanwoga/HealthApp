@@ -70,7 +70,7 @@ const App = () => {
                                 (mainPage === 'Activity' && <Activity setUserData={setUserData} setKeyboardVisible={setKeyboardVisible} userData={userData}/>) ||
                                 (mainPage === 'Body' && <Body/>)
                             )
-                            : <HeadingPage setLoggedIn={setLoggedIn} userData={userData} page={headingPage} setIsVisible={setHeadingPage}/>
+                            : <HeadingPage setUserData={setUserData} setLoggedIn={setLoggedIn} userData={userData} page={headingPage} setIsVisible={setHeadingPage}/>
                         }
                     </Container>
                     <Container textAlign='center' style={{ height: '9%', padding: '1%', marginTop: keyboardPadding }}>

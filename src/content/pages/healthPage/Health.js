@@ -10,8 +10,9 @@ const Health = ({ userData, setUserData }) => {
     const [sleepGoal, setSleepGoal] = useState(parseInt((userData.healthData.sleep['2023-03-28'].sleepGoal))) // sleep goal
     const [waterAmount, setWaterAmount] = useState(parseInt((userData.healthData.water['2023-03-28'].waterAmount))) // water intake
     const [waterGoal, setWaterGoal] = useState(parseInt((userData.healthData.water['2023-03-28'].waterGoal))) // water goal
-    const [waterUnit, setWaterUnit] = useState(userData.healthData.water['2023-03-28'].waterUnits) // water unit of measure
     const [bfList, setBfList] = useState(userData.healthData.meals['2023-03-28'].breakfast)
+
+    const unit = userData.preferences.unit
 
     useEffect(() => {
         // each time the variables change, update the json file
@@ -41,18 +42,11 @@ const Health = ({ userData, setUserData }) => {
         setUserData(userData)
     }, [waterGoal])
 
-    useEffect(() => {
-        // each time the variables change, update the json file
-
-        userData.healthData.water['2023-03-28'].waterUnit = waterUnit // re-assign the units in the object
-        setUserData(userData)
-    }, [waterUnit])
-
     return (
         <div>
             <Header size='large'>Health</Header>
             <Sleep sleep={sleepAmount} setSleepAmount={setSleepAmount} sleepGoal={sleepGoal} setSleepGoal={setSleepGoal}/>
-            <Water water={waterAmount} setWaterAmount={setWaterAmount} waterGoal={waterGoal} setWaterGoal={setWaterGoal} waterUnit={waterUnit} setWaterUnit={setWaterUnit}/>
+            <Water water={waterAmount} unit={unit} setWaterAmount={setWaterAmount} waterGoal={waterGoal} setWaterGoal={setWaterGoal}/>
             <Mood mood={100}/>
             <Breakfast bfList={bfList} setBfList={setBfList}/>
         </div>

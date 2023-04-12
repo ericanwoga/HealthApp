@@ -6,14 +6,14 @@ import UserPage from './pages/userPage/UserPage'
 import { Header, Icon, Grid, Segment, Button } from 'semantic-ui-react'
 
 // Renders the specific Header page if one is selected from the App Heading
-const HeadingPage = ({ setLoggedIn, userData, page, setIsVisible }) => {
+const HeadingPage = ({ setUserData, setLoggedIn, userData, page, setIsVisible }) => {
     const [content, setContent] = useState(page)
 
     useEffect(() => {
         setContent(
             (page === 'Achievements' && <TrophyPage userData={userData}/>) ||
             (page === 'Help' && <HelpPage userData={userData}/>) ||
-            (page === 'Settings' && <SettingPage userData={userData}/>) ||
+            (page === 'Settings' && <SettingPage setUserData={setUserData} userData={userData}/>) ||
             (page === 'Profile' && <UserPage setIsVisible={setIsVisible} setLoggedIn={setLoggedIn} userData={userData}/>)
         )
     }, [page, setIsVisible, setLoggedIn, userData])

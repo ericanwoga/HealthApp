@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
-import { Statistic, Grid, Progress, Button, Icon, Header, Input, Label } from 'semantic-ui-react'
+import { Statistic, Grid, Progress, Icon, Header, Input, Label } from 'semantic-ui-react'
 import PageItem from '../../PageItem'
 import PageModal from '../../PageModal'
 import './Health.css'
 
-const ModalContent = ({ unit, setUnit, water, setWaterAmount, waterGoal, setWaterGoal }) => {
+const ModalContent = ({ unit, water, setWaterAmount, waterGoal, setWaterGoal }) => {
     const [waterGoalError, setWaterGoalError] = useState(false)
     const [waterAmountError, setWaterAmountError] = useState(false)
 
@@ -32,25 +32,10 @@ const ModalContent = ({ unit, setUnit, water, setWaterAmount, waterGoal, setWate
         }
     }
 
-    const changeUnit = (e) => {
-        const val = e.target.value
-
-        if (val === 'liters') {
-            setUnit('liters')
-        } else {
-            setUnit('ounces')
-        }
-    }
-
     return (
         <>
-            <Header>Choose a unit of measure</Header>
-            <Button.Group>
-                <Button onClick={changeUnit} value="ounces">Ounces</Button>
-                <Button onClick={changeUnit} value="liters">Liters</Button>
-            </Button.Group>
             <Header>What is your water goal for today?</Header>
-            <Input fluid label={{ basic: true, content: unit }}
+            <Input fluid label={{ basic: true, content: unit === 'standard' ? 'Ounces' : 'Liters' }}
                 labelPosition='right'
                 value={waterGoal}
                 onChange={changeWaterGoal}
@@ -58,7 +43,7 @@ const ModalContent = ({ unit, setUnit, water, setWaterAmount, waterGoal, setWate
                 placeholder='Enter water intake goal'/>
             {waterGoalError ? <Label basic color='red' pointing prompt >Must be a number greater than 0</Label> : null}
             <Header>How much water did you drink today?</Header>
-            <Input fluid label={{ basic: true, content: unit }}
+            <Input fluid label={{ basic: true, content: unit === 'standard' ? 'Ounces' : 'Liters' }}
                 labelPosition='right'
                 value={water}
                 onChange={changeWaterAmount}
@@ -69,9 +54,8 @@ const ModalContent = ({ unit, setUnit, water, setWaterAmount, waterGoal, setWate
     )
 }
 
-const WaterContent = ({ water, setWaterAmount, waterGoal, setWaterGoal }) => {
+const WaterContent = ({ unit, water, setWaterAmount, waterGoal, setWaterGoal }) => {
     const [showWaterPopup, setShowWaterPopup] = useState(false)
-    const [unit, setUnit] = useState('ounces')
 
     return (
         <Grid>
@@ -81,7 +65,7 @@ const WaterContent = ({ water, setWaterAmount, waterGoal, setWaterGoal }) => {
             <Grid.Column verticalAlign='middle' width={6}>
                 <Statistic label size='large'>
                     <Statistic.Value>{water}/{waterGoal}</Statistic.Value>
-                    <Statistic.Label>{unit}</Statistic.Label>
+                    <Statistic.Label>{unit === 'standard' ? 'Ounces' : 'Liters'}</Statistic.Label>
                 </Statistic>
             </Grid.Column>
             <Grid.Column verticalAlign='middle' width={1}>
@@ -93,7 +77,7 @@ const WaterContent = ({ water, setWaterAmount, waterGoal, setWaterGoal }) => {
                     setClosed={() => setShowWaterPopup(false)}
                     submitAction={() => setShowWaterPopup(false)}
                     cancelAction={() => setShowWaterPopup(false)}
-                    content={<ModalContent unit={unit} setUnit={setUnit} water={water} setWaterAmount={setWaterAmount} waterGoal={waterGoal} setWaterGoal={setWaterGoal}/>}
+                    content={<ModalContent unit={unit} water={water} setWaterAmount={setWaterAmount} waterGoal={waterGoal} setWaterGoal={setWaterGoal}/>}
                     submitText={'Submit'}
                     cancelText={'Cancel'}
                 />
@@ -102,9 +86,9 @@ const WaterContent = ({ water, setWaterAmount, waterGoal, setWaterGoal }) => {
     )
 }
 
-const Water = ({ water, setWaterAmount, waterGoal, setWaterGoal }) => {
+const Water = ({ unit, water, setWaterAmount, waterGoal, setWaterGoal }) => {
     return (
-        <PageItem title="Water Intake" content={<WaterContent water={water} setWaterAmount={setWaterAmount} waterGoal={waterGoal} setWaterGoal={setWaterGoal}/>}/>
+        <PageItem title="Water Intake" content={<WaterContent unit={unit} water={water} setWaterAmount={setWaterAmount} waterGoal={waterGoal} setWaterGoal={setWaterGoal}/>}/>
     )
 }
 
