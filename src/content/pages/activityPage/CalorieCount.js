@@ -112,7 +112,7 @@ const CalorieCountContent = ({ calories }) => {
 
 const CalorieCount = ({ calories }) => {
     return (
-        <PageItem title="Calories Burned" moreLabel="Edit Chart" content={<CalorieCountContent calories={calories}/>}/>
+        <PageItem title="Calories Burned" content={<CalorieCountContent calories={calories}/>}/>
     )
 }
 

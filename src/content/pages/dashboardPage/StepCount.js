@@ -112,7 +112,7 @@ const StepCountContent = ({ steps }) => {
 
 const StepCount = ({ steps }) => {
     return (
-        <PageItem title="Step Count" moreLabel="Edit Chart" content={<StepCountContent steps={steps}/>}/>
+        <PageItem title="Step Count" content={<StepCountContent steps={steps}/>}/>
     )
 }
 
