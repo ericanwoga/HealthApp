@@ -35,7 +35,7 @@ const ModalContent = ({ unit, water, setWaterAmount, waterGoal, setWaterGoal }) 
     return (
         <>
             <Header>What is your water goal for today?</Header>
-            <Input fluid label={{ basic: true, content: unit === 'standard' ? 'Ounces' : 'Liters' }}
+            <Input fluid label={{ basic: true, content: unit === 'standard' ? ' ounces' : 'liters' }}
                 labelPosition='right'
                 value={waterGoal}
                 onChange={changeWaterGoal}
@@ -43,7 +43,7 @@ const ModalContent = ({ unit, water, setWaterAmount, waterGoal, setWaterGoal }) 
                 placeholder='Enter water intake goal'/>
             {waterGoalError ? <Label basic color='red' pointing prompt >Must be a number greater than 0</Label> : null}
             <Header>How much water did you drink today?</Header>
-            <Input fluid label={{ basic: true, content: unit === 'standard' ? 'Ounces' : 'Liters' }}
+            <Input fluid label={{ basic: true, content: unit === 'standard' ? ' ounces' : 'liters' }}
                 labelPosition='right'
                 value={water}
                 onChange={changeWaterAmount}
@@ -65,7 +65,7 @@ const WaterContent = ({ unit, water, setWaterAmount, waterGoal, setWaterGoal }) 
             <Grid.Column verticalAlign='middle' width={6}>
                 <Statistic label size='large'>
                     <Statistic.Value>{water}/{waterGoal}</Statistic.Value>
-                    <Statistic.Label>{unit === 'standard' ? 'Ounces' : 'Liters'}</Statistic.Label>
+                    <Statistic.Label>{unit === 'standard' ? ' ounces' : 'liters'}</Statistic.Label>
                 </Statistic>
             </Grid.Column>
             <Grid.Column verticalAlign='middle' width={1}>

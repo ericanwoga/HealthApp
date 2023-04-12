@@ -1,31 +1,33 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Header, Input, Button, Grid } from 'semantic-ui-react'
 import PageItem from '../../PageItem'
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, ResponsiveContainer } from 'recharts'
 import BodyMeasurements from './BodyMeasurements'
+import moment from 'moment'
 
-const BodyContent = ({ data, setData }) => {
+const BodyContent = ({ setReload, reload, weightData, setWeightData }) => {
     const [weight, setWeight] = useState('')
-
-    const handleWeightChange = (e) => {
-        setWeight(e.target.value)
-    }
+    const weightDataCopy = weightData
 
     const handleSubmitWeight = () => {
         const parsedWeight = parseInt(weight)
-        setData([...data, { weight: parsedWeight }])
+        weightDataCopy[moment().format('YYYY-MM-DD')] = parsedWeight
+        setWeightData(weightDataCopy)
         setWeight('')
+        setReload(!reload)
     }
 
     const handleClearData = () => {
-        setData(data.slice(0, -1))
+        delete weightDataCopy[moment().format('YYYY-MM-DD')]
+        setWeightData(weightDataCopy)
+        setReload(!reload)
     }
 
     return (
         <>
             <Header size="small">
-                {data.length
-                    ? `You weighed in at ${data[data.length - 1].weight} lbs. today!`
+                {weightDataCopy[moment().format('YYYY-MM-DD')]
+                    ? `You weighed in at ${weightDataCopy[moment().format('YYYY-MM-DD')]} lbs. today!`
                     : "Please enter today's weight"}
             </Header>
             <Grid>
@@ -35,30 +37,111 @@ const BodyContent = ({ data, setData }) => {
                         label={{ basic: true, content: 'lbs' }}
                         labelPosition="right"
                         placeholder="Enter weight..."
-                        onChange={handleWeightChange}
+                        onChange={(e, result) => setWeight(result.value)}
                         value={weight}
                     />
                 </Grid.Column>
                 <Grid.Column width={8}>
-                    <Button fluid onClick={handleSubmitWeight}>
-            Submit
+                    <Button fluid onClick={() => handleSubmitWeight()}>
+                        Submit
                     </Button>
                 </Grid.Column>
                 <Grid.Column width={8}>
-                    <Button fluid onClick={handleClearData}>
-            Undo Last Weight
+                    <Button fluid onClick={() => handleClearData()}>
+                        {'Undo Today\'s Weight'}
                     </Button>
                 </Grid.Column>
             </Grid>
         </>
     )
 }
-const GraphContent = ({ data }) => {
+
+const GraphContent = ({ weightData }) => {
+    const timeFrames = ['1 Week', '3 Months', '6 Months', '1 Year']
+    const [timeFrame] = useState(timeFrames[0])
+
+    function getWeights () {
+        const retVal = []
+        let i, j
+        let currDate, currMonth, weekCalories, monthCalories, daysInMonth
+        switch (timeFrame) {
+        case '1 Week':
+            for (i = 6; i >= 0; i--) {
+                currDate = moment().subtract(i, 'days')
+                retVal.push({
+                    name: currDate.format('dddd').slice(0, 3),
+                    weight: weightData[currDate.format('YYYY-MM-DD')] || 0
+                })
+            }
+            break
+        case '1 Month':
+            for (i = 31; i >= 0; i--) {
+                currDate = moment().subtract(i, 'days')
+                retVal.push({
+                    name: currDate.format('MM-DD'),
+                    weight: weightData[currDate.format('YYYY-MM-DD')] || 0
+                })
+            }
+            break
+        case '3 Months':
+            for (i = 12; i >= 0; i--) {
+                weekCalories = 0
+                for (j = 6; j >= 0; j--) {
+                    currDate = moment().subtract(7 * i + j, 'days')
+                    weekCalories += parseInt(weightData[currDate.format('YYYY-MM-DD')]) || 0
+                }
+                weekCalories /= 7
+                retVal.push({
+                    name: currDate.subtract(7, 'days').format('MM-DD'),
+                    weight: weekCalories || 0
+                })
+            }
+            break
+        case '6 Months':
+            currDate = moment().subtract(6, 'months')
+            for (i = 6; i >= 0; i--) {
+                currMonth = currDate.format('MMM')
+                monthCalories = 0
+                daysInMonth = 0
+                while (currDate.format('MMM') === currMonth) {
+                    monthCalories += parseInt(weightData[currDate.format('YYYY-MM-DD')]) || 0
+                    daysInMonth += 1
+                    currDate.add(1, 'days')
+                }
+                retVal.push({
+                    name: currMonth,
+                    weight: monthCalories / daysInMonth || 0
+                })
+            }
+            break
+        case '1 Year':
+            currDate = moment().subtract(1, 'year')
+            for (i = 12; i >= 0; i--) {
+                currMonth = currDate.format('MMM')
+                monthCalories = 0
+                daysInMonth = 0
+                while (currDate.format('MMM') === currMonth) {
+                    monthCalories += parseInt(weightData[currDate.format('YYYY-MM-DD')]) || 0
+                    daysInMonth += 1
+                    currDate.add(1, 'days')
+                }
+                retVal.push({
+                    name: currMonth,
+                    weight: monthCalories / daysInMonth || 0
+                })
+            }
+            break
+        default:
+            break
+        }
+        return retVal
+    }
+
     return (
         <ResponsiveContainer width="100%" height={300}>
-            <BarChart data={data}>
+            <BarChart data={getWeights()}>
                 <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="date" />
+                <XAxis dataKey="name" />
                 <YAxis />
                 <Bar dataKey="weight" fill="#2C698D" />
             </BarChart>
@@ -81,15 +164,22 @@ const GraphContent = ({ data }) => {
 //     />
 // )
 
-const Body = () => {
-    const [data, setData] = useState([])
+const Body = ({ userData, setUserData }) => {
+    const [weightData, setWeightData] = useState(userData.bodyData.weight)
+    const [reload, setReload] = useState(false)
+
+    useEffect(() => {
+        userData.bodyData.weight = weightData
+        setUserData(userData)
+    }, [weightData, reload])
+
     return (
         <div>
             <Header>Body</Header>
-            <PageItem title="Today's Weight" content={<BodyContent data={data} setData={setData} />} />
-            <PageItem title="Weights" content={<GraphContent data={data} />} />
+            <PageItem title="Today's Weight" content={<BodyContent setReload={setReload} reload={reload} weightData={weightData} setWeightData={setWeightData} />} />
+            <PageItem title="Weights" content={<GraphContent setReload={setReload} reload={reload} weightData={weightData} />} />
             {/* <PageItem title="Choose your Goal!" content={<DropdownExampleSelection />} /> */}
-            <PageItem title="Body Measurements" content={<BodyMeasurements />} />
+            <PageItem title="Body Measurements" content={<BodyMeasurements userData={userData} setUserData={setUserData}/>} />
 
         </div>
     )

@@ -1,12 +1,14 @@
 import React, { useState } from 'react'
-import { Header, Input, Button, Grid } from 'semantic-ui-react'
+import { Header, Input, Button, Grid, Divider } from 'semantic-ui-react'
+import moment from 'moment'
 
-const BodyMeasurements = () => {
+const BodyMeasurements = ({ userData, setUserData }) => {
     const [neck, setNeck] = useState('')
     const [waist, setWaist] = useState('')
     const [biceps, setBiceps] = useState('')
     const [thighs, setThighs] = useState('')
     const [calves, setCalves] = useState('')
+    const [chest, setChest] = useState('')
 
     const NeckChange = (e) => {
         setNeck(e.target.value)
@@ -23,6 +25,9 @@ const BodyMeasurements = () => {
     const CalvesChange = (e) => {
         setCalves(e.target.value)
     }
+    const ChestChange = (e) => {
+        setChest(e.target.value)
+    }
 
     const SubmitMeasurements = () => {
         const newMeasurement = {
@@ -30,82 +35,97 @@ const BodyMeasurements = () => {
             waist: parseFloat(waist),
             biceps: parseFloat(biceps),
             thighs: parseFloat(thighs),
-            calves: parseFloat(calves)
+            calves: parseFloat(calves),
+            chest: parseFloat(chest)
         }
-        console.log(newMeasurement)
+        userData.bodyData.measurements[moment()] = newMeasurement
+        setUserData(userData)
         setNeck('')
         setWaist('')
         setBiceps('')
         setThighs('')
         setCalves('')
+        setChest('')
     }
 
     return (
         <>
-            <Grid>
-                <Grid.Column width={5}>
-                    <Header>Neck</Header>
-                    <Input
-                        fluid
-                        label={{ basic: true, content: 'in.' }}
-                        labelPosition="right"
-                        placeholder="Enter neck measurement..."
-                        onChange={NeckChange}
-                        value={neck}
-                    />
-                </Grid.Column>
-                <Grid.Column width={5}>
-                    <Header>Waist</Header>
-                    <Input
-                        fluid
-                        label={{ basic: true, content: 'in.' }}
-                        labelPosition="right"
-                        placeholder="Enter waist measurement..."
-                        onChange={WaistChange}
-                        value={waist}
-                    />
-                </Grid.Column>
-                <Grid.Column width={5}>
-                    <Header>Biceps</Header>
-                    <Input
-                        fluid
-                        label={{ basic: true, content: 'in.' }}
-                        labelPosition="right"
-                        placeholder="Enter bicep measurement..."
-                        onChange={BicepsChange}
-                        value={biceps}
-                    />
-                </Grid.Column>
+            <Grid columns={3}>
+                <Grid.Row>
+                    <Grid.Column width={5}>
+                        <Header>Neck</Header>
+                        <Input
+                            fluid
+                            label={{ basic: true, content: 'in.' }}
+                            labelPosition="right"
+                            placeholder="Neck"
+                            onChange={NeckChange}
+                            value={neck}
+                        />
+                    </Grid.Column>
+                    <Grid.Column width={5}>
+                        <Header>Waist</Header>
+                        <Input
+                            fluid
+                            label={{ basic: true, content: 'in.' }}
+                            labelPosition="right"
+                            placeholder="Waist"
+                            onChange={WaistChange}
+                            value={waist}
+                        />
+                    </Grid.Column>
+                    <Grid.Column width={5}>
+                        <Header>Biceps</Header>
+                        <Input
+                            fluid
+                            label={{ basic: true, content: 'in.' }}
+                            labelPosition="right"
+                            placeholder="Biceps"
+                            onChange={BicepsChange}
+                            value={biceps}
+                        />
+                    </Grid.Column>
+                </Grid.Row>
+                <Grid.Row>
+                    <Grid.Column width={5}>
+                        <Header>Thighs</Header>
+                        <Input
+                            fluid
+                            label={{ basic: true, content: 'in.' }}
+                            labelPosition="right"
+                            placeholder="Thighs"
+                            onChange={ThighsChange}
+                            value={thighs}
+                        />
+                    </Grid.Column>
+                    <Grid.Column width={5}>
+                        <Header>Calves</Header>
+                        <Input
+                            fluid
+                            label={{ basic: true, content: 'in.' }}
+                            labelPosition="right"
+                            placeholder="Calves"
+                            onChange={CalvesChange}
+                            value={calves}
+                        />
+                    </Grid.Column>
+                    <Grid.Column width={5}>
+                        <Header>Chest</Header>
+                        <Input
+                            fluid
+                            label={{ basic: true, content: 'in.' }}
+                            labelPosition="right"
+                            placeholder="Chest"
+                            onChange={ChestChange}
+                            value={calves}
+                        />
+                    </Grid.Column>
+                </Grid.Row>
             </Grid>
-            <Grid>
-                <Grid.Column width={5}>
-                    <Header>Thighs</Header>
-                    <Input
-                        fluid
-                        label={{ basic: true, content: 'in.' }}
-                        labelPosition="right"
-                        placeholder="Enter bicep measurement..."
-                        onChange={ThighsChange}
-                        value={thighs}
-                    />
-                </Grid.Column>
-                <Grid.Column width={5}>
-                    <Header>Calves</Header>
-                    <Input
-                        fluid
-                        label={{ basic: true, content: 'in.' }}
-                        labelPosition="right"
-                        placeholder="Enter bicep measurement..."
-                        onChange={CalvesChange}
-                        value={calves}
-                    />
-                </Grid.Column>
-                <Grid.Column width={4}>
-                    <Button fluid onClick={SubmitMeasurements}>
-            Submit Measures
-                    </Button>
-                </Grid.Column>
-            </Grid>
+            <Divider/>
+            <Button fluid onClick={SubmitMeasurements}>
+                Submit Measurements
+            </Button>
         </>
     )
 }

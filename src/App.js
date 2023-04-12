@@ -68,7 +68,7 @@ const App = () => {
                                 (mainPage === 'Health' && <Health userData={userData} setUserData={setUserData}/>) ||
                                 (mainPage === 'Dashboard' && <Dashboard setKeyboardVisible={setKeyboardVisible} userData={userData} setUserData={setUserData}/>) ||
                                 (mainPage === 'Activity' && <Activity setUserData={setUserData} setKeyboardVisible={setKeyboardVisible} userData={userData}/>) ||
-                                (mainPage === 'Body' && <Body/>)
+                                (mainPage === 'Body' && <Body userData={userData} setUserData={setUserData} />)
                             )
                             : <HeadingPage setUserData={setUserData} setLoggedIn={setLoggedIn} userData={userData} page={headingPage} setIsVisible={setHeadingPage}/>
                         }

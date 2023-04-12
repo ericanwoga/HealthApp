@@ -64,13 +64,13 @@ const TrackSleepModal = ({ setKeyboardVisible, setHours }) => {
     )
 }
 
-const TrackWaterModal = ({ setKeyboardVisible, setWater }) => {
+const TrackWaterModal = ({ unit, setKeyboardVisible, setWater }) => {
     return (
         <>
             <Header>How much water would you like to track?</Header>
             <Input
                 fluid
-                label={{ basic: true, content: 'fluid oz' }}
+                label={{ basic: true, content: unit === 'standard' ? 'ounces' : 'liters' }}
                 labelPosition='right'
                 placeholder='Enter water intake'
                 onClick={() => setKeyboardVisible('onModal')}
@@ -190,6 +190,8 @@ const QuickActionsContent = ({ setKeyboardVisible, actionItems, userData, setUse
     const [mood, setMood] = useState('')
     const [steps, setSteps] = useState('')
 
+    const unit = userData.preferences.unit
+
     const updatedUserData = userData
     const now = moment()
 
@@ -290,7 +292,7 @@ const QuickActionsContent = ({ setKeyboardVisible, actionItems, userData, setUse
                 cancelAction={() => cancel()}/>) ||
             (modalOpen === 'Track Water' &&
             <PageModal
-                content={<TrackWaterModal setKeyboardVisible={setKeyboardVisible} setWater={setWater}/>}
+                content={<TrackWaterModal unit={unit} setKeyboardVisible={setKeyboardVisible} setWater={setWater}/>}
                 title={modalOpen}
                 open={true}
                 setClosed={() => cancel()}
