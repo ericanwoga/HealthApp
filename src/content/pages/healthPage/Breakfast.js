@@ -82,10 +82,10 @@ const BreakfastContent = ({ setKeyboardVisible, bfList, setBfList }) => {
         list.push(
             <Grid key={index}>
                 <Grid.Column verticalAlign='middle' textalign='center' width={9}>
-                    <Segment>{Object.keys(item)[0]}</Segment>
+                    <Segment><Header>{Object.keys(item)[0]}</Header></Segment>
                 </Grid.Column>
                 <Grid.Column verticalAlign='middle' textalign='center' width={4}>
-                    <Segment >{Object.values(item)[0]}</Segment>
+                    <Segment><Header>{Object.values(item)[0]}</Header></Segment>
                 </Grid.Column>
                 <Grid.Column verticalAlign='middle' width={1}>
                     <Icon onClick={() => setShowSleepPopup(true)} link circular name='edit' className='box-plus-sign'/>
