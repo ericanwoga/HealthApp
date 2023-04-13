@@ -221,7 +221,7 @@ const QuickActionsContent = ({ setKeyboardVisible, actionItems, userData, setUse
 
     const submitWater = () => {
         if (water !== '') {
-            updatedUserData.healthData.water[now.toDate()] = { water }
+            updatedUserData.healthData.water[now.toDate()].waterAmount += { water }
             setUserData(updatedUserData)
             cancel()
         }
