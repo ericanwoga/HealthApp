@@ -79,15 +79,17 @@ const TrackWaterModal = ({ unit, setKeyboardVisible, setWater }) => {
     )
 }
 
-const TrackMoodModal = ({ setKeyboardVisible, setMood }) => {
+const TrackMoodModal = ({ mood, setMood }) => {
     return (
         <>
             <Header>How are you feeling today?</Header>
-            <Input
-                fluid
-                placeholder='Describe how you feel!'
-                onClick={() => setKeyboardVisible('onModal')}
-                onChange={(e, result) => setMood(result.value)}/>
+            <Button.Group as='Grid' textAlign='center' vertical fluid size="large">
+                <Button onClick={() => setMood('happy')} active={mood === 'happy'} value="happy">Happy</Button>
+                <Button onClick={() => setMood('okay')} active={mood === 'okay'} value="okay">Okay</Button>
+                <Button onClick={() => setMood('sad')} active={mood === 'sad'} value="sad">Sad</Button>
+                <Button onClick={() => setMood('anxious')} active={mood === 'anxious'} value="anxious">Anxious</Button>
+                <Button onClick={() => setMood('angry')} active={mood === 'angry'} value="angry">Angry</Button>
+            </Button.Group>
         </>
     )
 }
@@ -197,7 +199,7 @@ const QuickActionsContent = ({ setKeyboardVisible, actionItems, userData, setUse
 
     const submitActivity = () => {
         if (name !== '' && calories !== '') {
-            updatedUserData.activityData.activity[now.toDate()] = { name, calories }
+            updatedUserData.activityData.activity[now.toDate()] = { name, calories: parseInt(calories) }
             setUserData(updatedUserData)
             cancel()
         }
@@ -205,7 +207,7 @@ const QuickActionsContent = ({ setKeyboardVisible, actionItems, userData, setUse
 
     const submitMeal = () => {
         if (name !== '' && calories !== '') {
-            updatedUserData.healthData.meals[now.toDate()] = { name, calories }
+            updatedUserData.healthData.meals[now.toDate()] = { name, calories: parseInt(calories) }
             setUserData(updatedUserData)
             cancel()
         }
@@ -213,7 +215,7 @@ const QuickActionsContent = ({ setKeyboardVisible, actionItems, userData, setUse
 
     const submitSleep = () => {
         if (hours !== '') {
-            updatedUserData.healthData.sleep[now.toDate()] = { hours }
+            updatedUserData.healthData.sleep.amount[now.format('MM-DD-YYYY')] = parseInt(hours)
             setUserData(updatedUserData)
             cancel()
         }
@@ -221,7 +223,9 @@ const QuickActionsContent = ({ setKeyboardVisible, actionItems, userData, setUse
 
     const submitWater = () => {
         if (water !== '') {
-            updatedUserData.healthData.water[now.toDate()].waterAmount += { water }
+            updatedUserData.healthData.water.amount[now.format('MM-DD-YYYY')] > 0
+                ? updatedUserData.healthData.water.amount[now.format('MM-DD-YYYY')] += parseInt(water)
+                : updatedUserData.healthData.water.amount[now.format('MM-DD-YYYY')] = parseInt(water)
             setUserData(updatedUserData)
             cancel()
         }
@@ -229,7 +233,7 @@ const QuickActionsContent = ({ setKeyboardVisible, actionItems, userData, setUse
 
     const submitMood = () => {
         if (mood !== '') {
-            updatedUserData.healthData.mood[now.toDate()] = { mood }
+            updatedUserData.healthData.mood[now.format('MM-DD-YYYY')] = mood
             setUserData(updatedUserData)
             cancel()
         }
@@ -237,11 +241,9 @@ const QuickActionsContent = ({ setKeyboardVisible, actionItems, userData, setUse
 
     const submitSteps = () => {
         if (steps !== '') {
-            let currentSteps = parseInt(updatedUserData.activityData.steps[now.format('YYYY-MM-DD')])
-            currentSteps > 0
-                ? currentSteps += parseInt(steps)
-                : currentSteps = parseInt(steps)
-            updatedUserData.activityData.steps[now.format('YYYY-MM-DD')] = currentSteps.toString()
+            parseInt(updatedUserData.activityData.steps[now.format('YYYY-MM-DD')]) > 0
+                ? updatedUserData.activityData.steps[now.format('YYYY-MM-DD')] += parseInt(steps)
+                : updatedUserData.activityData.steps[now.format('YYYY-MM-DD')] = parseInt(steps)
             setUserData(updatedUserData)
             cancel()
         }
@@ -302,7 +304,7 @@ const QuickActionsContent = ({ setKeyboardVisible, actionItems, userData, setUse
                 cancelAction={() => cancel()}/>) ||
             (modalOpen === 'Track Mood' &&
             <PageModal
-                content={<TrackMoodModal setKeyboardVisible={setKeyboardVisible} setMood={setMood}/>}
+                content={<TrackMoodModal mood={mood} setKeyboardVisible={setKeyboardVisible} setMood={setMood}/>}
                 title={modalOpen}
                 open={true}
                 setClosed={() => cancel()}

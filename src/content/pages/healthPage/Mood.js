@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
-import { Grid, Button, Header } from 'semantic-ui-react'
+import { Button, Header } from 'semantic-ui-react'
 import PageItem from '../../PageItem'
 import './Health.css'
 
-const MoodContent = ({ mood }) => {
+const MoodContent = ({ userData, setUserData }) => {
     const [currentMood, setMood] = useState('')
 
     const changeUnit = (e) => {
@@ -15,27 +15,23 @@ const MoodContent = ({ mood }) => {
     }
 
     return (
-        <Grid>
-            <Grid.Column textAlign='left'>
-                <Grid.Row>
-                    <Header>How are you feeling today?</Header>
-                </Grid.Row>
-                <br />
-                <Button.Group textalign='center' width={8} size="large">
-                    <Button onClick={changeUnit} value="happy">Happy</Button>
-                    <Button onClick={changeUnit} value="okay">Okay</Button>
-                    <Button onClick={changeUnit} value="sad">Sad</Button>
-                    <Button onClick={changeUnit} value="anxious">Anxious</Button>
-                    <Button onClick={changeUnit} value="angry">Angry</Button>
-                </Button.Group>
-            </Grid.Column>
-        </Grid>
+        <>
+            <Header textAlign='left'>How are you feeling today?</Header>
+            <Button.Group fluid textalign='center' size="large">
+                <Button onClick={changeUnit} active={currentMood === 'happy'} value="happy">Happy</Button>
+                <Button onClick={changeUnit} active={currentMood === 'okay'} value="okay">Okay</Button>
+                <Button onClick={changeUnit} active={currentMood === 'sad'} value="sad">Sad</Button>
+                <Button onClick={changeUnit} active={currentMood === 'anxious'} value="anxious">Anxious</Button>
+                <Button onClick={changeUnit} active={currentMood === 'angry'} value="angry">Angry</Button>
+            </Button.Group>
+        </>
+
     )
 }
 
-const Mood = ({ mood }) => {
+const Mood = ({ userData, setUserData }) => {
     return (
-        <PageItem title="Mood" content={<MoodContent mood={mood}/>}/>
+        <PageItem title="Mood" content={<MoodContent userData={userData} setUserData={setUserData} />}/>
     )
 }
 

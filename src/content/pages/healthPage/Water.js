@@ -64,8 +64,8 @@ const WaterContent = ({ setKeyboardVisible, unit, userData, setUserData }) => {
 
     function submit () {
         if (waterAmount !== '' && waterGoal !== '') {
-            updatedUserData.healthData.water.goal = waterGoal
-            updatedUserData.healthData.water.amount[today] = waterAmount
+            updatedUserData.healthData.water.goal = parseInt(waterGoal)
+            updatedUserData.healthData.water.amount[today] = parseInt(waterAmount)
             setUserData(updatedUserData)
             cancel()
         }
