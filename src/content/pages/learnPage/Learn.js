@@ -8,14 +8,14 @@ import sleepImage from './images/sleep.jpeg'
 import buffChickImage from './images/buffaloChicken.jpeg'
 import dumplingImage from './images/dumplings.jpeg'
 import boxingImage from './images/boxing.jpeg'
-import hiitImage from './images/Hiit.jpeg'
+import hiitImage from './images/hiit.jpeg'
 import meditationImage from './images/meditation.jpeg'
 import chickpeaImage from './images/chickpea.jpeg'
 import yogaImage from './images/yoga.jpeg'
 import PaginatedItems from '../../PaginatedItems'
 
 const improveSleep = 'How to improve your sleep'
-const howMuchWater = 'How much Water should you drink'
+const howMuchWater = 'How much water should you drink'
 const buffChickSan = 'Buffalo Chicken Sandwich'
 const brocChedSoup = 'Broccoli Cheddar Soup Dumplings'
 const boxingTraining = 'Boxing Training Workout'
@@ -426,7 +426,7 @@ const Learn = () => {
                 cancelText={'Done'}
                 cancelAction={() => setAllArticles('')}
                 setClosed={() => setAllArticles('')}
-                content={<PaginatedItems itemList={allArticles} itemsPerPage={2}/>}
+                content={<PaginatedItems itemList={allArticles} itemsPerPage={1}/>}
             />
             {modalContent}
             <PageItem

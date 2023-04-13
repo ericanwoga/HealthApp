@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Header, Input, Button, Grid } from 'semantic-ui-react'
 import PageItem from '../../PageItem'
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, ResponsiveContainer } from 'recharts'
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, ResponsiveContainer } from 'recharts'
 import BodyMeasurements from './BodyMeasurements'
 import moment from 'moment'
 
@@ -142,12 +142,12 @@ const GraphContent = ({ weightData }) => {
 
     return (
         <ResponsiveContainer width="100%" height={300}>
-            <BarChart data={getWeights()}>
+            <LineChart data={getWeights()}>
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis dataKey="name" />
                 <YAxis />
-                <Bar dataKey="weight" fill="#2C698D" />
-            </BarChart>
+                <Line dataKey="weight" fill="#2C698D" />
+            </LineChart>
         </ResponsiveContainer>
     )
 }

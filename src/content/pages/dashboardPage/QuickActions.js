@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Button, Icon, Grid, Header, Input, Dropdown, Radio } from 'semantic-ui-react'
-import activityOptions from '../../../data/activityOptions.json'
+import { Button, Icon, Grid, Header, Input, Radio } from 'semantic-ui-react'
 import PageItem from '../../PageItem'
 import PageModal from '../../PageModal'
 import moment from 'moment'
@@ -9,11 +8,11 @@ const TrackActivityModal = ({ setKeyboardVisible, setName, setCalories }) => {
     return (
         <>
             <Header>What kind of activity would you like to track?</Header>
-            <Dropdown
-                placeholder='Select Activity'
+            <Input
                 fluid
-                selection
-                options={activityOptions}
+                labelPosition='right'
+                placeholder='Activity Name'
+                onClick={() => setKeyboardVisible('onModal')}
                 onChange={(e, result) => setName(result.value)}/>
             <Header>How many calories did you burn?</Header>
             <Input
