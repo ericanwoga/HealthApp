@@ -52,7 +52,7 @@ const ModalContent = ({ setKeyboardVisible }) => {
     )
 }
 
-const BreakfastContent = ({ setKeyboardVisible, bfList, setBfList }) => {
+const BreakfastContent = ({ setKeyboardVisible, mealList, setMealList }) => {
     const [showSleepPopup, setShowSleepPopup] = useState(false)
     const list = []
 
@@ -78,7 +78,7 @@ const BreakfastContent = ({ setKeyboardVisible, bfList, setBfList }) => {
         setKeyboardVisible('off')
     }
 
-    bfList.forEach((item, index) => {
+    mealList.breakfast.forEach((item, index) => {
         list.push(
             <Grid key={index}>
                 <Grid.Column verticalAlign='middle' textalign='center' width={9}>
@@ -96,7 +96,7 @@ const BreakfastContent = ({ setKeyboardVisible, bfList, setBfList }) => {
                         setClosed={() => cancel()}
                         submitAction={() => submit()}
                         cancelAction={() => cancel()}
-                        content={<ModalContent setKeyboardVisible={setKeyboardVisible} bfList={bfList} setBfList={setBfList}/>}
+                        content={<ModalContent setKeyboardVisible={setKeyboardVisible}/>}
                         submitText={'Submit'}
                         cancelText={'Cancel'}
                     />
@@ -113,9 +113,9 @@ const BreakfastContent = ({ setKeyboardVisible, bfList, setBfList }) => {
     )
 }
 
-const Breakfast = ({ setKeyboardVisible, bfList, setBfList }) => {
+const Breakfast = ({ setKeyboardVisible, mealList, setMealList }) => {
     return (
-        <PageItem title="Breakfast" content={<BreakfastContent setKeyboardVisible={setKeyboardVisible} bfList={bfList} setBfList={setBfList}/>}/>
+        <PageItem title="Breakfast" content={<BreakfastContent setKeyboardVisible={setKeyboardVisible} mealList={mealList} setMealList={setMealList}/>}/>
     )
 }
 

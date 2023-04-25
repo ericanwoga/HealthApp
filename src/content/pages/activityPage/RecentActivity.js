@@ -108,18 +108,20 @@ const RecentActivity = ({ setKeyboardVisible, userData, setUserData }) => {
                 submitAction={() => submitActivity()}
                 cancelText={'Cancel'}
                 cancelAction={() => cancel()}/>
-            <PageModal
-                title={'All Activity'}
-                open={activityModal}
-                setOpen={() => setActivityModal(true)}
-                setClosed={() => setActivityModal(false)}
-                cancelText={'Done'}
-                cancelAction={() => setActivityModal(false)}
-                content={<RecentActivityContent workouts={sortedWorkouts}/>}/>
+            {sortedWorkouts.length > 0
+                ? (<PageModal
+                    title={'All Activity'}
+                    open={activityModal}
+                    setOpen={() => setActivityModal(true)}
+                    setClosed={() => setActivityModal(false)}
+                    cancelText={'Done'}
+                    cancelAction={() => setActivityModal(false)}
+                    content={<RecentActivityContent workouts={sortedWorkouts}/>}/>)
+                : ''}
             <PageItem
                 title="Recent Activity"
-                moreAction={() => setActivityModal(true)}
-                moreLabel="View All"
+                moreAction={sortedWorkouts.length > 0 ? () => setActivityModal(true) : {}}
+                moreLabel={sortedWorkouts.length > 0 ? 'View All' : ''}
                 content={
                     <WorkoutList setTrackActivityModal={setTrackActivityModal} workouts={sortedWorkouts} limit={3}/>
                 }

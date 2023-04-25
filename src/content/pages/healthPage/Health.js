@@ -6,8 +6,8 @@ import Mood from './Mood'
 import Breakfast from './Breakfast'
 
 const Health = ({ setKeyboardVisible, userData, setUserData }) => {
-    const [bfList, setBfList] = useState(userData.healthData.meals['2023-03-28'].breakfast)
     const unit = userData.preferences.unit
+    const [mealList, setMealList] = useState(userData.healthData.meals['2023-03-28'])
 
     return (
         <div>
@@ -15,7 +15,7 @@ const Health = ({ setKeyboardVisible, userData, setUserData }) => {
             <Sleep setKeyboardVisible={setKeyboardVisible} userData={userData} setUserData={setUserData}/>
             <Water setKeyboardVisible={setKeyboardVisible} userData={userData} setUserData={setUserData} unit={unit}/>
             <Mood mood={100}/>
-            <Breakfast setKeyboardVisible={setKeyboardVisible} bfList={bfList} setBfList={setBfList}/>
+            {mealList ? <Breakfast setKeyboardVisible={setKeyboardVisible} mealList={mealList} setMealList={setMealList}/> : '' }
         </div>
     )
 }

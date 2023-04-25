@@ -8,12 +8,18 @@
             "points": "0",
             "lifePoints": "0",
             "preferences": {
-                "unit": "standard"
+                "unit": "metric"
             },
             "healthData": {
-                "water": {},
+                "water": {
+                    "goal": 64,
+                    "amount": {}
+                },
                 "meals": {},
-                "sleep": {},
+                "sleep": {
+                    "goal": 64,
+                    "amount": {}
+                },
                 "mood": {}
             },
             "bodyData": {
@@ -22,6 +28,7 @@
             },
             "activityData": {
                 "steps": {},
+                "calories": {},
                 "activity": {}
             }
         },
