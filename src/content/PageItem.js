@@ -12,7 +12,7 @@ import { Header, Icon, Grid, Segment, Button } from 'semantic-ui-react'
  */
 const PageItem = ({ title, moreLabel, content, moreAction }) => {
     return (
-        <Segment basic>
+        <Segment basic style={{ fontSize: '70%' }}>
             <Grid>
                 <Grid.Column width={10}>
                     <Header size='huge' textAlign='left'>{title}</Header>
@@ -20,15 +20,15 @@ const PageItem = ({ title, moreLabel, content, moreAction }) => {
                 <Grid.Column width={6}>
                     {moreLabel
                         ? (
-                            <Button basic floated='right' size='large' onClick={moreAction}>
-                                {moreLabel}
+                            <Button basic floated='right' size='huge' style={{ paddingLeft: '10px', paddingRight: '10px' }} onClick={moreAction}>
+                                <strong>{moreLabel}</strong>
                                 <Icon name='right arrow' />
                             </Button>
                         )
                         : <></> }
                 </Grid.Column>
             </Grid>
-            <Segment style={{ overflow: 'auto' }}>
+            <Segment style={{ overflow: 'auto', fontSize: '100%' }}>
                 {content}
             </Segment>
         </Segment>

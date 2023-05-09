@@ -48,9 +48,9 @@ const App = () => {
 
     return (
         <>
-            <div id="rooty" style={{ scale: '100%', fontSize: 'xx-large', margin: 'auto', height: '1266px', width: '585px', borderRadius: '100px' }}>
+            <div id="rooty" style={{ scale: '100%', margin: 'auto', height: '1266px', width: '585px', borderRadius: '100px' }}>
                 {/* Screen size based on that of a recent iPhone (2532px X 1170px) */}
-                <Segment className='phoneContainer' style={{ scale: '100%', fontSize: 'x-large', padding: '10px', margin: 'auto', height: '1266px', width: '585px', overflow: 'hidden', border: '3px solid black', borderRadius: '100px' }}>
+                <Segment className='phoneContainer' style={{ scale: '100%', fontSize: 'xx-large', padding: '10px', margin: 'auto', height: '1266px', width: '585px', overflow: 'hidden', border: '3px solid black', borderRadius: '100px' }}>
                     {/* The login page is a modal and is visible on startup or any time "loggedIn" is false. */}
                     <LoginPage setUserData={setUserData} allUsers={allUsers} setAllUsers={setAllUsers} loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>
                     {/* The top iPhone bar consists of the dynamic island, the time, cellular and wifi strength, and battery level */}
@@ -62,7 +62,7 @@ const App = () => {
                         <AppHeading page={headingPage} setPage={setHeadingPage}/>
                     </Container>
                     {/* If one of the heading pages is not visible/clicked, the page router will take effect and display the proper tab */}
-                    <Container textAlign='center' style={{ height: bodyHeight, overflow: ('auto'), padding: '1%' }}>
+                    <Container textAlign='center' style={{ fontSize: '80%', height: bodyHeight, overflow: ('auto'), padding: '1%' }}>
                         { !headingPage
                             ? (
                                 (mainPage === 'Learn' && <Learn/>) ||

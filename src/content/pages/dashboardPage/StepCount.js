@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import moment from 'moment'
-import { Button } from 'semantic-ui-react'
+import { Button, Divider } from 'semantic-ui-react'
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, ResponsiveContainer } from 'recharts'
 import PageItem from '../../PageItem'
 
@@ -12,7 +12,7 @@ const StepCountContent = ({ steps }) => {
 
     timeFrames.forEach((time) => {
         chartButtons.push(
-            <Button size='large' key={time} active={timeFrame === time} onClick={() => setTimeFrame(time)}>
+            <Button style={{ paddingLeft: '0px', paddingRight: '0px' }} size='huge' key={time} active={timeFrame === time} onClick={() => setTimeFrame(time)}>
                 {time}
             </Button>
         )
@@ -100,11 +100,12 @@ const StepCountContent = ({ steps }) => {
             <ResponsiveContainer width="100%" height={200}>
                 <BarChart data={getSteps()} margin={0}>
                     <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis fontSize={15} dataKey="name"/>
-                    <YAxis fontSize={15}/>
+                    <XAxis fontSize={18} dataKey="name"/>
+                    <YAxis fontSize={18}/>
                     <Bar dataKey="steps" fill="#2C698D" />
                 </BarChart>
             </ResponsiveContainer>
+            <Divider/>
             <Button.Group fluid buttons={chartButtons}/>
         </div>
     )

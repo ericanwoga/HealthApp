@@ -27,7 +27,7 @@ const PageModal = ({ title, open, setOpen, setClosed, content, cancelText, submi
             style={{ width: '80%', borderRadius: '10px', marginBottom: '250px' }}
             mountNode={document.getElementById('rooty')}
         >
-            <Header size='large'>
+            <Header size='huge'>
                 {title}
             </Header>
             <Modal.Content scrolling style={{ maxHeight: '650px' }}>
@@ -35,12 +35,12 @@ const PageModal = ({ title, open, setOpen, setClosed, content, cancelText, submi
             </Modal.Content>
             <Modal.Actions>
                 {cancelText && cancelAction &&
-                    <Button color='red' inverted onClick={cancelAction}>
+                    <Button size='huge' color='red' inverted onClick={cancelAction}>
                         <Icon name='remove' /> {cancelText || 'Cancel'}
                     </Button>
                 }
                 {submitText && submitAction &&
-                    <Button color='green' inverted onClick={submitAction}>
+                    <Button size='huge' color='green' inverted onClick={submitAction}>
                         <Icon name='checkmark' /> {submitText || 'Submit'}
                     </Button>
                 }

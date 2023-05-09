@@ -27,7 +27,7 @@ const BodyContent = ({ setKeyboardVisible, unit, setReload, reload, weightData, 
 
     return (
         <>
-            <Header size="small">
+            <Header size="medium">
                 {weightDataCopy[moment().format('YYYY-MM-DD')]
                     ? `You weighed in at ${weightDataCopy[moment().format('YYYY-MM-DD')]} ${unit === 'metric' ? 'kg' : 'lbs.'} today!`
                     : "Please enter today's weight"}
@@ -35,6 +35,7 @@ const BodyContent = ({ setKeyboardVisible, unit, setReload, reload, weightData, 
             <Grid>
                 <Grid.Column width={16} columns={2} divided>
                     <Input
+                        size='large'
                         fluid
                         label={{ basic: true, content: unit === 'metric' ? 'kg' : 'lbs' }}
                         labelPosition="right"
@@ -45,13 +46,13 @@ const BodyContent = ({ setKeyboardVisible, unit, setReload, reload, weightData, 
                     />
                 </Grid.Column>
                 <Grid.Column width={8}>
-                    <Button fluid onClick={() => handleSubmitWeight()}>
+                    <Button size='huge' fluid onClick={() => handleSubmitWeight()}>
                         Submit
                     </Button>
                 </Grid.Column>
                 <Grid.Column width={8}>
-                    <Button fluid onClick={() => handleClearData()}>
-                        {'Undo Today\'s Weight'}
+                    <Button size='huge' fluid onClick={() => handleClearData()}>
+                        {'Undo Last'}
                     </Button>
                 </Grid.Column>
             </Grid>
@@ -71,19 +72,23 @@ const GraphContent = ({ weightData }) => {
         case '1 Week':
             for (i = 6; i >= 0; i--) {
                 currDate = moment().subtract(i, 'days')
-                retVal.push({
-                    name: currDate.format('dddd').slice(0, 3),
-                    weight: weightData[currDate.format('YYYY-MM-DD')] || 0
-                })
+                if (weightData[currDate.format('YYYY-MM-DD')] !== 0) {
+                    retVal.push({
+                        name: currDate.format('dddd').slice(0, 3),
+                        weight: weightData[currDate.format('YYYY-MM-DD')]
+                    })
+                }
             }
             break
         case '1 Month':
             for (i = 31; i >= 0; i--) {
                 currDate = moment().subtract(i, 'days')
-                retVal.push({
-                    name: currDate.format('MM-DD'),
-                    weight: weightData[currDate.format('YYYY-MM-DD')] || 0
-                })
+                if (weightData[currDate.format('YYYY-MM-DD')] !== 0) {
+                    retVal.push({
+                        name: currDate.format('MM-DD'),
+                        weight: weightData[currDate.format('YYYY-MM-DD')]
+                    })
+                }
             }
             break
         case '3 Months':
@@ -94,10 +99,12 @@ const GraphContent = ({ weightData }) => {
                     weekCalories += parseInt(weightData[currDate.format('YYYY-MM-DD')]) || 0
                 }
                 weekCalories /= 7
-                retVal.push({
-                    name: currDate.subtract(7, 'days').format('MM-DD'),
-                    weight: weekCalories || 0
-                })
+                if (weekCalories !== 0) {
+                    retVal.push({
+                        name: currDate.subtract(7, 'days').format('MM-DD'),
+                        weight: weekCalories
+                    })
+                }
             }
             break
         case '6 Months':
@@ -111,10 +118,12 @@ const GraphContent = ({ weightData }) => {
                     daysInMonth += 1
                     currDate.add(1, 'days')
                 }
-                retVal.push({
-                    name: currMonth,
-                    weight: monthCalories / daysInMonth || 0
-                })
+                if (monthCalories / daysInMonth !== 0) {
+                    retVal.push({
+                        name: currMonth,
+                        weight: monthCalories / daysInMonth || 0
+                    })
+                }
             }
             break
         case '1 Year':
@@ -128,10 +137,12 @@ const GraphContent = ({ weightData }) => {
                     daysInMonth += 1
                     currDate.add(1, 'days')
                 }
-                retVal.push({
-                    name: currMonth,
-                    weight: monthCalories / daysInMonth || 0
-                })
+                if (monthCalories / daysInMonth !== 0) {
+                    retVal.push({
+                        name: currMonth,
+                        weight: monthCalories / daysInMonth || 0
+                    })
+                }
             }
             break
         default:
@@ -144,8 +155,8 @@ const GraphContent = ({ weightData }) => {
         <ResponsiveContainer width="100%" height={300}>
             <LineChart data={getWeights()}>
                 <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="name" />
-                <YAxis />
+                <XAxis fontSize={18} dataKey="name" />
+                <YAxis fontSize={18}/>
                 <Line dataKey="weight" fill="#2C698D" />
             </LineChart>
         </ResponsiveContainer>
@@ -179,11 +190,11 @@ const Body = ({ setKeyboardVisible, userData, setUserData }) => {
 
     return (
         <div>
-            <Header>Body</Header>
+            <Header size='large'>Body</Header>
             <PageItem title="Today's Weight" content={<BodyContent setKeyboardVisible={setKeyboardVisible} unit={unit} setReload={setReload} reload={reload} weightData={weightData} setWeightData={setWeightData} />} />
             <PageItem title="Weights" content={<GraphContent setReload={setReload} reload={reload} weightData={weightData} />} />
             {/* <PageItem title="Choose your Goal!" content={<DropdownExampleSelection />} /> */}
-            <PageItem title="Body Measurements" content={<BodyMeasurements setKeyboardVisible={setKeyboardVisible} unit={unit} userData={userData} setUserData={setUserData}/>} />
+            <PageItem title="Measurements" content={<BodyMeasurements setKeyboardVisible={setKeyboardVisible} unit={unit} userData={userData} setUserData={setUserData}/>} />
 
         </div>
     )

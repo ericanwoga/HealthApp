@@ -12,7 +12,7 @@ import { Header, Icon, Grid, Segment, Button } from 'semantic-ui-react'
  */
 const PageItem = ({ title, moreLabel, content, moreAction }) => {
     return (
-        <Segment basic>
+        <Segment basic style={{ fontSize: '70%' }}>
             <Grid>
                 <Grid.Column width={10}>
                     <Header size='huge' textAlign='left'>{title}</Header>
@@ -28,7 +28,7 @@ const PageItem = ({ title, moreLabel, content, moreAction }) => {
                         : <></> }
                 </Grid.Column>
             </Grid>
-            <Segment>
+            <Segment style={{ fontSize: '100%' }}>
                 {content}
             </Segment>
         </Segment>

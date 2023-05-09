@@ -79,7 +79,7 @@ const SleepContent = ({ setKeyboardVisible, userData, setUserData }) => {
     return (
         <Grid>
             <Grid.Column verticalAlign='middle' textalign='center' width={8}>
-                <Progress percent={((sleepAmount / sleepGoal) * 100).toFixed(1)} progress size='large' />
+                <Progress percent={((sleepAmount / sleepGoal) * 100).toFixed(1)} progress size='large' style={{ fontSize: '125%' }} />
             </Grid.Column>
             <Grid.Column verticalAlign='middle' width={6}>
                 <Statistic label size='large'>

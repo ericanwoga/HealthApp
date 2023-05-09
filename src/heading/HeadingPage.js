@@ -22,9 +22,9 @@ const HeadingPage = ({ setUserData, setLoggedIn, userData, page, setIsVisible })
         <Segment textAlign='center' style={{ fontSize: 'x-large', height: '100%', overflow: 'auto' }}>
             <Grid>
                 <Grid.Column width={4}>
-                    <Button basic floated='left' onClick={() => setIsVisible(false)}>
+                    <Button basic floated='left' size='huge' onClick={() => setIsVisible(false)} style={{ paddingLeft: '10px', paddingRight: '10px' }}>
                         <Icon name='left arrow' />
-                    Back
+                        <strong>Back</strong>
                     </Button>
                 </Grid.Column>
                 <Grid.Column width={8} style={{ paddingLeft: '0%', paddingRight: '0%' }}>

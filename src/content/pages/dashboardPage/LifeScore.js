@@ -6,10 +6,12 @@ import PageModal from '../../PageModal'
 const ModalContent = () => {
     return (
         <>
-            <Header>Sorry!</Header>
-            <Header>We are still working on our proprietary way of calculating your Life Score.</Header>
-            <Header>For now, your life score will always be 100!</Header>
-            <Header>Keep up the great work!</Header>
+            <Header>
+                <Header>Sorry!</Header>
+                <Header>We are still working on our proprietary way of calculating your Life Score.</Header>
+                <Header>For now, your life score will always be 100!</Header>
+                <Header>Keep up the great work!</Header>
+            </Header>
         </>
     )
 }
@@ -27,8 +29,8 @@ const LifeScoreContent = ({ score }) => {
                 setClosed={() => setLifeScoreModal(false)}
                 submitAction={() => setLifeScoreModal(false)}
                 submitText={'Done'}/>
-            <Progress value={score} total='100' progress='ratio' size='large' style={{ marginBottom: '2rem' }}/>
-            <Button size='large' fluid onClick={() => setLifeScoreModal(!lifeScoreModal)}>See how to improve this score!</Button>
+            <Progress value={score} total='100' progress='ratio' size='large' style={{ marginBottom: '2rem', fontSize: '125%' }}/>
+            <Button size='huge' fluid onClick={() => setLifeScoreModal(!lifeScoreModal)}>See how to improve this score!</Button>
         </div>
     )
 }

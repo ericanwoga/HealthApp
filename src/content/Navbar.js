@@ -10,8 +10,9 @@ const Navbar = ({ setKeyboardVisible, pages, mainPage, setMainPage, setHeadingPa
                     {pages.map((page) => {
                         return (
                             <Button
+                                style={{ paddingLeft: '2px', paddingRight: '2px' }}
                                 basic
-                                size='huge'
+                                size='massive'
                                 key={page}
                                 onClick={() => {
                                     setMainPage(page)
@@ -19,7 +20,7 @@ const Navbar = ({ setKeyboardVisible, pages, mainPage, setMainPage, setHeadingPa
                                     setKeyboardVisible('off')
                                 }}
                                 active={page === mainPage}
-                            >{page}</Button>
+                            ><strong>{page}</strong></Button>
                         )
                     })}
                 </Button.Group>

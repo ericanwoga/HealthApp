@@ -31,7 +31,7 @@ const PreferenceContent = ({ userData, setUserData }) => {
     return (
         <>
             <Header textAlign='left'>Measurement system and units:</Header>
-            <Button.Group fluid>
+            <Button.Group fluid size='huge'>
                 <Button onClick={changeUnit} active={unit === 'standard'} value="standard">Standard</Button>
                 <Button onClick={changeUnit} active={unit === 'metric'} value="metric">Metric</Button>
             </Button.Group>

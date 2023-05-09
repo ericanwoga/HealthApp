@@ -57,7 +57,7 @@ const ArticleListCard = ({ title, imageSrc, button }) => {
 }
 
 const ArticleButton = ({ onClick }) => {
-    return (<Button fluid onClick={onClick}>Open Article</Button>)
+    return (<Button size='huge' fluid onClick={onClick}>Open Article</Button>)
 }
 
 const Article = ({ name, content }) => {
@@ -352,7 +352,7 @@ function getImage (article) {
 
 const MainArticleView = ({ setActiveModal, articles }) => {
     return (
-        <Grid style={{ width: '150%', height: '100%' }} columns={3}>
+        <Grid style={{ width: '200%', height: '100%' }} columns={3}>
             <Grid.Column>
                 <ArticleScrollCard
                     title={articles[0]}

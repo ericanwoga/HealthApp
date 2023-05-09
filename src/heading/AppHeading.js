@@ -9,16 +9,16 @@ const AppHeading = ({ page, setPage }) => {
 
     return (
         <Grid centered verticalAlign='middle'>
-            <Grid.Column width={4} textAlign='center'>
-                <Icon link circular inverted={page === 'Settings'} name='setting' onClick={() => setHeadingPage('Settings')}/>
-                <Icon link circular inverted={page === 'Help'} name='help' onClick={() => setHeadingPage('Help')}/>
+            <Grid.Column width={3} textAlign='center' style={{ paddingLeft: 0, paddingRight: 0 }}>
+                <Icon link circular size='small' inverted={page === 'Settings'} name='setting' onClick={() => setHeadingPage('Settings')}/>
+                <Icon link circular size='small' inverted={page === 'Help'} name='help' onClick={() => setHeadingPage('Help')}/>
             </Grid.Column>
-            <Grid.Column width={8} textAlign='center'>
-                <Header size='huge' textAlign='center'>Health App</Header>
+            <Grid.Column width={9} textAlign='center' style={{ paddingLeft: 0, paddingRight: 0 }}>
+                <Header size='large' textAlign='center'>Health App</Header>
             </Grid.Column>
-            <Grid.Column width={4} textAlign='center'>
-                <Icon link circular inverted={page === 'Achievements'} name='trophy' onClick={() => setHeadingPage('Achievements')}/>
-                <Icon link circular inverted={page === 'Profile'} name='user' onClick={() => setHeadingPage('Profile')}/>
+            <Grid.Column width={3} textAlign='center' style={{ paddingLeft: 0, paddingRight: 0 }}>
+                <Icon link circular size='small' inverted={page === 'Achievements'} name='trophy' onClick={() => setHeadingPage('Achievements')}/>
+                <Icon link circular size='small' inverted={page === 'Profile'} name='user' onClick={() => setHeadingPage('Profile')}/>
             </Grid.Column>
         </Grid>
     )

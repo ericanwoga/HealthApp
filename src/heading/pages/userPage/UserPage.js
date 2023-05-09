@@ -10,7 +10,7 @@ const UserPageContent = ({ setIsVisible, setLoggedIn, userData }) => {
             <Header textAlign='left'>Name: {userData.name}</Header>
             <Header textAlign='left'>Email: {userData.email}</Header>
             <Divider/>
-            <Button fluid onClick={() => {
+            <Button size='huge' fluid onClick={() => {
                 setLoggedIn(false)
                 setIsVisible(false)
             }}>Log Out</Button>

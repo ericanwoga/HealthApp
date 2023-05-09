@@ -22,7 +22,7 @@ const LoginPageContent = ({ allUsers, setUserData, setLoggedIn }) => {
         userButtons.push(
             <Button
                 fluid
-                size='large'
+                size='huge'
                 active={userKey === key}
                 key={key}
                 onClick={() => (
@@ -35,7 +35,7 @@ const LoginPageContent = ({ allUsers, setUserData, setLoggedIn }) => {
 
     return (
         <>
-            <Header size='medium'>Click on one of the users below to log in as them!</Header>
+            <Header size='large'>Click on one of the users below to log in as them!</Header>
             <Button.Group style={{ width: '100%' }} vertical buttons={userButtons}/>
         </>
     )

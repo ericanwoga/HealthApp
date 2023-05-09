@@ -7,7 +7,7 @@ import PaginatedItems from '../../PaginatedItems'
 
 const WorkoutCard = ({ date, workout }) => {
     return (
-        <Card as="h5" fluid>
+        <Card as="h4" fluid>
             <Card.Content>
                 <Card.Header textAlign='left'>{workout.name}</Card.Header>
                 <Card.Meta textAlign='left'>{moment(date).calendar()}</Card.Meta>
@@ -20,14 +20,14 @@ const WorkoutCard = ({ date, workout }) => {
 const WorkoutList = ({ workouts, setTrackActivityModal }) => {
     return (
         <>
-            <Button fluid size='large' onClick={() => {
+            <Button fluid size='huge' onClick={() => {
                 setTrackActivityModal(true)
             }}>
                 Track Activity
             </Button>
             {workouts.length > 0
                 ? <PaginatedItems itemList={workouts} limit={3}/>
-                : <Header>{'Track your first workout and you\'ll see it here!'}</Header>
+                : <Header size='huge'>{'Track your first workout and you\'ll see it here!'}</Header>
             }
         </>
     )
@@ -36,15 +36,17 @@ const WorkoutList = ({ workouts, setTrackActivityModal }) => {
 const TrackActivityModal = ({ setKeyboardVisible, setName, setCalories }) => {
     return (
         <>
-            <Header>What kind of activity would you like to track?</Header>
+            <Header size='large'>What kind of activity would you like to track?</Header>
             <Input
+                size='large'
                 fluid
                 labelPosition='right'
                 placeholder='Activity Name'
                 onClick={() => setKeyboardVisible('onModal')}
                 onChange={(e, result) => setName(result.value)}/>
-            <Header>How many calories did you burn?</Header>
+            <Header size='large'>How many calories did you burn?</Header>
             <Input
+                size='large'
                 fluid
                 label={{ basic: true, content: 'calories' }}
                 labelPosition='right'
