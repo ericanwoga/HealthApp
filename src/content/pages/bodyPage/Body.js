@@ -3,6 +3,10 @@ import { Header, Input, Button, Divider } from 'semantic-ui-react'
 import PageItem from '../../PageItem'
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, ResponsiveContainer } from 'recharts'
 import BodyMeasurements from './BodyMeasurements'
+import PageModal from '../../PageModal'
+import DateSelect from '../../DateSelect'
+import DatedItems from '../../DatedItems'
+import ViewAllCard from '../../ViewAllCard'
 import moment from 'moment'
 
 const BodyContent = ({ setKeyboardVisible, unit, setReload, reload, weightData, setWeightData }) => {
@@ -172,40 +176,88 @@ const Body = ({ setKeyboardVisible, userData, setUserData }) => {
         setUserData(userData)
     }, [weightData, reload])
 
+    const [date, setDate] = useState(new Date())
+    const [openModal, setOpenModal] = useState(false)
+    const [openBodyModal, setOpenBodyModal] = useState(false)
+
+    const items = {}
+    const itemList = []
+    Object.keys(items).map((key) => (
+        itemList.push(
+            <ViewAllCard key={key} date={key} name={items[key].name}/>
+        )
+    ))
+
+    const bodyItems = {}
+    const bodyItemList = []
+    Object.keys(bodyItems).map((key) => (
+        itemList.push(
+            <ViewAllCard key={key} date={key} name={bodyItems[key].name}/>
+        )
+    ))
+
     return (
         <div>
             <Header size='large'>Body</Header>
-            <PageItem title="Weight" content={<>
-                <BodyContent setKeyboardVisible={setKeyboardVisible} unit={unit} setReload={setReload} reload={reload} weightData={weightData} setWeightData={setWeightData} />
-                <Divider/>
-                <GraphContent weightData={weightData} />
-            </>} />
+            <PageItem title="Weight"
+                moreLabel={'View All'}
+                moreAction={() => setOpenBodyModal(true)}
+                content={<>
+                    <BodyContent setKeyboardVisible={setKeyboardVisible} unit={unit} setReload={setReload} reload={reload} weightData={weightData} setWeightData={setWeightData} />
+                    <Divider/>
+                    <GraphContent weightData={weightData} />
+                </>} />
+            <PageModal
+                title={'Weight History'}
+                open={openBodyModal}
+                setOpen={() => setOpenBodyModal(true)}
+                setClosed={() => setOpenBodyModal(false)}
+                cancelText={'Done'}
+                cancelAction={() => setOpenBodyModal(false)}
+                content={<>
+                    <DateSelect date={date} setDate={setDate}/>
+                    <DatedItems date={date} itemList={bodyItemList}/>
+                </>}/>
             {/* <PageItem title="Choose your Goal!" content={<DropdownExampleSelection />} /> */}
-            <PageItem title="Measurements" content={<>
-                <BodyMeasurements setKeyboardVisible={setKeyboardVisible} unit={unit} userData={userData} setUserData={setUserData}/>
-                <Divider/>
-                <GraphContent weightData={weightData}/>
-                <Button.Group size='huge' fluid>
-                    <Button style={{ paddingLeft: '0px', paddingRight: '0px' }} size='huge'>
+            <PageItem title="Measurements"
+                moreLabel={'View All'}
+                moreAction={() => setOpenModal(true)}
+                content={<>
+                    <BodyMeasurements setKeyboardVisible={setKeyboardVisible} unit={unit} userData={userData} setUserData={setUserData}/>
+                    <Divider/>
+                    <GraphContent weightData={weightData}/>
+                    <Button.Group size='huge' fluid>
+                        <Button style={{ paddingLeft: '0px', paddingRight: '0px' }} size='huge'>
                         Neck
-                    </Button>
-                    <Button style={{ paddingLeft: '0px', paddingRight: '0px' }} size='huge'>
+                        </Button>
+                        <Button style={{ paddingLeft: '0px', paddingRight: '0px' }} size='huge'>
                         Waist
-                    </Button>
-                    <Button style={{ paddingLeft: '0px', paddingRight: '0px' }} size='huge'>
+                        </Button>
+                        <Button style={{ paddingLeft: '0px', paddingRight: '0px' }} size='huge'>
                         Biceps
-                    </Button>
-                    <Button style={{ paddingLeft: '0px', paddingRight: '0px' }} size='huge'>
+                        </Button>
+                        <Button style={{ paddingLeft: '0px', paddingRight: '0px' }} size='huge'>
                         Thighs
-                    </Button>
-                    <Button style={{ paddingLeft: '0px', paddingRight: '0px' }} size='huge'>
+                        </Button>
+                        <Button style={{ paddingLeft: '0px', paddingRight: '0px' }} size='huge'>
                         Calves
-                    </Button>
-                    <Button style={{ paddingLeft: '0px', paddingRight: '0px' }} size='huge'>
+                        </Button>
+                        <Button style={{ paddingLeft: '0px', paddingRight: '0px' }} size='huge'>
                         Chest
-                    </Button>
-                </Button.Group>
-            </>} />
+                        </Button>
+                    </Button.Group>
+                </>} />
+            <PageModal
+                title={'Body Measurement History'}
+                open={openModal}
+                setOpen={() => setOpenModal(true)}
+                setClosed={() => setOpenModal(false)}
+                cancelText={'Done'}
+                cancelAction={() => setOpenModal(false)}
+                content={<>
+                    <DateSelect date={date} setDate={setDate}/>
+                    <DatedItems date={date} itemList={itemList}/>
+                </>}/>
 
         </div>
     )

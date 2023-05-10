@@ -3,14 +3,16 @@ import { Header, Card, Button, Input } from 'semantic-ui-react'
 import moment from 'moment'
 import PageItem from '../../PageItem'
 import PageModal from '../../PageModal'
+import DatedItems from '../../DatedItems'
 import PaginatedItems from '../../PaginatedItems'
+import DateSelect from '../../DateSelect'
 
 const WorkoutCard = ({ date, workout }) => {
     return (
         <Card as="h4" fluid>
             <Card.Content>
                 <Card.Header textAlign='left'>{workout.name}</Card.Header>
-                <Card.Meta textAlign='left'>{moment(date).calendar()}</Card.Meta>
+                <Card.Meta textAlign='left'>{moment(date).format('MM/DD/YYYY h:mm a')}</Card.Meta>
                 <Card.Description textAlign='left'>Calories Burned: {workout.calories}</Card.Description>
             </Card.Content>
         </Card>
@@ -58,9 +60,12 @@ const TrackActivityModal = ({ setKeyboardVisible, setName, setCalories }) => {
 }
 
 const RecentActivityContent = ({ workouts }) => {
+    const [date, setDate] = useState(new Date())
+
     return (
         <>
-            <PaginatedItems itemList={workouts} itemsPerPage={4}/>
+            <DateSelect date={date} setDate={setDate}/>
+            <DatedItems date={date} itemList={workouts}/>
         </>
 
     )

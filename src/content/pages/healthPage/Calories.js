@@ -2,6 +2,9 @@ import React, { useState } from 'react'
 import { Statistic, Grid, Progress, Button, Header, Input, Label } from 'semantic-ui-react'
 import PageItem from '../../PageItem'
 import PageModal from '../../PageModal'
+import DateSelect from '../../DateSelect'
+import DatedItems from '../../DatedItems'
+import ViewAllCard from '../../ViewAllCard'
 import moment from 'moment'
 import './Health.css'
 
@@ -108,8 +111,32 @@ const WaterContent = ({ setKeyboardVisible, userData, setUserData }) => {
 }
 
 const Calories = ({ setKeyboardVisible, userData, setUserData }) => {
+    const [date, setDate] = useState(new Date())
+    const [openModal, setOpenModal] = useState(false)
+
+    const items = {}
+    const itemList = []
+    Object.keys(items).map((key) => (
+        itemList.push(
+            <ViewAllCard key={key} date={key} name={items[key].name}/>
+        )
+    ))
+
     return (
-        <PageItem title="Calorie Intake" content={<WaterContent setKeyboardVisible={setKeyboardVisible} userData={userData} setUserData={setUserData}/>}/>
+        <>
+            <PageItem title="Calorie Intake" moreLabel={'View All'} moreAction={() => setOpenModal(true)} content={<WaterContent setKeyboardVisible={setKeyboardVisible} userData={userData} setUserData={setUserData}/>}/>
+            <PageModal
+                title={'Calorie Intake History'}
+                open={openModal}
+                setOpen={() => setOpenModal(true)}
+                setClosed={() => setOpenModal(false)}
+                cancelText={'Done'}
+                cancelAction={() => setOpenModal(false)}
+                content={<>
+                    <DateSelect date={date} setDate={setDate}/>
+                    <DatedItems date={date} itemList={itemList}/>
+                </>}/>
+        </>
     )
 }
 

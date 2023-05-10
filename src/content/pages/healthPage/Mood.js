@@ -3,6 +3,10 @@ import { Button, Header, Divider } from 'semantic-ui-react'
 import moment from 'moment'
 import PageItem from '../../PageItem'
 import './Health.css'
+import PageModal from '../../PageModal'
+import DateSelect from '../../DateSelect'
+import DatedItems from '../../DatedItems'
+import ViewAllCard from '../../ViewAllCard'
 
 const MoodContent = ({ userData, setUserData }) => {
     const [mood, setMood] = useState(['happy'])
@@ -40,12 +44,32 @@ const MoodContent = ({ userData, setUserData }) => {
 }
 
 const Mood = ({ userData, setUserData }) => {
-    const openMoodModal = () => {
-        console.log('test')
-    }
+    const [date, setDate] = useState(new Date())
+    const [openModal, setOpenModal] = useState(false)
+
+    const items = {}
+    const itemList = []
+    Object.keys(items).map((key) => (
+        itemList.push(
+            <ViewAllCard key={key} date={key} name={items[key].name}/>
+        )
+    ))
 
     return (
-        <PageItem title="Mood" moreLabel={'View All'} moreAction={openMoodModal} content={<MoodContent userData={userData} setUserData={setUserData}/>}/>
+        <>
+            <PageItem title="Mood" moreLabel={'View All'} moreAction={() => setOpenModal(true)} content={<MoodContent userData={userData} setUserData={setUserData}/>}/>
+            <PageModal
+                title={'Mood History'}
+                open={openModal}
+                setOpen={() => setOpenModal(true)}
+                setClosed={() => setOpenModal(false)}
+                cancelText={'Done'}
+                cancelAction={() => setOpenModal(false)}
+                content={<>
+                    <DateSelect date={date} setDate={setDate}/>
+                    <DatedItems date={date} itemList={itemList}/>
+                </>}/>
+        </>
     )
 }
 
