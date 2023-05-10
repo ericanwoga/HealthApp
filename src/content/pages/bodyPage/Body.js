@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Header, Input, Button, Grid } from 'semantic-ui-react'
+import { Header, Input, Button, Divider } from 'semantic-ui-react'
 import PageItem from '../../PageItem'
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, ResponsiveContainer } from 'recharts'
 import BodyMeasurements from './BodyMeasurements'
@@ -18,44 +18,28 @@ const BodyContent = ({ setKeyboardVisible, unit, setReload, reload, weightData, 
         setReload(!reload)
     }
 
-    const handleClearData = () => {
-        delete weightDataCopy[moment().format('YYYY-MM-DD')]
-        setKeyboardVisible('off')
-        setWeightData(weightDataCopy)
-        setReload(!reload)
-    }
-
     return (
         <>
-            <Header size="medium">
+            <Header textAlign='left'>
                 {weightDataCopy[moment().format('YYYY-MM-DD')]
-                    ? `You weighed in at ${weightDataCopy[moment().format('YYYY-MM-DD')]} ${unit === 'metric' ? 'kg' : 'lbs.'} today!`
-                    : "Please enter today's weight"}
+                    ? moment().format('LT') + ' you weighed in at ' + weightDataCopy[moment().format('YYYY-MM-DD')]
+                    : 'You have not yet tracked your weight!'}
             </Header>
-            <Grid>
-                <Grid.Column width={16} columns={2} divided>
-                    <Input
-                        size='large'
-                        fluid
-                        label={{ basic: true, content: unit === 'metric' ? 'kg' : 'lbs' }}
-                        labelPosition="right"
-                        placeholder="Enter weight..."
-                        onChange={(e, result) => setWeight(result.value)}
-                        onClick={() => setKeyboardVisible('onNoModal')}
-                        value={weight}
-                    />
-                </Grid.Column>
-                <Grid.Column width={8}>
-                    <Button size='huge' fluid onClick={() => handleSubmitWeight()}>
-                        Submit
-                    </Button>
-                </Grid.Column>
-                <Grid.Column width={8}>
-                    <Button size='huge' fluid onClick={() => handleClearData()}>
-                        {'Undo Last'}
-                    </Button>
-                </Grid.Column>
-            </Grid>
+            <Header textAlign='left'>Track a change in weight:</Header>
+            <Input
+                size='large'
+                fluid
+                label={{ basic: true, content: unit === 'metric' ? 'kg' : 'lbs' }}
+                labelPosition="right"
+                placeholder="Enter weight..."
+                onChange={(e, result) => setWeight(result.value)}
+                onClick={() => setKeyboardVisible('onNoModal')}
+                value={weight}
+            />
+            <Divider/>
+            <Button size='huge' fluid onClick={() => handleSubmitWeight()}>
+                Save
+            </Button>
         </>
     )
 }
@@ -191,10 +175,37 @@ const Body = ({ setKeyboardVisible, userData, setUserData }) => {
     return (
         <div>
             <Header size='large'>Body</Header>
-            <PageItem title="Today's Weight" content={<BodyContent setKeyboardVisible={setKeyboardVisible} unit={unit} setReload={setReload} reload={reload} weightData={weightData} setWeightData={setWeightData} />} />
-            <PageItem title="Weights" content={<GraphContent setReload={setReload} reload={reload} weightData={weightData} />} />
+            <PageItem title="Weight" content={<>
+                <BodyContent setKeyboardVisible={setKeyboardVisible} unit={unit} setReload={setReload} reload={reload} weightData={weightData} setWeightData={setWeightData} />
+                <Divider/>
+                <GraphContent weightData={weightData} />
+            </>} />
             {/* <PageItem title="Choose your Goal!" content={<DropdownExampleSelection />} /> */}
-            <PageItem title="Measurements" content={<BodyMeasurements setKeyboardVisible={setKeyboardVisible} unit={unit} userData={userData} setUserData={setUserData}/>} />
+            <PageItem title="Measurements" content={<>
+                <BodyMeasurements setKeyboardVisible={setKeyboardVisible} unit={unit} userData={userData} setUserData={setUserData}/>
+                <Divider/>
+                <GraphContent weightData={weightData}/>
+                <Button.Group size='huge' fluid>
+                    <Button style={{ paddingLeft: '0px', paddingRight: '0px' }} size='huge'>
+                        Neck
+                    </Button>
+                    <Button style={{ paddingLeft: '0px', paddingRight: '0px' }} size='huge'>
+                        Waist
+                    </Button>
+                    <Button style={{ paddingLeft: '0px', paddingRight: '0px' }} size='huge'>
+                        Biceps
+                    </Button>
+                    <Button style={{ paddingLeft: '0px', paddingRight: '0px' }} size='huge'>
+                        Thighs
+                    </Button>
+                    <Button style={{ paddingLeft: '0px', paddingRight: '0px' }} size='huge'>
+                        Calves
+                    </Button>
+                    <Button style={{ paddingLeft: '0px', paddingRight: '0px' }} size='huge'>
+                        Chest
+                    </Button>
+                </Button.Group>
+            </>} />
 
         </div>
     )

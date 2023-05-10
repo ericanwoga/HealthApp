@@ -55,7 +55,7 @@ const TrackMealModal = ({ setKeyboardVisible, setName, setCalories }) => {
 const TrackSleepModal = ({ setKeyboardVisible, setHours }) => {
     return (
         <>
-            <Header size='large'>How many hours did you sleep?</Header>
+            <Header size='large'>How many hours of sleep would you like to add for today?</Header>
             <Input
                 size='large'
                 fluid
@@ -71,29 +71,39 @@ const TrackSleepModal = ({ setKeyboardVisible, setHours }) => {
 const TrackWaterModal = ({ unit, setKeyboardVisible, setWater }) => {
     return (
         <>
-            <Header size='large'>How much water would you like to track?</Header>
+            <Header size='large'>How much water would you like to add?</Header>
             <Input
                 size='large'
                 fluid
                 label={{ basic: true, content: unit === 'standard' ? 'ounces' : 'liters' }}
                 labelPosition='right'
-                placeholder='Enter water intake'
+                placeholder='Enter water amount'
                 onClick={() => setKeyboardVisible('onModal')}
                 onChange={(e, result) => setWater(result.value)}/>
         </>
     )
 }
 
-const TrackMoodModal = ({ mood, setMood }) => {
+const TrackMoodModal = ({ mood, setFeeling, feeling }) => {
+    const [forceReload, setForceReload] = useState(false)
+    const changeMood = (e) => {
+        const val = e.target.value
+        setFeeling(val)
+        setForceReload(!forceReload)
+    }
+
     return (
         <>
-            <Header size='large'>How are you feeling today?</Header>
-            <Button.Group as='Grid' textAlign='center' vertical fluid size="huge">
-                <Button onClick={() => setMood('happy')} active={mood === 'happy'} value="happy">Happy</Button>
-                <Button onClick={() => setMood('okay')} active={mood === 'okay'} value="okay">Okay</Button>
-                <Button onClick={() => setMood('sad')} active={mood === 'sad'} value="sad">Sad</Button>
-                <Button onClick={() => setMood('anxious')} active={mood === 'anxious'} value="anxious">Anxious</Button>
-                <Button onClick={() => setMood('angry')} active={mood === 'angry'} value="angry">Angry</Button>
+            <Header textAlign='left'>
+                {'At ' + moment().format('LT') + ' you were feeling ' + mood}
+            </Header>
+            <Header textAlign='left'>How are you feeling now?</Header>
+            <Button.Group fluid textalign='center' size="huge">
+                <Button style={{ paddingLeft: '0px', paddingRight: '0px' }} onClick={changeMood} active={feeling === 'happy'} value="happy">Happy</Button>
+                <Button style={{ paddingLeft: '0px', paddingRight: '0px' }} onClick={changeMood} active={feeling === 'okay'} value="okay">Okay</Button>
+                <Button style={{ paddingLeft: '0px', paddingRight: '0px' }} onClick={changeMood} active={feeling === 'sad'} value="sad">Sad</Button>
+                <Button style={{ paddingLeft: '0px', paddingRight: '0px' }} onClick={changeMood} active={feeling === 'anxious'} value="anxious">Anxious</Button>
+                <Button style={{ paddingLeft: '0px', paddingRight: '0px' }} onClick={changeMood} active={feeling === 'angry'} value="angry">Angry</Button>
             </Button.Group>
         </>
     )
@@ -195,7 +205,8 @@ const QuickActionsContent = ({ setKeyboardVisible, actionItems, userData, setUse
     const [calories, setCalories] = useState('')
     const [hours, setHours] = useState('')
     const [water, setWater] = useState('')
-    const [mood, setMood] = useState('')
+    const [feeling, setFeeling] = useState('')
+    const [mood, setMood] = useState('happy')
     const [steps, setSteps] = useState('')
 
     const unit = userData.preferences.unit
@@ -207,7 +218,7 @@ const QuickActionsContent = ({ setKeyboardVisible, actionItems, userData, setUse
         if (name !== '' && calories !== '') {
             updatedUserData.activityData.activity[now.toDate()] = { name, calories: parseInt(calories) }
             setUserData(updatedUserData)
-            cancel()
+            setModalOpen('Confirmation')
         }
     }
 
@@ -215,7 +226,7 @@ const QuickActionsContent = ({ setKeyboardVisible, actionItems, userData, setUse
         if (name !== '' && calories !== '') {
             updatedUserData.healthData.meals[now.toDate()] = { name, calories: parseInt(calories) }
             setUserData(updatedUserData)
-            cancel()
+            setModalOpen('Confirmation')
         }
     }
 
@@ -223,7 +234,7 @@ const QuickActionsContent = ({ setKeyboardVisible, actionItems, userData, setUse
         if (hours !== '') {
             updatedUserData.healthData.sleep.amount[now.format('MM-DD-YYYY')] = parseInt(hours)
             setUserData(updatedUserData)
-            cancel()
+            setModalOpen('Confirmation')
         }
     }
 
@@ -233,15 +244,18 @@ const QuickActionsContent = ({ setKeyboardVisible, actionItems, userData, setUse
                 ? updatedUserData.healthData.water.amount[now.format('MM-DD-YYYY')] += parseInt(water)
                 : updatedUserData.healthData.water.amount[now.format('MM-DD-YYYY')] = parseInt(water)
             setUserData(updatedUserData)
-            cancel()
+            setModalOpen('Confirmation')
         }
     }
 
     const submitMood = () => {
-        if (mood !== '') {
+        if (feeling !== '') {
+            setMood(feeling)
+            /*
             updatedUserData.healthData.mood[now.format('MM-DD-YYYY')] = mood
             setUserData(updatedUserData)
-            cancel()
+            */
+            setModalOpen('Confirmation')
         }
     }
 
@@ -251,7 +265,7 @@ const QuickActionsContent = ({ setKeyboardVisible, actionItems, userData, setUse
                 ? updatedUserData.activityData.steps[now.format('YYYY-MM-DD')] += parseInt(steps)
                 : updatedUserData.activityData.steps[now.format('YYYY-MM-DD')] = parseInt(steps)
             setUserData(updatedUserData)
-            cancel()
+            setModalOpen('Confirmation')
         }
     }
 
@@ -262,8 +276,18 @@ const QuickActionsContent = ({ setKeyboardVisible, actionItems, userData, setUse
         setCalories('')
         setHours('')
         setWater('')
-        setMood('')
+        setFeeling('')
+        setMood('happy')
         setSteps('')
+    }
+
+    const ConfirmationModal = () => {
+        return (
+            <>
+                <Header size='large'>Informaton Tracked!</Header>
+                <Header size='large'>{"Head to the 'Health' Page to see your data."}</Header>
+            </>
+        )
     }
 
     useEffect(() => {
@@ -274,7 +298,7 @@ const QuickActionsContent = ({ setKeyboardVisible, actionItems, userData, setUse
                 title={modalOpen}
                 open={true}
                 setClosed={() => cancel()}
-                submitText={'Submit'}
+                submitText={'Save'}
                 submitAction={() => submitActivity()}
                 cancelText={'Cancel'}
                 cancelAction={() => cancel()}/>) ||
@@ -284,7 +308,7 @@ const QuickActionsContent = ({ setKeyboardVisible, actionItems, userData, setUse
                 title={modalOpen}
                 open={true}
                 setClosed={() => cancel()}
-                submitText={'Submit'}
+                submitText={'Save'}
                 submitAction={() => submitMeal()}
                 cancelText={'Cancel'}
                 cancelAction={() => cancel()}/>) ||
@@ -294,7 +318,7 @@ const QuickActionsContent = ({ setKeyboardVisible, actionItems, userData, setUse
                 title={modalOpen}
                 open={true}
                 setClosed={() => cancel()}
-                submitText={'Submit'}
+                submitText={'Save'}
                 submitAction={() => submitSleep()}
                 cancelText={'Cancel'}
                 cancelAction={() => cancel()}/>) ||
@@ -304,17 +328,17 @@ const QuickActionsContent = ({ setKeyboardVisible, actionItems, userData, setUse
                 title={modalOpen}
                 open={true}
                 setClosed={() => cancel()}
-                submitText={'Submit'}
+                submitText={'Save'}
                 submitAction={() => submitWater()}
                 cancelText={'Cancel'}
                 cancelAction={() => cancel()}/>) ||
             (modalOpen === 'Track Mood' &&
             <PageModal
-                content={<TrackMoodModal mood={mood} setKeyboardVisible={setKeyboardVisible} setMood={setMood}/>}
+                content={<TrackMoodModal mood={mood} setKeyboardVisible={setKeyboardVisible} feeling={feeling} setFeeling={setFeeling}/>}
                 title={modalOpen}
                 open={true}
                 setClosed={() => cancel()}
-                submitText={'Submit'}
+                submitText={'Save'}
                 submitAction={() => submitMood()}
                 cancelText={'Cancel'}
                 cancelAction={() => cancel()}/>) ||
@@ -324,13 +348,21 @@ const QuickActionsContent = ({ setKeyboardVisible, actionItems, userData, setUse
                 title={modalOpen}
                 open={true}
                 setClosed={() => cancel()}
-                submitText={'Submit'}
+                submitText={'Save'}
                 submitAction={() => submitSteps()}
                 cancelText={'Cancel'}
                 cancelAction={() => cancel()}/>) ||
+            (modalOpen === 'Confirmation' &&
+                <PageModal
+                    content={<ConfirmationModal/>}
+                    title={modalOpen}
+                    open={true}
+                    submitText={'Done'}
+                    submitAction={() => cancel()}
+                    cancelAction={() => cancel()}/>) ||
             ''
         )
-    }, [modalOpen, name, calories, hours, water, mood, steps])
+    }, [modalOpen, name, calories, hours, water, mood, steps, feeling])
 
     return (
         <>

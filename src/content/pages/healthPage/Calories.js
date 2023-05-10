@@ -5,7 +5,7 @@ import PageModal from '../../PageModal'
 import moment from 'moment'
 import './Health.css'
 
-const ModalContent = ({ setKeyboardVisible, unit, water, setWaterAmount, waterGoal, setWaterGoal }) => {
+const ModalContent = ({ setKeyboardVisible, water, setWaterAmount, waterGoal, setWaterGoal }) => {
     const [waterAmountError, setWaterAmountError] = useState(false)
     const [waterGoalError, setWaterGoalError] = useState(false)
 
@@ -31,33 +31,33 @@ const ModalContent = ({ setKeyboardVisible, unit, water, setWaterAmount, waterGo
 
     return (
         <>
-            <Header>How much water would you like to add for today?</Header>
-            <Input fluid label={{ basic: true, content: unit === 'standard' ? ' ounces' : 'liters' }}
+            <Header>How many calories would you like to add for today?</Header>
+            <Input fluid label={{ basic: true, content: 'calories' }}
                 labelPosition='right'
                 value={water}
                 onChange={(e, result) => changeWaterAmount(result.value)}
                 onClick={() => setKeyboardVisible('onModal')}
                 error={waterAmountError}
-                placeholder='Enter water intake'/>
+                placeholder='Enter calories consumed'/>
             {waterAmountError ? <Label basic color='red' pointing prompt >Must be a number greater than or equal to 0</Label> : null}
-            <Header>What is your water goal for today?</Header>
-            <Input fluid label={{ basic: true, content: unit === 'standard' ? ' ounces' : 'liters' }}
+            <Header>What is your calorie goal for today?</Header>
+            <Input fluid label={{ basic: true, content: 'calories' }}
                 labelPosition='right'
                 value={waterGoal}
                 onChange={(e, result) => changeWaterGoal(result.value)}
                 onClick={() => setKeyboardVisible('onModal')}
                 error={waterGoalError}
-                placeholder='Enter water intake goal'/>
+                placeholder='Enter calorie goal'/>
             {waterGoalError ? <Label basic color='red' pointing prompt >Must be a number greater than or equal to 0</Label> : null}
         </>
     )
 }
 
-const WaterContent = ({ setKeyboardVisible, unit, userData, setUserData }) => {
+const WaterContent = ({ setKeyboardVisible, userData, setUserData }) => {
     const today = moment().format('MM-DD-YYYY')
 
-    const [waterAmount, setWaterAmount] = useState(userData.healthData.water.amount[today] || 0)
-    const [waterGoal, setWaterGoal] = useState(userData.healthData.water.goal)
+    const [waterAmount, setWaterAmount] = useState(100)
+    const [waterGoal, setWaterGoal] = useState(2000)
     const [showWaterPopup, setShowWaterPopup] = useState(false)
 
     const updatedUserData = userData
@@ -85,21 +85,21 @@ const WaterContent = ({ setKeyboardVisible, unit, userData, setUserData }) => {
                 <Grid.Column verticalAlign='middle' width={8} style={{ marginTop: '0px', paddingBottom: '30px' }}>
                     <Statistic label size='small'>
                         <Statistic.Value>{waterAmount}/{waterGoal}</Statistic.Value>
-                        <Statistic.Label>{unit === 'standard' ? ' ounces' : 'liters'}</Statistic.Label>
+                        <Statistic.Label>{'calories'}</Statistic.Label>
                     </Statistic>
                 </Grid.Column>
             </Grid>
             <Button fluid size='huge' onClick={() => setShowWaterPopup(true)}>
-                Track Water
+                Track Calories
             </Button>
             <PageModal
-                title={'Water Tracker'}
+                title={'Calorie Intake'}
                 open={showWaterPopup}
                 setOpen={() => setShowWaterPopup(true)}
                 setClosed={() => cancel()}
                 submitAction={() => submit()}
                 cancelAction={() => cancel()}
-                content={<ModalContent setKeyboardVisible={setKeyboardVisible} unit={unit} waterAmount={waterAmount} setWaterAmount={setWaterAmount} waterGoal={waterGoal} setWaterGoal={setWaterGoal}/>}
+                content={<ModalContent setKeyboardVisible={setKeyboardVisible} waterAmount={waterAmount} setWaterAmount={setWaterAmount} waterGoal={waterGoal} setWaterGoal={setWaterGoal}/>}
                 submitText={'Save'}
                 cancelText={'Cancel'}
             />
@@ -107,10 +107,10 @@ const WaterContent = ({ setKeyboardVisible, unit, userData, setUserData }) => {
     )
 }
 
-const Water = ({ setKeyboardVisible, unit, userData, setUserData }) => {
+const Calories = ({ setKeyboardVisible, userData, setUserData }) => {
     return (
-        <PageItem title="Water Intake" content={<WaterContent setKeyboardVisible={setKeyboardVisible} unit={unit} userData={userData} setUserData={setUserData}/>}/>
+        <PageItem title="Calorie Intake" content={<WaterContent setKeyboardVisible={setKeyboardVisible} userData={userData} setUserData={setUserData}/>}/>
     )
 }
 
-export default Water
+export default Calories

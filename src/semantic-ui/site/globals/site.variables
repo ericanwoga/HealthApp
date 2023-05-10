@@ -4,7 +4,9 @@
 
 /*-- Colors --*/
 
-@cerulean : #2C698D;
-@powder : #BAE8E8';
-@mint : #CFFFD7;
-@midnight : #272643;
+@cerulean : '#2C698D';
+@powder : '#BAE8E8';
+@mint : '#CFFFD7';
+@midnight : '#272643';
+@red : #FFD2D2;
+@green: #BAE8E8;

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Statistic, Grid, Progress, Icon, Header, Input, Label } from 'semantic-ui-react'
+import { Statistic, Grid, Progress, Button, Header, Input, Label } from 'semantic-ui-react'
 import PageItem from '../../PageItem'
 import PageModal from '../../PageModal'
 import moment from 'moment'
@@ -31,7 +31,7 @@ const ModalContent = ({ setKeyboardVisible, sleepAmount, sleepGoal, setSleepAmou
 
     return (
         <>
-            <Header>How many hours did you sleep today?</Header>
+            <Header>How many hours of sleep would you like to add for today?</Header>
             <Input fluid label={{ basic: true, content: 'hours' }}
                 labelPosition='right'
                 value={sleepAmount}
@@ -77,31 +77,33 @@ const SleepContent = ({ setKeyboardVisible, userData, setUserData }) => {
     }
 
     return (
-        <Grid>
-            <Grid.Column verticalAlign='middle' textalign='center' width={8}>
-                <Progress percent={((sleepAmount / sleepGoal) * 100).toFixed(1)} progress size='large' style={{ fontSize: '125%' }} />
-            </Grid.Column>
-            <Grid.Column verticalAlign='middle' width={6}>
-                <Statistic label size='large'>
-                    <Statistic.Value>{sleepAmount}/{sleepGoal}</Statistic.Value>
-                    <Statistic.Label>hours</Statistic.Label>
-                </Statistic>
-            </Grid.Column>
-            <Grid.Column verticalAlign='middle' width={1}>
-                <Icon onClick={() => setShowSleepPopup(true)} link circular name='plus' className='box-plus-sign' />
-                <PageModal
-                    title={'Sleep Tracker'}
-                    open={showSleepPopup}
-                    setOpen={() => setShowSleepPopup(true)}
-                    setClosed={() => cancel()}
-                    submitAction={() => submit()}
-                    cancelAction={() => cancel()}
-                    content={<ModalContent setKeyboardVisible={setKeyboardVisible} setSleepAmount={setSleepAmount} sleepAmount={sleepAmount} sleepGoal={sleepGoal} setSleepGoal={setSleepGoal}/>}
-                    submitText={'Submit'}
-                    cancelText={'Cancel'}
-                />
-            </Grid.Column>
-        </Grid>
+        <>
+            <Grid>
+                <Grid.Column verticalAlign='middle' textalign='center' width={8} style={{ marginTop: '0px', paddingBottom: '0px' }}>
+                    <Progress percent={((sleepAmount / sleepGoal) * 100).toFixed(1)} progress size='large' style={{ fontSize: '125%' }} />
+                </Grid.Column>
+                <Grid.Column verticalAlign='middle' width={8} style={{ marginTop: '0px', paddingBottom: '30px' }}>
+                    <Statistic label size='small'>
+                        <Statistic.Value>{sleepAmount}/{sleepGoal}</Statistic.Value>
+                        <Statistic.Label>hours</Statistic.Label>
+                    </Statistic>
+                </Grid.Column>
+            </Grid>
+            <Button fluid size='huge' onClick={() => setShowSleepPopup(true)}>
+                Track Sleep
+            </Button>
+            <PageModal
+                title={'Sleep Tracker'}
+                open={showSleepPopup}
+                setOpen={() => setShowSleepPopup(true)}
+                setClosed={() => cancel()}
+                submitAction={() => submit()}
+                cancelAction={() => cancel()}
+                content={<ModalContent setKeyboardVisible={setKeyboardVisible} setSleepAmount={setSleepAmount} sleepAmount={sleepAmount} sleepGoal={sleepGoal} setSleepGoal={setSleepGoal}/>}
+                submitText={'Save'}
+                cancelText={'Cancel'}
+            />
+        </>
     )
 }
 

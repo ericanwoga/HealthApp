@@ -35,13 +35,13 @@ const PageModal = ({ title, open, setOpen, setClosed, content, cancelText, submi
             </Modal.Content>
             <Modal.Actions>
                 {cancelText && cancelAction &&
-                    <Button size='huge' color='red' inverted onClick={cancelAction}>
+                    <Button size='huge' onClick={cancelAction} style={{ backgroundColor: '#FFD2D2' }}>
                         <Icon name='remove' /> {cancelText || 'Cancel'}
                     </Button>
                 }
                 {submitText && submitAction &&
-                    <Button size='huge' color='green' inverted onClick={submitAction}>
-                        <Icon name='checkmark' /> {submitText || 'Submit'}
+                    <Button size='huge' onClick={submitAction} style={{ backgroundColor: '#BAE8E8' }}>
+                        <Icon name='checkmark' /> {submitText || 'Save'}
                     </Button>
                 }
             </Modal.Actions>

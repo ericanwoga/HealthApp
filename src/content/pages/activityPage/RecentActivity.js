@@ -106,7 +106,7 @@ const RecentActivity = ({ setKeyboardVisible, userData, setUserData }) => {
                 title={'Track Activity'}
                 open={trackActivityModal}
                 setClosed={() => cancel()}
-                submitText={'Submit'}
+                submitText={'Save'}
                 submitAction={() => submitActivity()}
                 cancelText={'Cancel'}
                 cancelAction={() => cancel()}/>
