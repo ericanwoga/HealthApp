@@ -423,8 +423,8 @@ const Learn = () => {
             <PageModal
                 title={'All ' + allModalTitle}
                 open={allArticles !== ''}
-                cancelText={'Done'}
-                cancelAction={() => setAllArticles('')}
+                submitText={'Done'}
+                submitAction={() => setAllArticles('')}
                 setClosed={() => setAllArticles('')}
                 content={<PaginatedItems itemList={allArticles} itemsPerPage={1}/>}
             />

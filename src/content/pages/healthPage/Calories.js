@@ -140,8 +140,8 @@ const Calories = ({ setKeyboardVisible, userData, setUserData }) => {
                 open={openModal}
                 setOpen={() => setOpenModal(true)}
                 setClosed={() => setOpenModal(false)}
-                cancelText={'Done'}
-                cancelAction={() => setOpenModal(false)}
+                submitText={'Done'}
+                submitAction={() => setOpenModal(false)}
                 content={<>
                     <DateSelect date={date} setDate={setDate}/>
                     <DatedItems date={date} itemList={itemList}/>

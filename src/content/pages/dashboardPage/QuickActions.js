@@ -276,7 +276,7 @@ const QuickActionsContent = ({ setKeyboardVisible, actionItems, userData, setUse
         return (
             <>
                 <Header size='large'>Informaton Tracked!</Header>
-                <Header size='large'>{"Head to the 'Health' Page to see your data."}</Header>
+                <Header size='large'>{"Head to the 'Activity' Page to see your data."}</Header>
             </>
         )
     }

@@ -130,7 +130,7 @@ const BodyMeasurements = ({ setKeyboardVisible, unit, userData, setUserData }) =
                 </Grid.Row>
             </Grid>
             <Divider/>
-            <Button size='huge' fluid onClick={SubmitMeasurements}>
+            <Button style={{ backgroundColor: '#BAE8E8' }} size='huge' fluid onClick={SubmitMeasurements}>
                 Save
             </Button>
         </>

@@ -41,7 +41,7 @@ const BodyContent = ({ setKeyboardVisible, unit, setReload, reload, weightData, 
                 value={weight}
             />
             <Divider/>
-            <Button size='huge' fluid onClick={() => handleSubmitWeight()}>
+            <Button style={{ backgroundColor: '#BAE8E8' }} size='huge' fluid onClick={() => handleSubmitWeight()}>
                 Save
             </Button>
         </>
@@ -181,7 +181,10 @@ const Body = ({ setKeyboardVisible, userData, setUserData }) => {
         'Wed May 09 2023 12:48:36 GMT-0400 (Eastern Daylight Time)': { name: '150 lbs' },
         'Wed May 10 2023 15:20:25 GMT-0400 (Eastern Daylight Time)': { name: '150 lbs' },
         'Wed May 10 2023 11:48:14 GMT-0400 (Eastern Daylight Time)': { name: '150 lbs' },
-        'Wed May 10 2023 7:52:14 GMT-0400 (Eastern Daylight Time)': { name: '150 lbs' }
+        'Wed May 10 2023 7:52:14 GMT-0400 (Eastern Daylight Time)': { name: '150 lbs' },
+        'Wed May 11 2023 15:20:25 GMT-0400 (Eastern Daylight Time)': { name: '150 lbs' },
+        'Wed May 11 2023 11:48:14 GMT-0400 (Eastern Daylight Time)': { name: '150 lbs' },
+        'Wed May 11 2023 7:52:14 GMT-0400 (Eastern Daylight Time)': { name: '150 lbs' }
     }
     const itemList = []
     Object.keys(items).map((key) => (
@@ -192,13 +195,16 @@ const Body = ({ setKeyboardVisible, userData, setUserData }) => {
     itemList.sort().reverse()
 
     const bodyItems = {
-        'Wed May 05 2023 14:10:36 GMT-0400 (Eastern Daylight Time)': { name: 'angry' },
+        'Wed May 05 2023 14:10:36 GMT-0400 (Eastern Daylight Time)': { name: '14" biceps' },
         'Wed May 06 2023 17:20:25 GMT-0400 (Eastern Daylight Time)': { name: 'anxious' },
         'Wed May 07 2023 11:48:14 GMT-0400 (Eastern Daylight Time)': { name: 'okay' },
         'Wed May 09 2023 12:48:36 GMT-0400 (Eastern Daylight Time)': { name: 'okay' },
         'Wed May 10 2023 15:20:25 GMT-0400 (Eastern Daylight Time)': { name: 'angry' },
         'Wed May 10 2023 11:48:14 GMT-0400 (Eastern Daylight Time)': { name: 'anxious' },
-        'Wed May 10 2023 7:52:14 GMT-0400 (Eastern Daylight Time)': { name: 'happy' }
+        'Wed May 10 2023 7:52:14 GMT-0400 (Eastern Daylight Time)': { name: 'happy' },
+        'Wed May 11 2023 7:52:15 GMT-0400 (Eastern Daylight Time)': { name: '40" chest' },
+        'Wed May 11 2023 7:52:14 GMT-0400 (Eastern Daylight Time)': { name: '32" waist' },
+        'Wed May 11 2023 7:52:13 GMT-0400 (Eastern Daylight Time)': { name: '14" biceps' }
     }
     const bodyItemList = []
     Object.keys(bodyItems).map((key) => (
@@ -224,8 +230,8 @@ const Body = ({ setKeyboardVisible, userData, setUserData }) => {
                 open={openBodyModal}
                 setOpen={() => setOpenBodyModal(true)}
                 setClosed={() => setOpenBodyModal(false)}
-                cancelText={'Done'}
-                cancelAction={() => setOpenBodyModal(false)}
+                submitText={'Done'}
+                submitAction={() => setOpenBodyModal(false)}
                 content={<>
                     <DateSelect date={date} setDate={setDate}/>
                     <DatedItems date={date} itemList={itemList}/>
@@ -264,8 +270,8 @@ const Body = ({ setKeyboardVisible, userData, setUserData }) => {
                 open={openModal}
                 setOpen={() => setOpenModal(true)}
                 setClosed={() => setOpenModal(false)}
-                cancelText={'Done'}
-                cancelAction={() => setOpenModal(false)}
+                submitText={'Done'}
+                submitAction={() => setOpenModal(false)}
                 content={<>
                     <DateSelect date={date} setDate={setDate}/>
                     <DatedItems date={date} itemList={bodyItemList}/>

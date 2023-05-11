@@ -35,7 +35,7 @@ const MoodContent = ({ userData, setUserData }) => {
                 <Button style={{ paddingLeft: '0px', paddingRight: '0px' }} onClick={() => setFeeling('angry')} active={feeling === 'angry'} value="angry">Angry</Button>
             </Button.Group>
             <Divider/>
-            <Button size='huge' fluid onClick={changeMood}>
+            <Button style={{ backgroundColor: '#BAE8E8' }} size='huge' fluid onClick={changeMood}>
                 Save
             </Button>
         </>
@@ -72,8 +72,8 @@ const Mood = ({ userData, setUserData }) => {
                 open={openModal}
                 setOpen={() => setOpenModal(true)}
                 setClosed={() => setOpenModal(false)}
-                cancelText={'Done'}
-                cancelAction={() => setOpenModal(false)}
+                submitText={'Done'}
+                submitAction={() => setOpenModal(false)}
                 content={<>
                     <DateSelect date={date} setDate={setDate}/>
                     <DatedItems date={date} itemList={itemList}/>

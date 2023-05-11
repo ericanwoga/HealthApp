@@ -120,8 +120,8 @@ const RecentActivity = ({ setKeyboardVisible, userData, setUserData }) => {
                     open={activityModal}
                     setOpen={() => setActivityModal(true)}
                     setClosed={() => setActivityModal(false)}
-                    cancelText={'Done'}
-                    cancelAction={() => setActivityModal(false)}
+                    submitText={'Done'}
+                    submitAction={() => setActivityModal(false)}
                     content={<RecentActivityContent workouts={sortedWorkouts}/>}/>)
                 : ''}
             <PageItem
