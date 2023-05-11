@@ -8,7 +8,9 @@ const ViewAllCard = ({ date, name, subLabel, subContent }) => {
             <Card.Content>
                 <Card.Header textAlign='left'>{name}</Card.Header>
                 <Card.Meta textAlign='left'>{moment(date).format('MM/DD/YYYY h:mm a')}</Card.Meta>
-                <Card.Description textAlign='left'>{subLabel} {': '} {subContent}</Card.Description>
+                { subLabel
+                    ? <Card.Description textAlign='left'>{subLabel} {': '} {subContent}</Card.Description>
+                    : '' }
             </Card.Content>
         </Card>
     )

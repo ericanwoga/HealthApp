@@ -27,17 +27,10 @@ const TrackActivityModal = ({ setKeyboardVisible, setName, setCalories }) => {
     )
 }
 
-const TrackMealModal = ({ setKeyboardVisible, setName, setCalories }) => {
+const TrackMealModal = ({ setKeyboardVisible, setCalories }) => {
     return (
         <>
-            <Header size='large'>What is the name of the meal?</Header>
-            <Input
-                size='huge'
-                fluid
-                placeholder='Meal name'
-                onClick={() => setKeyboardVisible('onModal')}
-                onChange={(e, result) => setName(result.value)}/>
-            <Header size='large'>How many calories were in the meal?</Header>
+            <Header size='large'>How many calories would you like to add for today?</Header>
             <Input
                 size='huge'
                 fluid
@@ -111,7 +104,7 @@ const TrackStepsModal = ({ userData, setKeyboardVisible, setSteps }) => {
     return (
         <>
             <Header size='large'>Current steps today: {userData.activityData.steps[moment().format('YYYY-MM-DD')] > 0 ? userData.activityData.steps[moment().format('YYYY-MM-DD')] : 0}</Header>
-            <Header size='large'>How many more steps would you like to track for today?</Header>
+            <Header size='large'>How many more steps would you like to add for today?</Header>
             <Input
                 size='huge'
                 fluid
@@ -129,11 +122,11 @@ const ButtonLayout = ({ actionItems, setModalOpen }) => {
             <Button key={key} fluid size='huge' icon labelPosition='left' onClick={() => {
                 setModalOpen(key)
             }}>
-                <div style={{ paddingLeft: '27px', paddingRight: '0px' }}>{key}</div>
+                <div style={{ paddingLeft: '21px', paddingRight: '0px' }}>{key}</div>
                 <Icon
                     name={
                         (key === 'Track Activity' && 'bicycle') ||
-                        (key === 'Track Meal' && 'food') ||
+                        (key === 'Track Calories' && 'food') ||
                         (key === 'Track Sleep' && 'bed') ||
                         (key === 'Track Water' && 'tint') ||
                         (key === 'Learn Something' && 'lightbulb outline') ||
@@ -300,7 +293,7 @@ const QuickActionsContent = ({ setKeyboardVisible, actionItems, userData, setUse
                 submitAction={() => submitActivity()}
                 cancelText={'Cancel'}
                 cancelAction={() => cancel()}/>) ||
-            (modalOpen === 'Track Meal' &&
+            (modalOpen === 'Track Calories' &&
             <PageModal
                 content={<TrackMealModal setKeyboardVisible={setKeyboardVisible} setName={setName} setCalories={setCalories}/>}
                 title={modalOpen}
@@ -389,7 +382,7 @@ const GetActionItems = ({ handleClick, actionItems }) => {
 
 const QuickActions = ({ setKeyboardVisible, setUserData, userData }) => {
     const [actionModal, setActionModal] = useState(false)
-    const [actionItems, setActionItems] = useState({ 'Track Activity': true, 'Track Meal': true, 'Track Sleep': true, 'Track Water': true, 'Track Mood': true, 'Track Steps': true })
+    const [actionItems, setActionItems] = useState({ 'Track Activity': true, 'Track Calories': true, 'Track Sleep': true, 'Track Water': true, 'Track Mood': true, 'Track Steps': true })
     const [reload, setReload] = useState(false)
 
     const handleClick = (key) => {

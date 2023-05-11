@@ -114,7 +114,14 @@ const Water = ({ setKeyboardVisible, unit, userData, setUserData }) => {
     const [date, setDate] = useState(new Date())
     const [openModal, setOpenModal] = useState(false)
 
-    const items = {}
+    const items = {
+        'Wed May 05 2023 14:10:36 GMT-0400 (Eastern Daylight Time)': { name: '10 oz.' },
+        'Wed May 06 2023 17:20:25 GMT-0400 (Eastern Daylight Time)': { name: '12 oz' },
+        'Wed May 07 2023 11:48:14 GMT-0400 (Eastern Daylight Time)': { name: '62 oz' },
+        'Wed May 09 2023 12:48:36 GMT-0400 (Eastern Daylight Time)': { name: '8 oz.' },
+        'Wed May 10 2023 15:20:25 GMT-0400 (Eastern Daylight Time)': { name: '12 oz.' },
+        'Wed May 10 2023 11:48:14 GMT-0400 (Eastern Daylight Time)': { name: '42 oz.' }
+    }
     const itemList = []
     Object.keys(items).map((key) => (
         itemList.push(

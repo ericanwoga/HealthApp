@@ -114,13 +114,23 @@ const Calories = ({ setKeyboardVisible, userData, setUserData }) => {
     const [date, setDate] = useState(new Date())
     const [openModal, setOpenModal] = useState(false)
 
-    const items = {}
+    const items = {
+        'Wed May 05 2023 14:10:36 GMT-0400 (Eastern Daylight Time)': { name: '100 calories' },
+        'Wed May 06 2023 17:20:25 GMT-0400 (Eastern Daylight Time)': { name: '125 calories' },
+        'Wed May 07 2023 11:48:14 GMT-0400 (Eastern Daylight Time)': { name: '150 calories' },
+        'Wed May 09 2023 12:48:36 GMT-0400 (Eastern Daylight Time)': { name: '200 calories' },
+        'Wed May 10 2023 15:20:25 GMT-0400 (Eastern Daylight Time)': { name: '500 calories' },
+        'Wed May 10 2023 11:48:14 GMT-0400 (Eastern Daylight Time)': { name: '750 calories' },
+        'Wed May 10 2023 09:20:25 GMT-0400 (Eastern Daylight Time)': { name: '250 calories' },
+        'Wed May 10 2023 7:52:14 GMT-0400 (Eastern Daylight Time)': { name: '105 calories' }
+    }
     const itemList = []
     Object.keys(items).map((key) => (
         itemList.push(
             <ViewAllCard key={key} date={key} name={items[key].name}/>
         )
     ))
+    itemList.sort().reverse()
 
     return (
         <>

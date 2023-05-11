@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { Header, Input, Button, Divider } from 'semantic-ui-react'
 import PageItem from '../../PageItem'
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, ResponsiveContainer } from 'recharts'
@@ -170,31 +170,43 @@ const Body = ({ setKeyboardVisible, userData, setUserData }) => {
     const [weightData, setWeightData] = useState(userData.bodyData.measurements.neck)
     const [reload, setReload] = useState(false)
     const unit = userData.preferences.unit
-
-    useEffect(() => {
-        userData.bodyData.weight = weightData
-        setUserData(userData)
-    }, [weightData, reload])
-
     const [date, setDate] = useState(new Date())
     const [openModal, setOpenModal] = useState(false)
     const [openBodyModal, setOpenBodyModal] = useState(false)
 
-    const items = {}
+    const items = {
+        'Wed May 05 2023 14:10:36 GMT-0400 (Eastern Daylight Time)': { name: '150 lbs' },
+        'Wed May 06 2023 17:20:25 GMT-0400 (Eastern Daylight Time)': { name: '150 lbs' },
+        'Wed May 07 2023 11:48:14 GMT-0400 (Eastern Daylight Time)': { name: '150 lbs' },
+        'Wed May 09 2023 12:48:36 GMT-0400 (Eastern Daylight Time)': { name: '150 lbs' },
+        'Wed May 10 2023 15:20:25 GMT-0400 (Eastern Daylight Time)': { name: '150 lbs' },
+        'Wed May 10 2023 11:48:14 GMT-0400 (Eastern Daylight Time)': { name: '150 lbs' },
+        'Wed May 10 2023 7:52:14 GMT-0400 (Eastern Daylight Time)': { name: '150 lbs' }
+    }
     const itemList = []
     Object.keys(items).map((key) => (
         itemList.push(
             <ViewAllCard key={key} date={key} name={items[key].name}/>
         )
     ))
+    itemList.sort().reverse()
 
-    const bodyItems = {}
+    const bodyItems = {
+        'Wed May 05 2023 14:10:36 GMT-0400 (Eastern Daylight Time)': { name: 'angry' },
+        'Wed May 06 2023 17:20:25 GMT-0400 (Eastern Daylight Time)': { name: 'anxious' },
+        'Wed May 07 2023 11:48:14 GMT-0400 (Eastern Daylight Time)': { name: 'okay' },
+        'Wed May 09 2023 12:48:36 GMT-0400 (Eastern Daylight Time)': { name: 'okay' },
+        'Wed May 10 2023 15:20:25 GMT-0400 (Eastern Daylight Time)': { name: 'angry' },
+        'Wed May 10 2023 11:48:14 GMT-0400 (Eastern Daylight Time)': { name: 'anxious' },
+        'Wed May 10 2023 7:52:14 GMT-0400 (Eastern Daylight Time)': { name: 'happy' }
+    }
     const bodyItemList = []
     Object.keys(bodyItems).map((key) => (
-        itemList.push(
+        bodyItemList.push(
             <ViewAllCard key={key} date={key} name={bodyItems[key].name}/>
         )
     ))
+    bodyItemList.sort().reverse()
 
     return (
         <div>
@@ -203,7 +215,7 @@ const Body = ({ setKeyboardVisible, userData, setUserData }) => {
                 moreLabel={'View All'}
                 moreAction={() => setOpenBodyModal(true)}
                 content={<>
-                    <BodyContent setKeyboardVisible={setKeyboardVisible} unit={unit} setReload={setReload} reload={reload} weightData={weightData} setWeightData={setWeightData} />
+                    <BodyContent setKeyboardVisible={setKeyboardVisible} unit={unit} setReload={setReload} reload={reload} weightData={userData.bodyData.weight} />
                     <Divider/>
                     <GraphContent weightData={userData.bodyData.weight} />
                 </>} />
@@ -216,7 +228,7 @@ const Body = ({ setKeyboardVisible, userData, setUserData }) => {
                 cancelAction={() => setOpenBodyModal(false)}
                 content={<>
                     <DateSelect date={date} setDate={setDate}/>
-                    <DatedItems date={date} itemList={bodyItemList}/>
+                    <DatedItems date={date} itemList={itemList}/>
                 </>}/>
             {/* <PageItem title="Choose your Goal!" content={<DropdownExampleSelection />} /> */}
             <PageItem title="Measurements"
@@ -256,7 +268,7 @@ const Body = ({ setKeyboardVisible, userData, setUserData }) => {
                 cancelAction={() => setOpenModal(false)}
                 content={<>
                     <DateSelect date={date} setDate={setDate}/>
-                    <DatedItems date={date} itemList={itemList}/>
+                    <DatedItems date={date} itemList={bodyItemList}/>
                 </>}/>
 
         </div>
