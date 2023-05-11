@@ -167,7 +167,7 @@ const GraphContent = ({ weightData }) => {
 // )
 
 const Body = ({ setKeyboardVisible, userData, setUserData }) => {
-    const [weightData, setWeightData] = useState(userData.bodyData.weight)
+    const [weightData, setWeightData] = useState(userData.bodyData.measurements.neck)
     const [reload, setReload] = useState(false)
     const unit = userData.preferences.unit
 
@@ -205,7 +205,7 @@ const Body = ({ setKeyboardVisible, userData, setUserData }) => {
                 content={<>
                     <BodyContent setKeyboardVisible={setKeyboardVisible} unit={unit} setReload={setReload} reload={reload} weightData={weightData} setWeightData={setWeightData} />
                     <Divider/>
-                    <GraphContent weightData={weightData} />
+                    <GraphContent weightData={userData.bodyData.weight} />
                 </>} />
             <PageModal
                 title={'Weight History'}
@@ -227,22 +227,22 @@ const Body = ({ setKeyboardVisible, userData, setUserData }) => {
                     <Divider/>
                     <GraphContent weightData={weightData}/>
                     <Button.Group size='huge' fluid>
-                        <Button style={{ paddingLeft: '0px', paddingRight: '0px' }} size='huge'>
+                        <Button style={{ paddingLeft: '0px', paddingRight: '0px' }} size='huge' active={weightData === userData.bodyData.measurements.neck} onClick={() => setWeightData(userData.bodyData.measurements.neck)}>
                         Neck
                         </Button>
-                        <Button style={{ paddingLeft: '0px', paddingRight: '0px' }} size='huge'>
+                        <Button style={{ paddingLeft: '0px', paddingRight: '0px' }} size='huge' active={weightData === userData.bodyData.measurements.waist} onClick={() => setWeightData(userData.bodyData.measurements.waist)}>
                         Waist
                         </Button>
-                        <Button style={{ paddingLeft: '0px', paddingRight: '0px' }} size='huge'>
+                        <Button style={{ paddingLeft: '0px', paddingRight: '0px' }} size='huge' active={weightData === userData.bodyData.measurements.biceps} onClick={() => setWeightData(userData.bodyData.measurements.biceps)}>
                         Biceps
                         </Button>
-                        <Button style={{ paddingLeft: '0px', paddingRight: '0px' }} size='huge'>
+                        <Button style={{ paddingLeft: '0px', paddingRight: '0px' }} size='huge' active={weightData === userData.bodyData.measurements.thighs} onClick={() => setWeightData(userData.bodyData.measurements.thighs)}>
                         Thighs
                         </Button>
-                        <Button style={{ paddingLeft: '0px', paddingRight: '0px' }} size='huge'>
+                        <Button style={{ paddingLeft: '0px', paddingRight: '0px' }} size='huge' active={weightData === userData.bodyData.measurements.calves} onClick={() => setWeightData(userData.bodyData.measurements.calves)}>
                         Calves
                         </Button>
-                        <Button style={{ paddingLeft: '0px', paddingRight: '0px' }} size='huge'>
+                        <Button style={{ paddingLeft: '0px', paddingRight: '0px' }} size='huge' active={weightData === userData.bodyData.measurements.chest} onClick={() => setWeightData(userData.bodyData.measurements.chest)}>
                         Chest
                         </Button>
                     </Button.Group>

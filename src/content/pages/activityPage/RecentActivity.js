@@ -40,15 +40,14 @@ const TrackActivityModal = ({ setKeyboardVisible, setName, setCalories }) => {
         <>
             <Header size='large'>What kind of activity would you like to track?</Header>
             <Input
-                size='large'
+                size='huge'
                 fluid
-                labelPosition='right'
                 placeholder='Activity Name'
                 onClick={() => setKeyboardVisible('onModal')}
                 onChange={(e, result) => setName(result.value)}/>
             <Header size='large'>How many calories did you burn?</Header>
             <Input
-                size='large'
+                size='huge'
                 fluid
                 label={{ basic: true, content: 'calories' }}
                 labelPosition='right'

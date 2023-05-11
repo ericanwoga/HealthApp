@@ -9,15 +9,14 @@ const TrackActivityModal = ({ setKeyboardVisible, setName, setCalories }) => {
         <>
             <Header size='large'>What kind of activity would you like to track?</Header>
             <Input
-                size='large'
+                size='huge'
                 fluid
-                labelPosition='right'
                 placeholder='Activity Name'
                 onClick={() => setKeyboardVisible('onModal')}
                 onChange={(e, result) => setName(result.value)}/>
             <Header size='large'>How many calories did you burn?</Header>
             <Input
-                size='large'
+                size='huge'
                 fluid
                 label={{ basic: true, content: 'calories' }}
                 labelPosition='right'
@@ -33,15 +32,14 @@ const TrackMealModal = ({ setKeyboardVisible, setName, setCalories }) => {
         <>
             <Header size='large'>What is the name of the meal?</Header>
             <Input
-                size='large'
+                size='huge'
                 fluid
-                labelPosition='right'
                 placeholder='Meal name'
                 onClick={() => setKeyboardVisible('onModal')}
                 onChange={(e, result) => setName(result.value)}/>
             <Header size='large'>How many calories were in the meal?</Header>
             <Input
-                size='large'
+                size='huge'
                 fluid
                 label={{ basic: true, content: 'calories' }}
                 labelPosition='right'
@@ -57,7 +55,7 @@ const TrackSleepModal = ({ setKeyboardVisible, setHours }) => {
         <>
             <Header size='large'>How many hours of sleep would you like to add for today?</Header>
             <Input
-                size='large'
+                size='huge'
                 fluid
                 label={{ basic: true, content: 'hours' }}
                 labelPosition='right'
@@ -73,7 +71,7 @@ const TrackWaterModal = ({ unit, setKeyboardVisible, setWater }) => {
         <>
             <Header size='large'>How much water would you like to add?</Header>
             <Input
-                size='large'
+                size='huge'
                 fluid
                 label={{ basic: true, content: unit === 'standard' ? 'ounces' : 'liters' }}
                 labelPosition='right'
@@ -94,10 +92,10 @@ const TrackMoodModal = ({ mood, setFeeling, feeling }) => {
 
     return (
         <>
-            <Header textAlign='left'>
+            <Header size='large' textAlign='left'>
                 {'At ' + moment().format('LT') + ' you were feeling ' + mood}
             </Header>
-            <Header textAlign='left'>How are you feeling now?</Header>
+            <Header size='large' textAlign='left'>How are you feeling now?</Header>
             <Button.Group fluid textalign='center' size="huge">
                 <Button style={{ paddingLeft: '0px', paddingRight: '0px' }} onClick={changeMood} active={feeling === 'happy'} value="happy">Happy</Button>
                 <Button style={{ paddingLeft: '0px', paddingRight: '0px' }} onClick={changeMood} active={feeling === 'okay'} value="okay">Okay</Button>
@@ -115,7 +113,7 @@ const TrackStepsModal = ({ userData, setKeyboardVisible, setSteps }) => {
             <Header size='large'>Current steps today: {userData.activityData.steps[moment().format('YYYY-MM-DD')] > 0 ? userData.activityData.steps[moment().format('YYYY-MM-DD')] : 0}</Header>
             <Header size='large'>How many more steps would you like to track for today?</Header>
             <Input
-                size='large'
+                size='huge'
                 fluid
                 placeholder='Steps to add to your total today'
                 onClick={() => setKeyboardVisible('onModal')}

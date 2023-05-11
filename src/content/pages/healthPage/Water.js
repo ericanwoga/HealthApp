@@ -34,8 +34,8 @@ const ModalContent = ({ setKeyboardVisible, unit, water, setWaterAmount, waterGo
 
     return (
         <>
-            <Header>How much water would you like to add for today?</Header>
-            <Input fluid label={{ basic: true, content: unit === 'standard' ? ' ounces' : 'liters' }}
+            <Header size='large'>How much water would you like to add for today?</Header>
+            <Input size='huge' fluid label={{ basic: true, content: unit === 'standard' ? ' ounces' : 'liters' }}
                 labelPosition='right'
                 value={water}
                 onChange={(e, result) => changeWaterAmount(result.value)}
@@ -43,8 +43,8 @@ const ModalContent = ({ setKeyboardVisible, unit, water, setWaterAmount, waterGo
                 error={waterAmountError}
                 placeholder='Enter water intake'/>
             {waterAmountError ? <Label basic color='red' pointing prompt >Must be a number greater than or equal to 0</Label> : null}
-            <Header>What is your water goal for today?</Header>
-            <Input fluid label={{ basic: true, content: unit === 'standard' ? ' ounces' : 'liters' }}
+            <Header size='large'>What is your water goal for today?</Header>
+            <Input size='huge' fluid label={{ basic: true, content: unit === 'standard' ? ' ounces' : 'liters' }}
                 labelPosition='right'
                 value={waterGoal}
                 onChange={(e, result) => changeWaterGoal(result.value)}

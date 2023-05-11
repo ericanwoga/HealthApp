@@ -34,8 +34,8 @@ const ModalContent = ({ setKeyboardVisible, water, setWaterAmount, waterGoal, se
 
     return (
         <>
-            <Header>How many calories would you like to add for today?</Header>
-            <Input fluid label={{ basic: true, content: 'calories' }}
+            <Header size='large'>How many calories would you like to add for today?</Header>
+            <Input size='huge' fluid label={{ basic: true, content: 'calories' }}
                 labelPosition='right'
                 value={water}
                 onChange={(e, result) => changeWaterAmount(result.value)}
@@ -43,8 +43,8 @@ const ModalContent = ({ setKeyboardVisible, water, setWaterAmount, waterGoal, se
                 error={waterAmountError}
                 placeholder='Enter calories consumed'/>
             {waterAmountError ? <Label basic color='red' pointing prompt >Must be a number greater than or equal to 0</Label> : null}
-            <Header>What is your calorie goal for today?</Header>
-            <Input fluid label={{ basic: true, content: 'calories' }}
+            <Header size='large'>What is your calorie goal for today?</Header>
+            <Input size='huge' fluid label={{ basic: true, content: 'calories' }}
                 labelPosition='right'
                 value={waterGoal}
                 onChange={(e, result) => changeWaterGoal(result.value)}

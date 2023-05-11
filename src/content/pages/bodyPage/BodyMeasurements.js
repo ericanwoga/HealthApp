@@ -59,7 +59,7 @@ const BodyMeasurements = ({ setKeyboardVisible, unit, userData, setUserData }) =
                             fluid
                             label={{ basic: true, content: unit === 'metric' ? 'cm.' : 'in.' }}
                             labelPosition="right"
-                            placeholder="Neck"
+                            placeholder="0"
                             onChange={NeckChange}
                             onClick={() => setKeyboardVisible('onNoModal')}
                             value={neck}
@@ -71,7 +71,7 @@ const BodyMeasurements = ({ setKeyboardVisible, unit, userData, setUserData }) =
                             fluid
                             label={{ basic: true, content: unit === 'metric' ? 'cm.' : 'in.' }}
                             labelPosition="right"
-                            placeholder="Waist"
+                            placeholder="0"
                             onChange={WaistChange}
                             onClick={() => setKeyboardVisible('onNoModal')}
                             value={waist}
@@ -83,7 +83,7 @@ const BodyMeasurements = ({ setKeyboardVisible, unit, userData, setUserData }) =
                             fluid
                             label={{ basic: true, content: unit === 'metric' ? 'cm.' : 'in.' }}
                             labelPosition="right"
-                            placeholder="Biceps"
+                            placeholder="0"
                             onChange={BicepsChange}
                             onClick={() => setKeyboardVisible('onNoModal')}
                             value={biceps}
@@ -97,7 +97,7 @@ const BodyMeasurements = ({ setKeyboardVisible, unit, userData, setUserData }) =
                             fluid
                             label={{ basic: true, content: unit === 'metric' ? 'cm.' : 'in.' }}
                             labelPosition="right"
-                            placeholder="Thighs"
+                            placeholder="0"
                             onChange={ThighsChange}
                             onClick={() => setKeyboardVisible('onNoModal')}
                             value={thighs}
@@ -109,7 +109,7 @@ const BodyMeasurements = ({ setKeyboardVisible, unit, userData, setUserData }) =
                             fluid
                             label={{ basic: true, content: unit === 'metric' ? 'cm.' : 'in.' }}
                             labelPosition="right"
-                            placeholder="Calves"
+                            placeholder="0"
                             onChange={CalvesChange}
                             onClick={() => setKeyboardVisible('onNoModal')}
                             value={calves}
@@ -121,7 +121,7 @@ const BodyMeasurements = ({ setKeyboardVisible, unit, userData, setUserData }) =
                             fluid
                             label={{ basic: true, content: unit === 'metric' ? 'cm.' : 'in.' }}
                             labelPosition="right"
-                            placeholder="Chest"
+                            placeholder="0"
                             onChange={ChestChange}
                             onClick={() => setKeyboardVisible('onNoModal')}
                             value={chest}

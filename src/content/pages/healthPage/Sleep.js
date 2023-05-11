@@ -34,8 +34,8 @@ const ModalContent = ({ setKeyboardVisible, sleepAmount, sleepGoal, setSleepAmou
 
     return (
         <>
-            <Header>How many hours of sleep would you like to add for today?</Header>
-            <Input fluid label={{ basic: true, content: 'hours' }}
+            <Header size='large'>How many hours of sleep would you like to add for today?</Header>
+            <Input size='huge' fluid label={{ basic: true, content: 'hours' }}
                 labelPosition='right'
                 value={sleepAmount}
                 onChange={(e, result) => changeSleepAmount(result.value)}
@@ -43,8 +43,8 @@ const ModalContent = ({ setKeyboardVisible, sleepAmount, sleepGoal, setSleepAmou
                 error={sleepAmountError}
                 placeholder='Enter hours slept'/>
             {sleepAmountError ? <Label basic color='red' pointing prompt >Must be a number between 0 and 24 </Label> : null}
-            <Header>What is your sleep goal for today?</Header>
-            <Input fluid label={{ basic: true, content: 'hours' }}
+            <Header size='large'>What is your sleep goal for today?</Header>
+            <Input size='huge' fluid label={{ basic: true, content: 'hours' }}
                 labelPosition='right'
                 value={sleepGoal}
                 onChange={(e, result) => changeSleepGoal(result.value)}
